@@ -506,7 +506,13 @@ class flogger3(MyApp):
                 return
             
             now = time.time()
-            flist = os.listdir(folder)
+            path = os.path.dirname(os.path.abspath(__file__))
+            if os.path.isdir(os.path.join(path, folder)):
+#                flist = os.listdir(folder)
+                flist = os.listdir(os.path.join(path, folder))
+            else:
+                print "Not found: ", folder
+                return
             print "delete flist: ", flist
             for f in flist:
         #        print "Pathname is: ", os.path.join(folder, f), " st_mtime is: ", os.stat(os.path.join(folder, f)).st_mtime

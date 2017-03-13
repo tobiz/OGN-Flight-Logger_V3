@@ -224,6 +224,7 @@ class MyApp(QtGui.QMainWindow, Ui_MainWindow):
         print "floggerUpdateConfig called"
         self.floggerAirfieldEdit2(True)
         self.floggerAPRSUserEdit2(True)
+        self.floggerAPRSPasscodeEdit2(True)
         self.floggerAirfieldDetailsEdit2(True)
         self.floggerMinFlightTimeEdit2(True)
         self.floggerDBSchemaEdit()
@@ -236,6 +237,7 @@ class MyApp(QtGui.QMainWindow, Ui_MainWindow):
         print "floggerCancelConfigUpdate called"
         self.floggerAirfieldEdit2(False)
         self.floggerAPRSUserEdit2(False)
+        self.floggerAPRSPasscodeEdit2(False)
         self.floggerAirfieldDetailsEdit2(False)
         self.floggerMinFlightTimeEdit2(False)
         # Not sure what to do yet!
@@ -287,8 +289,8 @@ class MyApp(QtGui.QMainWindow, Ui_MainWindow):
             self.APRSUser.setText(old_val)
             APRSUser = old_val
 #       print "Airfield B: " + airfield_base
-        self.editConfigField("settings.py", "APRS_USER", APRSUser)
-#        APRSUser = self.config["APRS_USER"]
+        self.editConfigField("flogger_settings_file.txt", "APRS_USER", APRSUser)
+        self.APRS_USER = APRSUser
         
 #    def floggerAirfieldDetailsEdit(self):
 #        print "Airfield Details button clicked"
@@ -296,6 +298,16 @@ class MyApp(QtGui.QMainWindow, Ui_MainWindow):
 #        self.editConfigField("flogger_settings_file.txt", "FLOGGER_AIRFIELD_DETAILS", airfield_details)
 #        airfield_details = self.config["FLOGGER_AIRFIELD_DETAILS"]
 #        self.FLOGGER_AIRFIELD_DETAILS = airfield_details
+    def floggerAPRSPasscodeEdit2(self, mode):
+            print "APRS Passcode button clicked"
+            if mode: 
+                APRSPasscode = self.APRSPasscode.toPlainText()  
+            else:
+                old_val = self.getOldValue(self.config, "APRS_PASSCODE")
+                self.APRSPasscode.setText(old_val)
+                APRSPasscode = old_val
+            self.editConfigField("flogger_settings_file.txt", "APRS_PASSCODE", APRSPasscode)
+            self.APRS_PASSCODE = APRSPasscode
         
             
     def floggerAirfieldDetailsEdit2(self, mode):

@@ -162,19 +162,6 @@
       </rect>
      </property>
     </widget>
-    <widget class="QPushButton" name="APRSPasscodeButton">
-     <property name="geometry">
-      <rect>
-       <x>370</x>
-       <y>30</y>
-       <width>41</width>
-       <height>26</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>Edit</string>
-     </property>
-    </widget>
    </widget>
    <widget class="QGroupBox" name="APRSServerHostBox">
     <property name="geometry">
@@ -1008,7 +995,7 @@
      <string notr="true">background-color: rgb(192, 255, 255);</string>
     </property>
     <property name="title">
-     <string>Update Configuration</string>
+     <string>Update Configuration?</string>
     </property>
     <widget class="QPushButton" name="CancelButton">
      <property name="geometry">
