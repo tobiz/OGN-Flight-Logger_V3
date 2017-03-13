@@ -1,7 +1,9 @@
 # OGN-Flight-Logger_V3
-DEVELOPMENT OF OGN-Flight-Logger IS NOW CONTINUING AS: OGN-Flight-Logger_V2
+DEVELOPMENT OF OGN-Flight-Logger IS NOW CONTINUING AS: OGN-Flight-Logger_V3
 
 Python APRS/OGN program to log flight times, durations and maximum heights achieved
+
+V3 is functionally the same as V2 but controlled by a gui.
 
 This python program creates an SQlite db of flights from a given location and aircraft list 
 (the later two parameters are to be be developed into a more generalised format).
@@ -89,3 +91,5 @@ send an SMS msg but has not been tested.
 20170310 - The intention is to remove separate Edit buttons for each field and replace by a single one which when clicked will update all changed fields. There will also be a Cancel button to 'undo' any changed fields (for now this will be limited to a single undo level, muliple undo levels is for later(!)); so far this feature has been shown to work on 2 fields. In addition the Python Packaging 'setup' files have been added for uploading OGN-Flogger to PyPi, and something(?) has been added to the PyPi index (but not convinced it installs correctly at the moment).
 
 20170312 - First commit of V3
+
+20170313 - Add explanation of differences between V2 and V3.
