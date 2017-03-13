@@ -205,19 +205,6 @@
       </rect>
      </property>
     </widget>
-    <widget class="QPushButton" name="APRSServerHostButton">
-     <property name="geometry">
-      <rect>
-       <x>370</x>
-       <y>30</y>
-       <width>41</width>
-       <height>26</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>Edit</string>
-     </property>
-    </widget>
    </widget>
    <widget class="QGroupBox" name="APRSServerPortBox">
     <property name="geometry">
@@ -259,19 +246,6 @@
        <width>201</width>
        <height>51</height>
       </rect>
-     </property>
-    </widget>
-    <widget class="QPushButton" name="APRSServerPortButton">
-     <property name="geometry">
-      <rect>
-       <x>370</x>
-       <y>30</y>
-       <width>41</width>
-       <height>26</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>Edit</string>
      </property>
     </widget>
    </widget>
@@ -599,19 +573,6 @@
        <width>201</width>
        <height>51</height>
       </rect>
-     </property>
-    </widget>
-    <widget class="QPushButton" name="DBSchemaButton">
-     <property name="geometry">
-      <rect>
-       <x>370</x>
-       <y>30</y>
-       <width>41</width>
-       <height>26</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>Edit</string>
      </property>
     </widget>
    </widget>
