@@ -41,7 +41,7 @@ class MyApp(QtGui.QMainWindow, Ui_MainWindow):
 #        self.MinFlightTimeButton.clicked.connect(self.floggerMinFlightTimeEdit)  
         self.FleetCheckRadioButton.toggled.connect(self.floggerFleetCheckRadioButton) 
         self.RecordTracksRadioButton.toggled.connect(self.floggerRecordTracksRadioButton)
-        self.DBSchemaButton.clicked.connect(self.floggerDBSchemaEdit)  
+#        self.DBSchemaButton.clicked.connect(self.floggerDBSchemaEdit)  
         self.SMTPServerURLButton.clicked.connect(self.floggerSMTPServerURLEdit) 
         self.SMTPServerPortButton.clicked.connect(self.floggerSMTPServerPortEdit)
         self.APRSBase1Button.clicked.connect(self.floggerAPRSBaseEdit)
@@ -225,9 +225,11 @@ class MyApp(QtGui.QMainWindow, Ui_MainWindow):
         self.floggerAirfieldEdit2(True)
         self.floggerAPRSUserEdit2(True)
         self.floggerAPRSPasscodeEdit2(True)
+        self.floggerAPRSServerhostEdit2(True)
+        self.floggerAPRSServerportEdit2(True)
         self.floggerAirfieldDetailsEdit2(True)
         self.floggerMinFlightTimeEdit2(True)
-        self.floggerDBSchemaEdit()
+        self.floggerDBSchemaFileEdit2(True)
         self.floggerSMTPServerURLEdit()
         self.floggerSMTPServerPortEdit()
         self.floggerAPRSBaseEdit()
@@ -238,9 +240,11 @@ class MyApp(QtGui.QMainWindow, Ui_MainWindow):
         self.floggerAirfieldEdit2(False)
         self.floggerAPRSUserEdit2(False)
         self.floggerAPRSPasscodeEdit2(False)
+        self.floggerAPRSServerhostEdit2(False)
+        self.floggerAPRSServerportEdit2(False)
         self.floggerAirfieldDetailsEdit2(False)
         self.floggerMinFlightTimeEdit2(False)
-        # Not sure what to do yet!
+        self.floggerDBSchemaFileEdit2(False)
         return
                        
 #    def floggerAirfieldEdit(self):
@@ -308,6 +312,30 @@ class MyApp(QtGui.QMainWindow, Ui_MainWindow):
                 APRSPasscode = old_val
             self.editConfigField("flogger_settings_file.txt", "APRS_PASSCODE", APRSPasscode)
             self.APRS_PASSCODE = APRSPasscode
+            
+    
+    def floggerAPRSServerhostEdit2(self, mode):
+            print "APRS Server Host button clicked"
+            if mode: 
+                APRSServerhost = self.APRSServerHostName.toPlainText()  
+            else:
+                old_val = self.getOldValue(self.config, "APRS_SERVER_HOST")
+                self.APRSServerHostName.setText(old_val)
+                APRSServerhost = old_val
+            self.editConfigField("flogger_settings_file.txt", "APRS_SERVER_HOST", APRSServerhost)
+            self.APRS_SERVER_HOST = APRSServerhost
+            
+    
+    def floggerAPRSServerportEdit2(self, mode):
+            print "APRS Server Port button clicked"
+            if mode: 
+                APRSServerport = self.APRSServerPort.toPlainText()  
+            else:
+                old_val = self.getOldValue(self.config, "APRS_SERVER_PORT")
+                self.APRSServerPort.setText(old_val)
+                APRSServerport = old_val
+            self.editConfigField("flogger_settings_file.txt", "APRS_SERVER_PORT", APRSServerport)
+            self.APRS_SERVER_PORT = int(APRSServerport)
         
             
     def floggerAirfieldDetailsEdit2(self, mode):
@@ -332,7 +360,7 @@ class MyApp(QtGui.QMainWindow, Ui_MainWindow):
             old_val = self.getOldValue(self.config, "FLOGGER_MIN_FLIGHT_TIME")
             self.MinFlightTime.setText(old_val)
             min_flight_time = old_val 
-        self.editConfigField("flogger_settings_file.txt", "FLOGGER_MIN_FLIGHT_TIME", min_flight_time)    
+        self.editConfigField("flogger_settings_file.txt", "FLOGGER_MIN_FLIGHT_TIME", min_flight_time) 
     
     def floggerFleetCheckRadioButton(self):
         print "Fleet Check Radio Button clicked" 
@@ -365,7 +393,17 @@ class MyApp(QtGui.QMainWindow, Ui_MainWindow):
         db_schema = self.config["FLOGGER_DB_SCHEMA"]
 #        self.AirfieldBase.setText(settings.FLOGGER_AIRFIELD_NAME)
         self.FLOGGER_DB_SCHEMA = db_schema_file 
-        
+            
+    def floggerDBSchemaFileEdit2(self, mode):
+        print "DB Schema File button clicked"
+        if mode: 
+            db_schema_file = self.DBSchemaFile.toPlainText() 
+        else: 
+            old_val = self.getOldValue(self.config, "FLOGGER_DB_SCHEMA")
+            self.DBSchemaFile.setText(old_val)
+            db_schema_file = old_val 
+        self.editConfigField("flogger_settings_file.txt", "FLOGGER_DB_SCHEMA", db_schema_file) 
+        self.FLOGGER_DB_SCHEMA = db_schema_file
                 
     def floggerSMTPServerURLEdit(self):
         print "SMTP Server URL button clicked" 
