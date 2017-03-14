@@ -4,7 +4,7 @@ import string
 from PyQt4 import QtGui, QtCore, uic
 from PyQt4.Qt import SIGNAL
 import subprocess
-#import flogger_settings
+import flogger_settings
 import flogger_settings
 from parse import *
 from ConfigParser import *
@@ -58,8 +58,6 @@ class MyApp(QtGui.QMainWindow, Ui_MainWindow):
 
 #        filename = open(filepath)
         try:
-#            config = ConfigObj(filename, encoding='UTF8', raise_errors = True)
-#            self.config = ConfigObj("flogger_settings.py", raise_errors = True)
             self.config = ConfigObj("flogger_settings_file.txt", raise_errors = True)
             print "Opened"
         except:
@@ -157,6 +155,18 @@ class MyApp(QtGui.QMainWindow, Ui_MainWindow):
         settings.FLOGGER_SMTP_SERVER_PORT = int(old_val)
         self.SMTPServerPort.setText(old_val)
         settings.FLOGGER_SMTP_SERVER_PORT = int(old_val)
+        
+                
+        old_val = self.getOldValue(self.config, "FLOGGER_SMTP_TX") 
+        print "TX from file: ", old_val   
+        settings.FLOGGER_SMTP_TX = old_val
+        self.EmailSenderTX.setText(old_val)
+        settings.FLOGGER_SMTP_TX = old_val     
+                
+        old_val = self.getOldValue(self.config, "FLOGGER_SMTP_RX")    
+        settings.FLOGGER_SMTP_RX = old_val
+        self.EmailReceiverRX.setText(old_val)
+        settings.FLOGGER_SMTP_RX = old_val
                 
         old_val = self.getOldValue(self.config, "FLOGGER_APRS_BASES")
         i = 1
@@ -232,6 +242,8 @@ class MyApp(QtGui.QMainWindow, Ui_MainWindow):
         self.floggerDBSchemaFileEdit2(True)
         self.floggerSMTPServerURLEdit2(True)
         self.floggerSMTPServerPortEdit()
+        self.floggerEmailSenderEdit2(True)
+        self.floggerEmailReceiverEdit2(True)
         self.floggerAPRSBaseEdit()
         return
     
@@ -246,6 +258,9 @@ class MyApp(QtGui.QMainWindow, Ui_MainWindow):
         self.floggerMinFlightTimeEdit2(False)
         self.floggerDBSchemaFileEdit2(False)
         self.floggerSMTPServerURLEdit2(False)
+#        self.floggerSMTPServerPortEdit()
+        self.floggerEmailSenderEdit2(False)
+        self.floggerEmailReceiverEdit2(False)
         return
                        
 #    def floggerAirfieldEdit(self):
@@ -423,15 +438,29 @@ class MyApp(QtGui.QMainWindow, Ui_MainWindow):
             self.SMTPServerURL.setText(old_val)
             smtp_server_URL = old_val
         self.editConfigField("flogger_settings_file.txt", "FLOGGER_SMTP_SERVER_URL", smtp_server_URL)
-        self.FLOGGER_SMTP_SERVER_URL = smtp_server_URL
-        
-        
-         
-        smtp_server_URL = self.SMTPServerURL.toPlainText()  
-        print "SMTP Server URL: " + smtp_server_URL
-        self.editConfigField("flogger_settings_file.txt", "FLOGGER_SMTP_SERVER_URL", smtp_server_URL)
-        smtp_server_URL = self.config["FLOGGER_SMTP_SERVER_URL"]
-        self.FLOGGER_SMTP_SERVER_URL = smtp_server_URL 
+        self.FLOGGER_SMTP_SERVER_URL = smtp_server_URL       
+                      
+    def floggerEmailSenderEdit2(self, mode):
+        print "SMTP Sender Tx button clicked"
+        if mode: 
+            EmailSenderTX = self.EmailSenderTX.toPlainText()  
+        else:
+            old_val = self.getOldValue(self.config, "FLOGGER_SMTP_TX")
+            self.EmailSenderTX.setText(old_val)
+            EmailSenderTX = old_val
+        self.editConfigField("flogger_settings_file.txt", "FLOGGER_SMTP_TX", EmailSenderTX)
+        self.FLOGGER_SMTP_TX = EmailSenderTX        
+                      
+    def floggerEmailReceiverEdit2(self, mode):
+        print "SMTP Receiver Rx button clicked"
+        if mode: 
+            EmailReceiverRX = self.EmailReceiverRX.toPlainText()  
+        else:
+            old_val = self.getOldValue(self.config, "FLOGGER_SMTP_RX")
+            self.EmailReceiverRX.setText(old_val)
+            EmailReceiverRX = old_val
+        self.editConfigField("flogger_settings_file.txt", "FLOGGER_SMTP_RX", EmailReceiverRX)
+        self.FLOGGER_SMTP_RX = EmailReceiverRX 
         
                        
     def floggerSMTPServerPortEdit(self):

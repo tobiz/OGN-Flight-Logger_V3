@@ -587,43 +587,58 @@ class flogger3(MyApp):
         #
         
         parser = argparse.ArgumentParser()
-        parser.add_argument("user", help="user and passcode must be supplied, see http://www.george-smart.co.uk/wiki/APRS_Callpass for how to obtain")
-        parser.add_argument("passcode", help="user and passcode must be supplied", type=int)
-        parser.add_argument("mode", help="mode is test or live, test modifies behaviour to add output for testing", default="live")
+        parser.add_argument("--user", help="user and passcode must be supplied, see http://www.george-smart.co.uk/wiki/APRS_Callpass for how to obtain")
+        parser.add_argument("--passcode", help="user and passcode must be supplied", type=int)
+        parser.add_argument("--mode", help="mode is test or live, test modifies behaviour to add output for testing", default="live")
         parser.add_argument('-s', '--smtp', help="URL of smtp server")
         parser.add_argument('-t', '--tx', help="email address of sender")
         parser.add_argument('-r', '--rx', help="email address of receiver")
         
-        args = parser.parse_args()
-        print "user=", args.user, " passcode=", args.passcode, "mode=", args.mode, "smtp=", args.smtp, "tx=", args.tx, "rx=", args.rx
+        try:
+            args = parser.parse_args()
+            #
+            # Check parameters. If an smtp server address is specified then the sender and receiver email
+            # addresses must also be supplied either in the call line or the config file
+            #
+            if (args.smtp == None and settings.FLOGGER_SMTP_SERVER_URL == ""):
+                print "SMTP url not specified, don't send email"
+            else:
+                print "Set to send email"
+                if (args.smtp <> None):
+                    settings.FLOGGER_SMTP_SERVER_URL = args.smtp
+                if (args.tx <> None):
+                    settings.FLOGGER_SMTP_TX = args.tx
+                if (args.rx <> None):
+                    print "args.rx is: ", args.rx
+                    settings.FLOGGER_SMTP_RX = args.rx
+                elif ((args.tx == None or args.rx == None) and (settings.FLOGGER_SMTP_TX == "" or settings.FLOGGER_SMTP_RX == "")):
+                    print "Email option parameters or config not valid. smtp=%s, SERVER_URL=%s, tx=%s, rx=%s, SMTP_TX=%s, SMTP_RX=%s" % \
+                    (args.smtp, settings.FLOGGER_SMTP_SERVER_URL, args.tx, args.rx, settings.FLOGGER_SMTP_TX, settings.FLOGGER_SMTP_RX)
+                    print "Exit"
+                    exit()
+                print "Email parameters are now: smtp=%s, SERVER_URL=%s, tx=%s, rx=%s, SMTP_TX=%s, SMTP_RX=%s" % \
+                    (args.smtp, settings.FLOGGER_SMTP_SERVER_URL, args.tx, args.rx, settings.FLOGGER_SMTP_TX, settings.FLOGGER_SMTP_RX)           
+            if (args.user <> None):
+                settings.APRS_USER = args.user
+            else:
+                print "Taken from form APRS_USER: ", settings.APRS_USER
+            if args.passcode <> None:
+                settings.APRS_PASSCODE = args.passcode
+            else:
+                print "Taken from form APRS_PASSCODE: ", settings.APRS_PASSCODE
+            if args.mode <> None:
+                settings.FLOGGER_MODE = args.mode
+            else:
+                print "Taken from form FLOGGER_MODE: ", settings.FLOGGER_MODE               
+        except :
+            print "Failed in command line arg parser"
+#        print "user=", args.user, " passcode=", args.passcode, "mode=", args.mode, "smtp=", args.smtp, "tx=", args.tx, "rx=", args.rx
         
-        #
-        # Check parameters. If an smtp server address is specified then the sender and receiver email
-        # addresses must also be supplied either in the call line or the config file
-        #
-        if (args.smtp == None and settings.FLOGGER_SMTP_SERVER_URL == ""):
-            print "SMTP url not specified, don't send email"
-        else:
-            print "Set to send email"
-            if (args.smtp <> None):
-                settings.FLOGGER_SMTP_SERVER_URL = args.smtp
-            if (args.tx <> None):
-                settings.FLOGGER_SMTP_TX = args.tx
-            if (args.rx <> None):
-                print "args.rx is: ", args.rx
-                settings.FLOGGER_SMTP_RX = args.rx
-            elif ((args.tx == None or args.rx == None) and (settings.FLOGGER_SMTP_TX == "" or settings.FLOGGER_SMTP_RX == "")):
-                print "Email option parameters or config not valid. smtp=%s, SERVER_URL=%s, tx=%s, rx=%s, SMTP_TX=%s, SMTP_RX=%s" % \
-                (args.smtp, settings.FLOGGER_SMTP_SERVER_URL, args.tx, args.rx, settings.FLOGGER_SMTP_TX, settings.FLOGGER_SMTP_RX)
-                exit()
-            print "Email parameters are now: smtp=%s, SERVER_URL=%s, tx=%s, rx=%s, SMTP_TX=%s, SMTP_RX=%s" % \
-                (args.smtp, settings.FLOGGER_SMTP_SERVER_URL, args.tx, args.rx, settings.FLOGGER_SMTP_TX, settings.FLOGGER_SMTP_RX)
-           
         
         
-        settings.APRS_USER = args.user
-        settings.APRS_PASSCODE = args.passcode
-        settings.FLOGGER_MODE = args.mode
+#        settings.APRS_USER = args.user
+#        settings.APRS_PASSCODE = args.passcode
+#        settings.FLOGGER_MODE = args.mode
         
         # Creates or opens a file called flogger.sql3 as an SQLite3 DB
         
