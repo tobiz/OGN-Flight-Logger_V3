@@ -42,7 +42,7 @@ class MyApp(QtGui.QMainWindow, Ui_MainWindow):
         self.FleetCheckRadioButton.toggled.connect(self.floggerFleetCheckRadioButton) 
         self.RecordTracksRadioButton.toggled.connect(self.floggerRecordTracksRadioButton)
 #        self.DBSchemaButton.clicked.connect(self.floggerDBSchemaEdit)  
-        self.SMTPServerURLButton.clicked.connect(self.floggerSMTPServerURLEdit) 
+#        self.SMTPServerURLButton.clicked.connect(self.floggerSMTPServerURLEdit) 
         self.SMTPServerPortButton.clicked.connect(self.floggerSMTPServerPortEdit)
         self.APRSBase1Button.clicked.connect(self.floggerAPRSBaseEdit)
         self.UpdateButton.clicked.connect(self.floggerUpdateConfig)
@@ -230,7 +230,7 @@ class MyApp(QtGui.QMainWindow, Ui_MainWindow):
         self.floggerAirfieldDetailsEdit2(True)
         self.floggerMinFlightTimeEdit2(True)
         self.floggerDBSchemaFileEdit2(True)
-        self.floggerSMTPServerURLEdit()
+        self.floggerSMTPServerURLEdit2(True)
         self.floggerSMTPServerPortEdit()
         self.floggerAPRSBaseEdit()
         return
@@ -245,6 +245,7 @@ class MyApp(QtGui.QMainWindow, Ui_MainWindow):
         self.floggerAirfieldDetailsEdit2(False)
         self.floggerMinFlightTimeEdit2(False)
         self.floggerDBSchemaFileEdit2(False)
+        self.floggerSMTPServerURLEdit2(False)
         return
                        
 #    def floggerAirfieldEdit(self):
@@ -411,7 +412,26 @@ class MyApp(QtGui.QMainWindow, Ui_MainWindow):
         print "SMTP Server URL: " + smtp_server_URL
         self.editConfigField("flogger_settings_file.txt", "FLOGGER_SMTP_SERVER_URL", smtp_server_URL)
         smtp_server_URL = self.config["FLOGGER_SMTP_SERVER_URL"]
-        self.FLOGGER_SMTP_SERVER_URL = smtp_server_URL  
+        self.FLOGGER_SMTP_SERVER_URL = smtp_server_URL   
+                      
+    def floggerSMTPServerURLEdit2(self, mode):
+        print "SMTP Server URL button clicked"
+        if mode: 
+            smtp_server_URL = self.SMTPServerURL.toPlainText()  
+        else:
+            old_val = self.getOldValue(self.config, "FLOGGER_SMTP_SERVER_URL")
+            self.SMTPServerURL.setText(old_val)
+            smtp_server_URL = old_val
+        self.editConfigField("flogger_settings_file.txt", "FLOGGER_SMTP_SERVER_URL", smtp_server_URL)
+        self.FLOGGER_SMTP_SERVER_URL = smtp_server_URL
+        
+        
+         
+        smtp_server_URL = self.SMTPServerURL.toPlainText()  
+        print "SMTP Server URL: " + smtp_server_URL
+        self.editConfigField("flogger_settings_file.txt", "FLOGGER_SMTP_SERVER_URL", smtp_server_URL)
+        smtp_server_URL = self.config["FLOGGER_SMTP_SERVER_URL"]
+        self.FLOGGER_SMTP_SERVER_URL = smtp_server_URL 
         
                        
     def floggerSMTPServerPortEdit(self):
