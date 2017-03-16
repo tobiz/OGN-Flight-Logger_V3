@@ -4,8 +4,6 @@ import string
 from PyQt4 import QtGui, QtCore, uic
 from PyQt4.Qt import SIGNAL
 import subprocess
-import flogger_settings
-import flogger_settings
 from parse import *
 from ConfigParser import *
 from configobj import ConfigObj
@@ -43,7 +41,7 @@ class MyApp(QtGui.QMainWindow, Ui_MainWindow):
         self.RecordTracksRadioButton.toggled.connect(self.floggerRecordTracksRadioButton)
 #        self.DBSchemaButton.clicked.connect(self.floggerDBSchemaEdit)  
 #        self.SMTPServerURLButton.clicked.connect(self.floggerSMTPServerURLEdit) 
-        self.SMTPServerPortButton.clicked.connect(self.floggerSMTPServerPortEdit)
+#        self.SMTPServerPortButton.clicked.connect(self.floggerSMTPServerPortEdit)
         self.APRSBase1Button.clicked.connect(self.floggerAPRSBaseEdit)
         self.UpdateButton.clicked.connect(self.floggerUpdateConfig)
         self.CancelButton.clicked.connect(self.floggerCancelConfigUpdate)
@@ -196,7 +194,16 @@ class MyApp(QtGui.QMainWindow, Ui_MainWindow):
         print "APRS_BASES: ", old_val
         print "APRS_BASES: ", settings.FLOGGER_APRS_BASES
         
-        
+        old_val = self.getOldValue(self.config, "FLOGGER_FLEET_LIST") 
+#        print "FLOGGER_FLEET_LIST: ", old_val 
+        for key in old_val.keys():
+            old_val[key] = int(old_val[key])
+#            print "Key: ", key, " = ", int(old_val[key])
+        settings.FLOGGER_FLEET_LIST = old_val
+#        for key in settings.FLOGGER_FLEET_LIST.keys():
+#            settings.FLOGGER_FLEET_LIST[key] = int(settings.FLOGGER_FLEET_LIST[key])
+        print "FLOGGER_FLEET_LIST: ", settings.FLOGGER_FLEET_LIST
+            
 #
 # GUI Initialisation end
 #  
@@ -214,6 +221,10 @@ class MyApp(QtGui.QMainWindow, Ui_MainWindow):
 #        print "settings.FLOGGER_DB_SCHEMA: ", settings.FLOGGER_DB_SCHEMA
         self.RunningLabel.setStyleSheet("color: green")
         self.RunningLabel.setText("Running...")
+#        self.RunningProgressBar.maximum(0)
+        self.RunningProgressBar.setProperty("maximum", 0)
+        
+       
         flogger.flogger_run(settings)
         
         
@@ -221,6 +232,8 @@ class MyApp(QtGui.QMainWindow, Ui_MainWindow):
         settings.FLOGGER_RUN = False
         self.RunningLabel.setStyleSheet("color: red")
         self.RunningLabel.setText("Stopped")
+        self.RunningProgressBar.setProperty("maximum", 1)
+#        print "Running max: ", self.RunningProgressBar.maximum
         print "flogger stop"
     
     def floggerQuit(self):

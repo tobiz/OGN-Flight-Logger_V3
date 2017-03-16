@@ -148,16 +148,6 @@ class flogger3(MyApp):
     
     def __init__(self, interval=1):
         print "init flogger3"
-#        settings = class_settings()
-        
-#        self.interval = interval
-#        thread = threading.Thread(target=self.flogger_run, args=())
-#        self.thread = Thread(target=self.flogger_start, name= "flogger", args=(settings,))
-#        print "Thread setup"
-#        thread = threading.Thread(target=self.flogger_run)
-#        self.thread.daemon = True                            # Daemonize thread
-#        thread.start()                                  # Start the execution
-#        print "Thread started"
         print "flogger3 initialized"
         return
     
