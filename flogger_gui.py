@@ -96,30 +96,23 @@ class MyApp(QtGui.QMainWindow, Ui_MainWindow):
         old_val = self.getOldValue(self.config, "FLOGGER_MIN_FLIGHT_TIME")    
         settings.FLOGGER_MIN_FLIGHT_TIME = old_val
         self.MinFlightTime.setText(old_val)
+#
+# Note this could be done using LatLon
+#        
+        old_val_lat = self.getOldValue(self.config, "FLOGGER_LATITUDE")    # This might get parsed as a real - need to watch it!
+        print "Old_val: " + old_val_lat
+        settings.FLOGGER_LATITUDE = old_val_lat
         
-        old_val = self.getOldValue(self.config, "FLOGGER_LATITUDE")    # This might get parsed as a real - need to watch it!
-        print "Old_val: " + old_val
-        settings.FLOGGER_LATITUDE = old_val
-        self.AirfieldLatitude.setText(old_val)
+        old_val_lon = self.getOldValue(self.config, "FLOGGER_LONGITUDE")    # This might get parsed as a real - need to watch it!
+        print "Old_lon: " + old_val_lon
+        settings.FLOGGER_LONGITUDE = old_val_lon
+        self.AirfieldLongitude.setText(old_val_lon)
         
-        old_val = self.getOldValue(self.config, "FLOGGER_LONGITUDE")    # This might get parsed as a real - need to watch it!
-        settings.FLOGGER_LONGITUDE = old_val
-        self.AirfieldLongitude.setText(old_val)
-        
-        if settings.FLOGGER_LATITUDE < 0:
-            latitude = str(settings.FLOGGER_LATITUDE)[1:] + " S"
-        else:
-            latitude = str(settings.FLOGGER_LATITUDE)[1:] + " N"
-#        print "Latitude: " + latitude
-        
-        if settings.FLOGGER_LONGITUDE < 0:
-            longitude = str(settings.FLOGGER_LONGITUDE)[1:] + " E"
-        else:
-            longitude = str(settings.FLOGGER_LONGITUDE)[1:] + " W"
-#        print "Latitude: " + longitude
-        self.AirfieldLatitude.setText(latitude)
-        self.AirfieldLongitude.setText(longitude)
-        
+        old_latlon = LatLon(Latitude( old_val_lat), Longitude(old_val_lon))
+        old_latlonstr = old_latlon.to_string('D% %H')
+        self.AirfieldLatitude.setText(old_latlonstr[0])
+        self.AirfieldLongitude.setText(old_latlonstr[1])
+               
         old_val = self.getOldValue(self.config, "FLOGGER_FLEET_CHECK")
         print "Fleet Check: " + old_val 
         if old_val == "Y":
@@ -173,24 +166,25 @@ class MyApp(QtGui.QMainWindow, Ui_MainWindow):
             print "APRS Base: " + item
             if i == 1:
                 self.APRSBase1Edit.setText(item)
-                i = i + 1
+#                i = i + 1
+                i += 1
                 continue
             if i == 2:
                 self.APRSBase2Edit.setText(item)
-                i = i + 1
+                i += 1
                 continue
             if i == 3:
                 self.APRSBase3Edit.setText(item)
-                i = i + 1
+                i += 1
                 continue
             if i == 4:
                 self.APRSBase4Edit.setText(item)
-                i = i + 1  
+                i += 1
                 continue 
-            if i == 5:
-                self.APRSBase5Edit.setText(item)
-                i = i + 1  
-                continue 
+#            if i == 5:
+#                self.APRSBase5Edit.setText(item)
+#                i = i + 1  
+#                continue 
         settings.FLOGGER_APRS_BASES = old_val
         print "APRS_BASES: ", old_val
         print "APRS_BASES: ", settings.FLOGGER_APRS_BASES
