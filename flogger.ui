@@ -290,18 +290,8 @@
        <height>51</height>
       </rect>
      </property>
-    </widget>
-    <widget class="QPushButton" name="AirfieldLatitudeButton">
-     <property name="geometry">
-      <rect>
-       <x>370</x>
-       <y>30</y>
-       <width>41</width>
-       <height>26</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>Edit</string>
+     <property name="toolTip">
+      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Format is: d.dddd N|S&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
      </property>
     </widget>
    </widget>
@@ -346,18 +336,8 @@
        <height>51</height>
       </rect>
      </property>
-    </widget>
-    <widget class="QPushButton" name="AirfieldLongitudeButton">
-     <property name="geometry">
-      <rect>
-       <x>370</x>
-       <y>30</y>
-       <width>41</width>
-       <height>26</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>Edit</string>
+     <property name="toolTip">
+      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Format is: d.dddd E|W&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
      </property>
     </widget>
    </widget>
@@ -447,19 +427,6 @@
        <width>201</width>
        <height>51</height>
       </rect>
-     </property>
-    </widget>
-    <widget class="QPushButton" name="MinFlightTimeButton">
-     <property name="geometry">
-      <rect>
-       <x>370</x>
-       <y>30</y>
-       <width>41</width>
-       <height>26</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>Edit</string>
      </property>
     </widget>
    </widget>

@@ -125,19 +125,47 @@ FLOGGER_DUPLICATE_FLIGHT_DELTA = 90# Delta time (secs) for duplicate flights
 FLOGGER_APRS_BASES = SuttonBnk, UKPOC, UKRUF, Linton
 
 
+
+
+
+# Flogger process control. Continue process loop if True, else terminate thread
+FLOGGER_RUN = TRUE
+
 # Coded       001-099: Gliders, 
 #             101-199: Tugs, 
 #             201-299: Motor Gliders, 
 #             301-399: Other
 # Note. No reason for coding these values other than, 'why not!'
-##FLOGGER_FLEET_LIST = {"G-CHEF":1, "G-CHVR":2, "G-CKFN":3, "G-CKJH":4, 
-##                      "G-CKLW":5, "G-CJVZ":6, "G-DDKC":7, "G-DDPO":8,  
-##                      "G-BETM":101, "G-CIOF":102, "G-MOYR":103, "G-BJIV": 104,
-##                      "G-OSUT":201, 
-##                      }
+#FLOGGER_FLEET_LIST = {"G-CHEF":1, "G-CHVR":2, "G-CKFN":3, "G-CKJH":4, 
+#						"G-CKLW":5, "G-CJVZ":6, "G-DDKC":7, "G-DDPO":8,
+#						"G-BETM":101, "G-CIOF":102, "G-MOYR":103, "G-BJIV": 104,
+#						"G-OSUT":201
+#						}
+
+#FLOGGER_FLEET_LIST = {"G-CHEF":1, "G-CHVR":2, "G-CKFN":3, "G-CKJH":4, 
+#                          "G-CKLW":5, "G-CJVZ":6, "G-DDKC":7, "G-DDPO":8,  
+#                          "G-BETM":101, "G-CIOF":102, "G-MOYR":103, "G-BJIV": 104,
+#                          "G-OSUT":201, 
+#                          }
 #
 # Aircraft types in OGN Database, see https://github.com/glidernet/ogn-ddb/blob/master/index.php#L87
 #
+
+[FLOGGER_FLEET_LIST]
+G-CHEF = 1
+G-CHVR = 2
+G-CKFN = 3
+G-CKJH = 4
+G-CKLW = 5
+G-CJVZ = 6
+G-DDKC = 7
+G-DDPO = 8
+G-BETM = 101
+G-CIOF = 102
+G-MOYR = 103
+G-BJIV = 104
+G-OSUT = 201
+
 ##FLOGGER_AIRCRAFT_CAT = [
 ##        'None'                  # 0 = Blank
 ##        'Gliders/motoGliders',  # 1
@@ -148,10 +176,14 @@ FLOGGER_APRS_BASES = SuttonBnk, UKPOC, UKRUF, Linton
 ##        'Others',               # 6
 ##        ]
 
-# Flogger process control. Continue process loop if True, else terminate thread
-FLOGGER_RUN = TRUE
-
-
+[FLOGGER_AIRCRAFT_CAT]
+None = 0
+Gliders/motoGliders = 1
+Planes = 2
+Ultralights = 3
+Helicopters = 4
+Drones/UAV = 5
+Others = 6
 
 
  

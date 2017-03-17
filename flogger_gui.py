@@ -9,6 +9,7 @@ from ConfigParser import *
 from configobj import ConfigObj
 from flogger3 import *
 from flogger_settings import * 
+from LatLon import *
 
 
 # 20170311 
@@ -96,12 +97,12 @@ class MyApp(QtGui.QMainWindow, Ui_MainWindow):
         settings.FLOGGER_MIN_FLIGHT_TIME = old_val
         self.MinFlightTime.setText(old_val)
         
-        old_val = self.getOldValue(self.config, "FLOGGER_LATITUDE")    # This might get parsed as an real - need to watch it!
+        old_val = self.getOldValue(self.config, "FLOGGER_LATITUDE")    # This might get parsed as a real - need to watch it!
         print "Old_val: " + old_val
         settings.FLOGGER_LATITUDE = old_val
         self.AirfieldLatitude.setText(old_val)
         
-        old_val = self.getOldValue(self.config, "FLOGGER_LONGITUDE")    # This might get parsed as an real - need to watch it!
+        old_val = self.getOldValue(self.config, "FLOGGER_LONGITUDE")    # This might get parsed as a real - need to watch it!
         settings.FLOGGER_LONGITUDE = old_val
         self.AirfieldLongitude.setText(old_val)
         
@@ -251,10 +252,11 @@ class MyApp(QtGui.QMainWindow, Ui_MainWindow):
         self.floggerAPRSServerhostEdit2(True)
         self.floggerAPRSServerportEdit2(True)
         self.floggerAirfieldDetailsEdit2(True)
+        self.floggerAirfieldLatLonEdit2(True)
         self.floggerMinFlightTimeEdit2(True)
         self.floggerDBSchemaFileEdit2(True)
         self.floggerSMTPServerURLEdit2(True)
-        self.floggerSMTPServerPortEdit()
+        self.floggerSMTPServerPortEdit2(True)
         self.floggerEmailSenderEdit2(True)
         self.floggerEmailReceiverEdit2(True)
         self.floggerAPRSBaseEdit()
@@ -268,10 +270,11 @@ class MyApp(QtGui.QMainWindow, Ui_MainWindow):
         self.floggerAPRSServerhostEdit2(False)
         self.floggerAPRSServerportEdit2(False)
         self.floggerAirfieldDetailsEdit2(False)
+        self.floggerAirfieldLatLonEdit2(False)
         self.floggerMinFlightTimeEdit2(False)
         self.floggerDBSchemaFileEdit2(False)
         self.floggerSMTPServerURLEdit2(False)
-#        self.floggerSMTPServerPortEdit()
+        self.floggerSMTPServerPortEdit2(False)
         self.floggerEmailSenderEdit2(False)
         self.floggerEmailReceiverEdit2(False)
         return
@@ -378,8 +381,33 @@ class MyApp(QtGui.QMainWindow, Ui_MainWindow):
         self.editConfigField("flogger_settings_file.txt", "FLOGGER_AIRFIELD_DETAILS", airfield_details)
 #        airfield_details = self.config["FLOGGER_AIRFIELD_DETAILS"]
 #        self.FLOGGER_AIRFIELD_DETAILS = airfield_details
-        
-        
+
+    def floggerAirfieldLatLonEdit2(self, mode):
+        print "Airfield latitude, longitude called"
+        if mode:
+            airfieldLat = self.AirfieldLatitude.toPlainText()
+            airfieldLon = self.AirfieldLongitude.toPlainText()
+            airfieldlatlon = string2latlon(str(airfieldLat), str(airfieldLon), 'D% %H')
+            print "Airfield lat/lon: ", airfieldlatlon
+            airfieldLatLonStr = airfieldlatlon.to_string("%D")
+            print "Update Lat/Lon: ", airfieldLatLonStr
+            print "Latlonstr: ", airfieldLatLonStr[0], " :", airfieldLatLonStr[1]
+            old_val_lat = airfieldLatLonStr[0]
+            old_val_lon = airfieldLatLonStr[1]
+        else:
+            old_val_lat = self.getOldValue(self.config, "FLOGGER_LATITUDE")
+            old_val_lon = self.getOldValue(self.config, "FLOGGER_LONGITUDE")
+            print "Old Lat: ", old_val_lat, " Old Lon: ", old_val_lon
+            airfieldlatlon = LatLon(Latitude(old_val_lat), Longitude(old_val_lon))
+            print "airfieldlatlon: ", airfieldlatlon
+            airfieldLatLonStr = airfieldlatlon.to_string('D% %H')
+            print "airfieldlatlonStr: ", airfieldLatLonStr
+            self.AirfieldLatitude.setText(airfieldLatLonStr[0])
+            self.AirfieldLongitude.setText(airfieldLatLonStr[1])
+        self.editConfigField("flogger_settings_file.txt", "FLOGGER_LATITUDE", old_val_lat)
+        self.editConfigField("flogger_settings_file.txt", "FLOGGER_LONGITUDE", old_val_lon)
+        return
+                  
     def floggerMinFlightTimeEdit2(self, mode):
         print "Min Flight Time button clicked"
         # Note. Format is "HH:MM:SS" ie a string
@@ -474,14 +502,16 @@ class MyApp(QtGui.QMainWindow, Ui_MainWindow):
             EmailReceiverRX = old_val
         self.editConfigField("flogger_settings_file.txt", "FLOGGER_SMTP_RX", EmailReceiverRX)
         self.FLOGGER_SMTP_RX = EmailReceiverRX 
-        
-                       
-    def floggerSMTPServerPortEdit(self):
-        print "SMTP Server Port button clicked" 
-        smtp_server_port = self.SMTPServerPort.toPlainText()  
-        print "SMTP Server Port: " + smtp_server_port
+                             
+    def floggerSMTPServerPortEdit2(self, mode):
+        print "SMTP Server Port button clicked"
+        if mode :
+            smtp_server_port = self.SMTPServerPort.toPlainText()  
+        else:
+            old_val = self.getOldValue(self.config, "FLOGGER_SMTP_SERVER_PORT")
+            self.SMTPServerPort.setText(old_val)
+            smtp_server_port = old_val
         self.editConfigField("flogger_settings_file.txt", "FLOGGER_SMTP_SERVER_PORT", smtp_server_port)
-        smtp_server_port = self.config["FLOGGER_SMTP_SERVER_PORT"]
         self.FLOGGER_SMTP_SERVER_PORT = int(smtp_server_port)      
     
     def floggerAPRSBasesListEdit(self):
@@ -505,21 +535,6 @@ class MyApp(QtGui.QMainWindow, Ui_MainWindow):
         self.editConfigField("flogger_settings_file.txt", "FLOGGER_APRS_BASES", APRSBaseList)
 #        APRSBase = self.config["FLOGGER_APRS_BASES"]
         self.FLOGGER_APRS_BASES = APRSBaseList 
-        
-    def floggerRunningMovie(self, frame_rate):
-        print "RunningMovie called"
-        print "Running.."
-        self.RunningLabel.setStyleSheet("color: green")
-        self.RunningLabel.setText("Running..")
-        time.sleep(frame_rate)
-        print "Running..."
-        self.RunningLabel.setText("Running...")
-        time.sleep(frame_rate)
-        print "Running."
-        self.RunningLabel.setText("Running.")
-        time.sleep(frame_rate)
-        return
-        
           
     def editConfigField (self, file_name, field_name, new_value):
         print "editConfig called"
