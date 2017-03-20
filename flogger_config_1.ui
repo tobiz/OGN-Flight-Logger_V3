@@ -34,170 +34,11 @@
      <string>Flogger - Aircraft Flight Logging</string>
     </property>
    </widget>
-   <widget class="QGroupBox" name="MinFlightTimeBox">
-    <property name="geometry">
-     <rect>
-      <x>450</x>
-      <y>690</y>
-      <width>381</width>
-      <height>61</height>
-     </rect>
-    </property>
-    <property name="toolTip">
-     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;format is - Hrs:Min:Sec&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-    </property>
-    <property name="title">
-     <string/>
-    </property>
-    <widget class="QLabel" name="MinFlightTimeLabel">
-     <property name="geometry">
-      <rect>
-       <x>10</x>
-       <y>20</y>
-       <width>151</width>
-       <height>20</height>
-      </rect>
-     </property>
-     <property name="font">
-      <font>
-       <pointsize>9</pointsize>
-       <weight>75</weight>
-       <bold>true</bold>
-      </font>
-     </property>
-     <property name="text">
-      <string>Minimum Flight Time</string>
-     </property>
-    </widget>
-    <widget class="QTextEdit" name="MinFlightTime">
-     <property name="geometry">
-      <rect>
-       <x>160</x>
-       <y>10</y>
-       <width>201</width>
-       <height>51</height>
-      </rect>
-     </property>
-    </widget>
-   </widget>
-   <widget class="QGroupBox" name="RecordTracksBox">
-    <property name="geometry">
-     <rect>
-      <x>30</x>
-      <y>500</y>
-      <width>151</width>
-      <height>61</height>
-     </rect>
-    </property>
-    <property name="toolTip">
-     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;format is - Hrs:Min:Sec&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-    </property>
-    <property name="title">
-     <string/>
-    </property>
-    <widget class="QRadioButton" name="RecordTracksRadioButton">
-     <property name="geometry">
-      <rect>
-       <x>10</x>
-       <y>20</y>
-       <width>141</width>
-       <height>21</height>
-      </rect>
-     </property>
-     <property name="toolTip">
-      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Record flight tracks Y|N&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-     </property>
-     <property name="text">
-      <string>Record Tracks</string>
-     </property>
-    </widget>
-   </widget>
-   <widget class="QGroupBox" name="FleetCheckBox">
-    <property name="geometry">
-     <rect>
-      <x>30</x>
-      <y>560</y>
-      <width>151</width>
-      <height>61</height>
-     </rect>
-    </property>
-    <property name="toolTip">
-     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;format is - Hrs:Min:Sec&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-    </property>
-    <property name="title">
-     <string/>
-    </property>
-    <widget class="QRadioButton" name="FleetCheckRadioButton">
-     <property name="geometry">
-      <rect>
-       <x>10</x>
-       <y>20</y>
-       <width>141</width>
-       <height>21</height>
-      </rect>
-     </property>
-     <property name="toolTip">
-      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Check for membership of fleet, Y|N&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-     </property>
-     <property name="text">
-      <string>Fleet Check</string>
-     </property>
-    </widget>
-   </widget>
-   <widget class="QGroupBox" name="DBSchemaBox">
-    <property name="geometry">
-     <rect>
-      <x>450</x>
-      <y>760</y>
-      <width>381</width>
-      <height>61</height>
-     </rect>
-    </property>
-    <property name="toolTip">
-     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;format is - Hrs:Min:Sec&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-    </property>
-    <property name="title">
-     <string/>
-    </property>
-    <widget class="QLabel" name="DBSchemaLabel">
-     <property name="geometry">
-      <rect>
-       <x>10</x>
-       <y>20</y>
-       <width>151</width>
-       <height>20</height>
-      </rect>
-     </property>
-     <property name="font">
-      <font>
-       <pointsize>9</pointsize>
-       <weight>75</weight>
-       <bold>true</bold>
-      </font>
-     </property>
-     <property name="toolTip">
-      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:400;&quot;&gt;File holding SQlite3 schema&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-     </property>
-     <property name="text">
-      <string>DB Schema File</string>
-     </property>
-    </widget>
-    <widget class="QTextEdit" name="DBSchemaFile">
-     <property name="geometry">
-      <rect>
-       <x>160</x>
-       <y>10</y>
-       <width>201</width>
-       <height>51</height>
-      </rect>
-     </property>
-    </widget>
-   </widget>
    <widget class="QGroupBox" name="RunningBox">
     <property name="geometry">
      <rect>
-      <x>40</x>
-      <y>50</y>
+      <x>290</x>
+      <y>680</y>
       <width>191</width>
       <height>111</height>
      </rect>
@@ -265,8 +106,8 @@
    <widget class="QGroupBox" name="groupBox">
     <property name="geometry">
      <rect>
-      <x>440</x>
-      <y>540</y>
+      <x>0</x>
+      <y>690</y>
       <width>271</width>
       <height>80</height>
      </rect>
@@ -278,7 +119,7 @@
      </font>
     </property>
     <property name="styleSheet">
-     <string notr="true">background-color: rgb(192, 255, 255);</string>
+     <string notr="true">background-color: rgb(255, 246, 245);</string>
     </property>
     <property name="title">
      <string>Update Configuration?</string>
@@ -320,11 +161,14 @@ background-color: rgb(0, 255, 0);</string>
    <widget class="QTabWidget" name="tabWidget">
     <property name="geometry">
      <rect>
-      <x>430</x>
-      <y>10</y>
-      <width>401</width>
-      <height>521</height>
+      <x>20</x>
+      <y>50</y>
+      <width>641</width>
+      <height>611</height>
      </rect>
+    </property>
+    <property name="toolTip">
+     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;These values should only be changed if you know what you are doing.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
     </property>
     <property name="currentIndex">
      <number>0</number>
@@ -341,6 +185,9 @@ background-color: rgb(0, 255, 0);</string>
         <width>381</width>
         <height>61</height>
        </rect>
+      </property>
+      <property name="toolTip">
+       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Get your own Username and Passcode from http://www.george-smart.co.uk/wiki/APRS_Callpass&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
       </property>
       <property name="title">
        <string/>
@@ -384,6 +231,9 @@ background-color: rgb(0, 255, 0);</string>
         <width>381</width>
         <height>61</height>
        </rect>
+      </property>
+      <property name="toolTip">
+       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Get your own Username and Passcode from http://www.george-smart.co.uk/wiki/APRS_Callpass&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
       </property>
       <property name="title">
        <string/>
@@ -461,9 +311,6 @@ background-color: rgb(0, 255, 0);</string>
         </rect>
        </property>
       </widget>
-      <zorder>APRSServerHostLabel</zorder>
-      <zorder>APRSServerHostName</zorder>
-      <zorder>APRSBaseListBox</zorder>
      </widget>
      <widget class="QGroupBox" name="APRSServerPortBox">
       <property name="geometry">
@@ -511,14 +358,17 @@ background-color: rgb(0, 255, 0);</string>
      <widget class="QGroupBox" name="APRSBaseListBox">
       <property name="geometry">
        <rect>
-        <x>10</x>
+        <x>0</x>
         <y>280</y>
         <width>361</width>
-        <height>211</height>
+        <height>251</height>
        </rect>
       </property>
+      <property name="toolTip">
+       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;List of APRS base stations to take data from&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+      </property>
       <property name="styleSheet">
-       <string notr="true">background-color: rgb(255, 253, 188);</string>
+       <string notr="true"/>
       </property>
       <property name="title">
        <string/>
@@ -528,18 +378,18 @@ background-color: rgb(0, 255, 0);</string>
         <rect>
          <x>10</x>
          <y>50</y>
-         <width>51</width>
+         <width>121</width>
          <height>17</height>
         </rect>
        </property>
        <property name="text">
-        <string>Base 1</string>
+        <string> APRS Base 1</string>
        </property>
       </widget>
       <widget class="QTextEdit" name="APRSBase1Edit">
        <property name="geometry">
         <rect>
-         <x>70</x>
+         <x>130</x>
          <y>40</y>
          <width>181</width>
          <height>41</height>
@@ -549,39 +399,23 @@ background-color: rgb(0, 255, 0);</string>
         <string notr="true">background-color: rgb(255, 255, 255);</string>
        </property>
       </widget>
-      <widget class="QPushButton" name="APRSBase1Button">
-       <property name="geometry">
-        <rect>
-         <x>200</x>
-         <y>10</y>
-         <width>51</width>
-         <height>26</height>
-        </rect>
-       </property>
-       <property name="styleSheet">
-        <string notr="true">background-color: rgb(255, 255, 255);</string>
-       </property>
-       <property name="text">
-        <string>Edit</string>
-       </property>
-      </widget>
       <widget class="QLabel" name="APRSBase2Label">
        <property name="geometry">
         <rect>
          <x>10</x>
          <y>90</y>
-         <width>51</width>
+         <width>81</width>
          <height>17</height>
         </rect>
        </property>
        <property name="text">
-        <string>Base 2</string>
+        <string>APRS Base 2</string>
        </property>
       </widget>
       <widget class="QTextEdit" name="APRSBase2Edit">
        <property name="geometry">
         <rect>
-         <x>70</x>
+         <x>130</x>
          <y>80</y>
          <width>181</width>
          <height>41</height>
@@ -594,7 +428,7 @@ background-color: rgb(0, 255, 0);</string>
       <widget class="QTextEdit" name="APRSBase3Edit">
        <property name="geometry">
         <rect>
-         <x>70</x>
+         <x>130</x>
          <y>120</y>
          <width>181</width>
          <height>41</height>
@@ -609,12 +443,12 @@ background-color: rgb(0, 255, 0);</string>
         <rect>
          <x>10</x>
          <y>130</y>
-         <width>51</width>
+         <width>101</width>
          <height>17</height>
         </rect>
        </property>
        <property name="text">
-        <string>Base 3</string>
+        <string>APRS Base 3</string>
        </property>
       </widget>
       <widget class="QLabel" name="APRSBase4Label">
@@ -622,18 +456,18 @@ background-color: rgb(0, 255, 0);</string>
         <rect>
          <x>10</x>
          <y>170</y>
-         <width>51</width>
+         <width>81</width>
          <height>17</height>
         </rect>
        </property>
        <property name="text">
-        <string>Base 4</string>
+        <string>APRS Base 4</string>
        </property>
       </widget>
       <widget class="QTextEdit" name="APRSBase4Edit">
        <property name="geometry">
         <rect>
-         <x>70</x>
+         <x>130</x>
          <y>160</y>
          <width>181</width>
          <height>41</height>
@@ -646,9 +480,9 @@ background-color: rgb(0, 255, 0);</string>
       <widget class="QLabel" name="APRSBaseLabel">
        <property name="geometry">
         <rect>
-         <x>30</x>
+         <x>10</x>
          <y>10</y>
-         <width>141</width>
+         <width>281</width>
          <height>17</height>
         </rect>
        </property>
@@ -662,20 +496,35 @@ background-color: rgb(0, 255, 0);</string>
         <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Specify 1-5 APRS Base Station names to be used for receiving Flarm signals&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
        </property>
        <property name="text">
-        <string>APRS Base Stations</string>
+        <string>APRS Base Stations to take data from</string>
        </property>
       </widget>
-      <zorder>APRSBase1Label</zorder>
-      <zorder>APRSBase1Edit</zorder>
-      <zorder>APRSBase1Button</zorder>
-      <zorder>APRSBase2Label</zorder>
-      <zorder>APRSBase2Edit</zorder>
-      <zorder>APRSBase3Edit</zorder>
-      <zorder>APRSBase3Label</zorder>
-      <zorder>APRSBase4Label</zorder>
-      <zorder>APRSBase4Edit</zorder>
-      <zorder>APRSBaseLabel</zorder>
-      <zorder>toolBox</zorder>
+      <widget class="QTextEdit" name="APRSBase5Edit">
+       <property name="geometry">
+        <rect>
+         <x>130</x>
+         <y>200</y>
+         <width>181</width>
+         <height>41</height>
+        </rect>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">background-color: rgb(255, 255, 255);</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="APRSBase5Label">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>210</y>
+         <width>81</width>
+         <height>17</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>APRS Base 5</string>
+       </property>
+      </widget>
      </widget>
     </widget>
     <widget class="QWidget" name="AirfieldConfig">
@@ -690,6 +539,9 @@ background-color: rgb(0, 255, 0);</string>
         <width>381</width>
         <height>61</height>
        </rect>
+      </property>
+      <property name="toolTip">
+       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Name of airfield in Flarm or OGN databases&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
       </property>
       <property name="title">
        <string/>
@@ -711,7 +563,7 @@ background-color: rgb(0, 255, 0);</string>
         </font>
        </property>
        <property name="text">
-        <string>Base Airfield</string>
+        <string>Airfield Name</string>
        </property>
       </widget>
       <widget class="QTextEdit" name="AirfieldBase">
@@ -733,6 +585,9 @@ background-color: rgb(0, 255, 0);</string>
         <width>381</width>
         <height>61</height>
        </rect>
+      </property>
+      <property name="toolTip">
+       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Long name of airfield&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
       </property>
       <property name="title">
        <string/>
@@ -776,6 +631,9 @@ background-color: rgb(0, 255, 0);</string>
         <width>381</width>
         <height>61</height>
        </rect>
+      </property>
+      <property name="toolTip">
+       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Latitude of Base Airfield&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
       </property>
       <property name="title">
        <string/>
@@ -823,6 +681,9 @@ background-color: rgb(0, 255, 0);</string>
         <height>61</height>
        </rect>
       </property>
+      <property name="toolTip">
+       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Longitude of base airfield&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+      </property>
       <property name="title">
        <string/>
       </property>
@@ -860,6 +721,55 @@ background-color: rgb(0, 255, 0);</string>
        </property>
       </widget>
      </widget>
+     <widget class="QGroupBox" name="AirfieldFlarmRadiusBox">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>270</y>
+        <width>381</width>
+        <height>61</height>
+       </rect>
+      </property>
+      <property name="toolTip">
+       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Radius of Flarm signals to be included, in Km&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+      </property>
+      <property name="title">
+       <string/>
+      </property>
+      <widget class="QLabel" name="AirfieldFlarmRadiusLabel">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>20</y>
+         <width>151</width>
+         <height>20</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>10</pointsize>
+         <weight>75</weight>
+         <bold>true</bold>
+        </font>
+       </property>
+       <property name="text">
+        <string>Flarm Radius</string>
+       </property>
+      </widget>
+      <widget class="QTextEdit" name="AirfieldFlarmRadius">
+       <property name="geometry">
+        <rect>
+         <x>160</x>
+         <y>10</y>
+         <width>201</width>
+         <height>51</height>
+        </rect>
+       </property>
+       <property name="toolTip">
+        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Format is: d.dddd E|W&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+       </property>
+      </widget>
+     </widget>
     </widget>
     <widget class="QWidget" name="tab">
      <attribute name="title">
@@ -869,7 +779,7 @@ background-color: rgb(0, 255, 0);</string>
       <item row="0" column="0">
        <widget class="QGroupBox" name="SMTPServerURLBox">
         <property name="toolTip">
-         <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;format is - Hrs:Min:Sec&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+         <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;URL of  server used for sending email&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
         </property>
         <property name="title">
          <string/>
@@ -902,149 +812,710 @@ background-color: rgb(0, 255, 0);</string>
           <rect>
            <x>160</x>
            <y>10</y>
-           <width>201</width>
-           <height>51</height>
-          </rect>
-         </property>
-        </widget>
-       </widget>
-      </item>
-      <item row="1" column="0">
-       <widget class="QGroupBox" name="SMTPServerPortBox">
-        <property name="toolTip">
-         <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;format is - Hrs:Min:Sec&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-        </property>
-        <property name="title">
-         <string/>
-        </property>
-        <widget class="QLabel" name="SMTPPortLabel">
-         <property name="geometry">
-          <rect>
-           <x>10</x>
-           <y>20</y>
-           <width>151</width>
-           <height>20</height>
-          </rect>
-         </property>
-         <property name="font">
-          <font>
-           <pointsize>9</pointsize>
-           <weight>75</weight>
-           <bold>true</bold>
-          </font>
-         </property>
-         <property name="toolTip">
-          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:400;&quot;&gt;SMTP server port: default is 25&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-         </property>
-         <property name="text">
-          <string>Email Server Port</string>
-         </property>
-        </widget>
-        <widget class="QTextEdit" name="SMTPServerPort">
-         <property name="geometry">
-          <rect>
-           <x>160</x>
-           <y>10</y>
-           <width>201</width>
-           <height>51</height>
-          </rect>
-         </property>
-        </widget>
-       </widget>
-      </item>
-      <item row="2" column="0">
-       <widget class="QGroupBox" name="EmailSenderBox">
-        <property name="toolTip">
-         <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;format is - Hrs:Min:Sec&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-        </property>
-        <property name="title">
-         <string/>
-        </property>
-        <widget class="QLabel" name="EmailSenderLabel">
-         <property name="geometry">
-          <rect>
-           <x>10</x>
-           <y>20</y>
-           <width>151</width>
-           <height>20</height>
-          </rect>
-         </property>
-         <property name="font">
-          <font>
-           <pointsize>9</pointsize>
-           <weight>75</weight>
-           <bold>true</bold>
-          </font>
-         </property>
-         <property name="toolTip">
-          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:400;&quot;&gt;SMTP server port: default is 25&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-         </property>
-         <property name="text">
-          <string>Email Sender</string>
-         </property>
-        </widget>
-        <widget class="QTextEdit" name="EmailSenderTX">
-         <property name="geometry">
-          <rect>
-           <x>160</x>
-           <y>10</y>
            <width>221</width>
            <height>51</height>
           </rect>
          </property>
         </widget>
-       </widget>
-      </item>
-      <item row="3" column="0">
-       <widget class="QGroupBox" name="EmailReceiverBox">
-        <property name="toolTip">
-         <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;format is - Hrs:Min:Sec&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-        </property>
-        <property name="title">
-         <string/>
-        </property>
-        <widget class="QLabel" name="EmailReceiverLabel">
+        <widget class="QGroupBox" name="SMTPServerPortBox">
          <property name="geometry">
           <rect>
-           <x>10</x>
-           <y>20</y>
-           <width>151</width>
-           <height>20</height>
+           <x>0</x>
+           <y>80</y>
+           <width>625</width>
+           <height>111</height>
           </rect>
-         </property>
-         <property name="font">
-          <font>
-           <pointsize>9</pointsize>
-           <weight>75</weight>
-           <bold>true</bold>
-          </font>
          </property>
          <property name="toolTip">
-          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:400;&quot;&gt;SMTP server port: default is 25&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Port number for smtp messages, normally 25&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
          </property>
-         <property name="text">
-          <string>Email Receiver</string>
+         <property name="title">
+          <string/>
          </property>
+         <widget class="QLabel" name="SMTPPortLabel">
+          <property name="geometry">
+           <rect>
+            <x>10</x>
+            <y>20</y>
+            <width>151</width>
+            <height>20</height>
+           </rect>
+          </property>
+          <property name="font">
+           <font>
+            <pointsize>9</pointsize>
+            <weight>75</weight>
+            <bold>true</bold>
+           </font>
+          </property>
+          <property name="toolTip">
+           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:400;&quot;&gt;SMTP server port: default is 25&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+          </property>
+          <property name="text">
+           <string>Email Server Port</string>
+          </property>
+         </widget>
+         <widget class="QTextEdit" name="SMTPServerPort">
+          <property name="geometry">
+           <rect>
+            <x>160</x>
+            <y>10</y>
+            <width>221</width>
+            <height>51</height>
+           </rect>
+          </property>
+         </widget>
         </widget>
-        <widget class="QTextEdit" name="EmailReceiverRX">
+        <widget class="QGroupBox" name="EmailSenderBox">
          <property name="geometry">
           <rect>
-           <x>160</x>
-           <y>10</y>
-           <width>221</width>
-           <height>51</height>
+           <x>0</x>
+           <y>160</y>
+           <width>625</width>
+           <height>168</height>
           </rect>
          </property>
+         <property name="toolTip">
+          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Email address of sender&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+         </property>
+         <property name="title">
+          <string/>
+         </property>
+         <widget class="QLabel" name="EmailSenderLabel">
+          <property name="geometry">
+           <rect>
+            <x>10</x>
+            <y>20</y>
+            <width>151</width>
+            <height>20</height>
+           </rect>
+          </property>
+          <property name="font">
+           <font>
+            <pointsize>9</pointsize>
+            <weight>75</weight>
+            <bold>true</bold>
+           </font>
+          </property>
+          <property name="toolTip">
+           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+          </property>
+          <property name="text">
+           <string>Email Sender</string>
+          </property>
+         </widget>
+         <widget class="QTextEdit" name="EmailSenderTX">
+          <property name="geometry">
+           <rect>
+            <x>160</x>
+            <y>10</y>
+            <width>221</width>
+            <height>51</height>
+           </rect>
+          </property>
+         </widget>
+        </widget>
+        <widget class="QGroupBox" name="EmailReceiverBox">
+         <property name="geometry">
+          <rect>
+           <x>0</x>
+           <y>250</y>
+           <width>625</width>
+           <height>283</height>
+          </rect>
+         </property>
+         <property name="toolTip">
+          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Email address of receiving user&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+         </property>
+         <property name="title">
+          <string/>
+         </property>
+         <widget class="QLabel" name="EmailReceiverLabel">
+          <property name="geometry">
+           <rect>
+            <x>10</x>
+            <y>20</y>
+            <width>151</width>
+            <height>20</height>
+           </rect>
+          </property>
+          <property name="font">
+           <font>
+            <pointsize>9</pointsize>
+            <weight>75</weight>
+            <bold>true</bold>
+           </font>
+          </property>
+          <property name="toolTip">
+           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+          </property>
+          <property name="text">
+           <string>Email Receiver</string>
+          </property>
+         </widget>
+         <widget class="QTextEdit" name="EmailReceiverRX">
+          <property name="geometry">
+           <rect>
+            <x>160</x>
+            <y>10</y>
+            <width>221</width>
+            <height>51</height>
+           </rect>
+          </property>
+         </widget>
         </widget>
        </widget>
       </item>
      </layout>
-     <zorder>SMTPServerURLLabel</zorder>
-     <zorder>SMTPServerURLBox</zorder>
-     <zorder>SMTPServerPortBox</zorder>
-     <zorder>EmailSenderLabel</zorder>
-     <zorder>EmailSenderBox</zorder>
-     <zorder>EmailReceiverBox</zorder>
+    </widget>
+    <widget class="QWidget" name="tab_2">
+     <attribute name="title">
+      <string>Flight Config</string>
+     </attribute>
+     <widget class="QGroupBox" name="MinFlightTimeBox">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>10</y>
+        <width>381</width>
+        <height>61</height>
+       </rect>
+      </property>
+      <property name="toolTip">
+       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Flight duration less than which is not considered a flight. Format hh:mm:ss&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+      </property>
+      <property name="title">
+       <string/>
+      </property>
+      <widget class="QLabel" name="MinFlightTimeLabel">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>20</y>
+         <width>151</width>
+         <height>20</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>9</pointsize>
+         <weight>75</weight>
+         <bold>true</bold>
+        </font>
+       </property>
+       <property name="text">
+        <string>Minimum Flight Time</string>
+       </property>
+      </widget>
+      <widget class="QTextEdit" name="MinFlightTime">
+       <property name="geometry">
+        <rect>
+         <x>170</x>
+         <y>10</y>
+         <width>201</width>
+         <height>51</height>
+        </rect>
+       </property>
+      </widget>
+     </widget>
+     <widget class="QGroupBox" name="RecordTracksBox">
+      <property name="geometry">
+       <rect>
+        <x>400</x>
+        <y>10</y>
+        <width>151</width>
+        <height>61</height>
+       </rect>
+      </property>
+      <property name="toolTip">
+       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Whether flight tracks are to be recorded&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+      </property>
+      <property name="title">
+       <string/>
+      </property>
+      <widget class="QRadioButton" name="RecordTracksRadioButton">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>20</y>
+         <width>141</width>
+         <height>21</height>
+        </rect>
+       </property>
+       <property name="toolTip">
+        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Record flight tracks Y|N&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+       </property>
+       <property name="text">
+        <string>Record Tracks</string>
+       </property>
+      </widget>
+     </widget>
+     <widget class="QGroupBox" name="FleetCheckBox">
+      <property name="geometry">
+       <rect>
+        <x>400</x>
+        <y>80</y>
+        <width>151</width>
+        <height>61</height>
+       </rect>
+      </property>
+      <property name="toolTip">
+       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Whether to only record flights in a specified fleet&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+      </property>
+      <property name="title">
+       <string/>
+      </property>
+      <widget class="QRadioButton" name="FleetCheckRadioButton">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>20</y>
+         <width>141</width>
+         <height>21</height>
+        </rect>
+       </property>
+       <property name="toolTip">
+        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Check for membership of fleet, Y|N&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+       </property>
+       <property name="text">
+        <string>Fleet Check</string>
+       </property>
+      </widget>
+     </widget>
+     <widget class="QGroupBox" name="MinFlightQFEBox">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>200</y>
+        <width>381</width>
+        <height>61</height>
+       </rect>
+      </property>
+      <property name="toolTip">
+       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Minimum altitude in metres attained for inclusion as a flight after takeoff&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+      </property>
+      <property name="title">
+       <string/>
+      </property>
+      <widget class="QLabel" name="MinFlightQFELabel">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>20</y>
+         <width>151</width>
+         <height>20</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>9</pointsize>
+         <weight>75</weight>
+         <bold>true</bold>
+        </font>
+       </property>
+       <property name="text">
+        <string>Minimum QFE</string>
+       </property>
+      </widget>
+      <widget class="QTextEdit" name="MinFlightQFE">
+       <property name="geometry">
+        <rect>
+         <x>170</x>
+         <y>10</y>
+         <width>201</width>
+         <height>51</height>
+        </rect>
+       </property>
+      </widget>
+     </widget>
+     <widget class="QGroupBox" name="MinFlightTakeoffVBox">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>80</y>
+        <width>381</width>
+        <height>61</height>
+       </rect>
+      </property>
+      <property name="toolTip">
+       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Minimum Vertical velocity to be considered as having left the ground&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+      </property>
+      <property name="title">
+       <string/>
+      </property>
+      <widget class="QLabel" name="MinFlightTakeoffVLabel">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>20</y>
+         <width>151</width>
+         <height>20</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>9</pointsize>
+         <weight>75</weight>
+         <bold>true</bold>
+        </font>
+       </property>
+       <property name="text">
+        <string>Minimum Takeoff Spd</string>
+       </property>
+      </widget>
+      <widget class="QTextEdit" name="MinFlightTakeoffVelocity">
+       <property name="geometry">
+        <rect>
+         <x>170</x>
+         <y>10</y>
+         <width>201</width>
+         <height>51</height>
+        </rect>
+       </property>
+      </widget>
+     </widget>
+     <widget class="QGroupBox" name="MinFlightLandingVBox">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>140</y>
+        <width>381</width>
+        <height>61</height>
+       </rect>
+      </property>
+      <property name="toolTip">
+       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Minimum horizontal velocity below which flight is considered to have landed&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+      </property>
+      <property name="title">
+       <string/>
+      </property>
+      <widget class="QLabel" name="MinFlightLandingVLabel">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>20</y>
+         <width>161</width>
+         <height>20</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>9</pointsize>
+         <weight>75</weight>
+         <bold>true</bold>
+        </font>
+       </property>
+       <property name="text">
+        <string>Minimum Landing Spd</string>
+       </property>
+      </widget>
+      <widget class="QTextEdit" name="MinFlightLandingVelocity">
+       <property name="geometry">
+        <rect>
+         <x>170</x>
+         <y>10</y>
+         <width>201</width>
+         <height>51</height>
+        </rect>
+       </property>
+      </widget>
+     </widget>
+     <widget class="QGroupBox" name="MinTugLaunchBox">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>270</y>
+        <width>381</width>
+        <height>61</height>
+       </rect>
+      </property>
+      <property name="toolTip">
+       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Time in seconds between tug and glider takeoff time to be considered a tug launch&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+      </property>
+      <property name="title">
+       <string/>
+      </property>
+      <widget class="QLabel" name="MinTugLaunchLabel">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>20</y>
+         <width>151</width>
+         <height>20</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>9</pointsize>
+         <weight>75</weight>
+         <bold>true</bold>
+        </font>
+       </property>
+       <property name="text">
+        <string> Tug Launch TIme</string>
+       </property>
+      </widget>
+      <widget class="QTextEdit" name="MinTugLaunchTIme">
+       <property name="geometry">
+        <rect>
+         <x>170</x>
+         <y>10</y>
+         <width>201</width>
+         <height>51</height>
+        </rect>
+       </property>
+      </widget>
+     </widget>
+    </widget>
+    <widget class="QWidget" name="tab_3">
+     <attribute name="title">
+      <string>Advanced</string>
+     </attribute>
+     <widget class="QGroupBox" name="DBSchemaBox">
+      <property name="geometry">
+       <rect>
+        <x>0</x>
+        <y>20</y>
+        <width>381</width>
+        <height>61</height>
+       </rect>
+      </property>
+      <property name="toolTip">
+       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;File holding SQlite3 schema&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+      </property>
+      <property name="title">
+       <string/>
+      </property>
+      <widget class="QLabel" name="DBSchemaLabel">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>20</y>
+         <width>151</width>
+         <height>20</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>9</pointsize>
+         <weight>75</weight>
+         <bold>true</bold>
+        </font>
+       </property>
+       <property name="toolTip">
+        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+       </property>
+       <property name="text">
+        <string>DB Schema File</string>
+       </property>
+      </widget>
+      <widget class="QTextEdit" name="DBSchemaFile">
+       <property name="geometry">
+        <rect>
+         <x>160</x>
+         <y>10</y>
+         <width>201</width>
+         <height>51</height>
+        </rect>
+       </property>
+      </widget>
+     </widget>
+     <widget class="QGroupBox" name="APRSKeepAliveBox">
+      <property name="geometry">
+       <rect>
+        <x>0</x>
+        <y>370</y>
+        <width>381</width>
+        <height>61</height>
+       </rect>
+      </property>
+      <property name="toolTip">
+       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;format is - Hrs:Min:Sec&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+      </property>
+      <property name="title">
+       <string/>
+      </property>
+      <widget class="QLabel" name="APRSKeepAliveLabel">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>20</y>
+         <width>231</width>
+         <height>20</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>9</pointsize>
+         <weight>75</weight>
+         <bold>true</bold>
+        </font>
+       </property>
+       <property name="toolTip">
+        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:400;&quot;&gt;File holding SQlite3 schema&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+       </property>
+       <property name="text">
+        <string>APRS Socket Keep Alive TIme</string>
+       </property>
+      </widget>
+      <widget class="QTextEdit" name="APRSKeepAliveTIme">
+       <property name="geometry">
+        <rect>
+         <x>290</x>
+         <y>10</y>
+         <width>71</width>
+         <height>51</height>
+        </rect>
+       </property>
+      </widget>
+     </widget>
+     <widget class="QGroupBox" name="DBNameBox">
+      <property name="geometry">
+       <rect>
+        <x>0</x>
+        <y>90</y>
+        <width>381</width>
+        <height>61</height>
+       </rect>
+      </property>
+      <property name="toolTip">
+       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Name to be used for Flogger SQLite3 database&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+      </property>
+      <property name="title">
+       <string/>
+      </property>
+      <widget class="QLabel" name="DBNameLabel">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>20</y>
+         <width>151</width>
+         <height>20</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>9</pointsize>
+         <weight>75</weight>
+         <bold>true</bold>
+        </font>
+       </property>
+       <property name="toolTip">
+        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+       </property>
+       <property name="text">
+        <string>Database Name</string>
+       </property>
+      </widget>
+      <widget class="QTextEdit" name="DBName">
+       <property name="geometry">
+        <rect>
+         <x>160</x>
+         <y>10</y>
+         <width>201</width>
+         <height>51</height>
+        </rect>
+       </property>
+      </widget>
+     </widget>
+     <widget class="QGroupBox" name="FlarmnetURLBox">
+      <property name="geometry">
+       <rect>
+        <x>0</x>
+        <y>160</y>
+        <width>381</width>
+        <height>61</height>
+       </rect>
+      </property>
+      <property name="toolTip">
+       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;URL of Flarmnet Database&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+      </property>
+      <property name="title">
+       <string/>
+      </property>
+      <widget class="QLabel" name="FlarmnetURLLabel">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>20</y>
+         <width>151</width>
+         <height>20</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>9</pointsize>
+         <weight>75</weight>
+         <bold>true</bold>
+        </font>
+       </property>
+       <property name="toolTip">
+        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+       </property>
+       <property name="text">
+        <string>Flarmnet DB URL</string>
+       </property>
+      </widget>
+      <widget class="QTextEdit" name="FlarmnetURL">
+       <property name="geometry">
+        <rect>
+         <x>160</x>
+         <y>10</y>
+         <width>201</width>
+         <height>51</height>
+        </rect>
+       </property>
+      </widget>
+     </widget>
+     <widget class="QGroupBox" name="OGNURLBox">
+      <property name="geometry">
+       <rect>
+        <x>0</x>
+        <y>230</y>
+        <width>381</width>
+        <height>61</height>
+       </rect>
+      </property>
+      <property name="toolTip">
+       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;URL of Flarmnet Database&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+      </property>
+      <property name="title">
+       <string/>
+      </property>
+      <widget class="QLabel" name="OGNURLLabel">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>20</y>
+         <width>151</width>
+         <height>20</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>9</pointsize>
+         <weight>75</weight>
+         <bold>true</bold>
+        </font>
+       </property>
+       <property name="toolTip">
+        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+       </property>
+       <property name="text">
+        <string>OGN DB URL</string>
+       </property>
+      </widget>
+      <widget class="QTextEdit" name="OGNURL">
+       <property name="geometry">
+        <rect>
+         <x>160</x>
+         <y>10</y>
+         <width>201</width>
+         <height>51</height>
+        </rect>
+       </property>
+      </widget>
+     </widget>
     </widget>
    </widget>
   </widget>

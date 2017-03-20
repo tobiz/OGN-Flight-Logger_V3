@@ -293,6 +293,11 @@ class flogger3(MyApp):
             # has taken off at FLOGGER_AIRFIELD_NAME; if it hasn't it won't be included in the flights, if it has it will.
             #
             # This logic and code needs to be re-thought!
+            # Note, there is a difference between aircraft registered to a location and in a designated 'fleet' for
+            # that location and whether the aircraft has taken off from a location.
+            # The fleet_check is intended to check whether an aircraft is a member of a designated fleet, not whether
+            # it has taken off from the designated location. The intention if the fleet check is to enable recording only
+            # flights undertaken by the club fleet.
             #
             print "In fleet check for: ", callsign
         #    cursor.execute('''SELECT ROWID FROM aircraft WHERE registration =? or flarm_id=? ''', (callsign,callsign,))
@@ -302,9 +307,11 @@ class flogger3(MyApp):
         #    cursor.execute('''SELECT ROWID FROM flarm_db WHERE flarm_id =?''', (flarm_id,))
         #    if settings.FLOGGER_FLEET_CHECK == "N" or settings.FLOGGER_FLEET_CHECK == "n":
             if not test_YorN(settings.FLOGGER_FLEET_CHECK):
+                print "Fleet Check: ", settings.FLOGGER_FLEET_CHECK
                 fleet_name = "Fleet Name: Not used"
                 cursor.execute('''SELECT ROWID, registration FROM flarm_db WHERE registration =? OR flarm_id =? ''', (callsign,callsign[3:],))
             else:
+                print "Fleet Check for Airfield: ", settings.FLOGGER_AIRFIELD_NAME
                 fleet_name = settings.FLOGGER_AIRFIELD_NAME
                 cursor.execute('''SELECT ROWID FROM flarm_db WHERE registration =? OR flarm_id =? AND airport=?''', (callsign,callsign[3:],settings.FLOGGER_AIRFIELD_NAME,))
             #cursor.execute('''SELECT ROWID FROM flarm_db WHERE registration =? OR flarm_id =? AND airport=?''', (callsign,callsign[3:],settings.FLOGGER_AIRFIELD_NAME,))
@@ -682,7 +689,9 @@ class flogger3(MyApp):
                 settings.FLOGGER_LATITUDE       = str(loc[0])   # Held as string
                 settings.FLOGGER_LONGITUDE      = str(loc[1])   # Held as string
                 settings.FLOGGER_QNH            = loc[2]        # Held as number
-                print "Location is: ", settings.FLOGGER_AIRFIELD_DETAILS, " latitude: ", loc[0], " longitude: ", loc[1], " elevation: ", loc[2]    
+#                print "Location is: ", settings.FLOGGER_AIRFIELD_DETAILS, " latitude: ", loc[0], " longitude: ", loc[1], " elevation: ", loc[2] 
+                print "Location is: ", settings.FLOGGER_AIRFIELD_DETAILS, " latitude: ", settings.FLOGGER_LATITUDE , \
+                                    " longitude: ", settings.FLOGGER_LONGITUDE, " elevation: ", settings.FLOGGER_QNH       
         else:
             print "Use location data from settings"   
             

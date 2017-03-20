@@ -19,7 +19,9 @@ path = os.path.dirname(os.path.abspath(__file__))
 print("Path: " + path) 
 #settings = class_settings()
 
-Ui_MainWindow, base_class = uic.loadUiType(os.path.join(path,"flogger.ui"))
+Ui_MainWindow, base_class = uic.loadUiType(os.path.join(path,"flogger_config_1.ui"))
+#Ui_MainWindow, base_class = uic.loadUiType(os.path.join(path,"flogger.ui"))
+
 
 #class Window (QtGui.QMainWindow, form_class):
 class MyApp(QtGui.QMainWindow, Ui_MainWindow):
@@ -43,7 +45,7 @@ class MyApp(QtGui.QMainWindow, Ui_MainWindow):
 #        self.DBSchemaButton.clicked.connect(self.floggerDBSchemaEdit)  
 #        self.SMTPServerURLButton.clicked.connect(self.floggerSMTPServerURLEdit) 
 #        self.SMTPServerPortButton.clicked.connect(self.floggerSMTPServerPortEdit)
-        self.APRSBase1Button.clicked.connect(self.floggerAPRSBaseEdit)
+#        self.APRSBase1Button.clicked.connect(self.floggerAPRSBaseEdit)
         self.UpdateButton.clicked.connect(self.floggerUpdateConfig)
         self.CancelButton.clicked.connect(self.floggerCancelConfigUpdate)
 
@@ -89,13 +91,34 @@ class MyApp(QtGui.QMainWindow, Ui_MainWindow):
         settings.APRS_SERVER_PORT = int(old_val)
         self.APRSServerPort.setText(old_val)
         
+        old_val = self.getOldValue(self.config, "FLOGGER_RAD")    # This might get parsed as an int - need to watch it!
+        settings.FLOGGER_RAD = int(old_val)
+        self.AirfieldFlarmRadius.setText(old_val)
+        
         old_val = self.getOldValue(self.config, "FLOGGER_AIRFIELD_DETAILS")    
         settings.FLOGGER_AIRFIELD_DETAILS = old_val
         self.AirfieldDetails.setText(old_val)
+          
+        old_val = self.getOldValue(self.config, "FLOGGER_QFE_MIN")    
+        settings.FLOGGER_QFE_MIN = old_val
+        self.MinFlightQFE.setText(old_val)
         
         old_val = self.getOldValue(self.config, "FLOGGER_MIN_FLIGHT_TIME")    
         settings.FLOGGER_MIN_FLIGHT_TIME = old_val
         self.MinFlightTime.setText(old_val)
+        
+        
+        old_val = self.getOldValue(self.config, "FLOGGER_V_TAKEOFF_MIN")    
+        settings.FLOGGER_V_TAKEOFF_MIN = old_val
+        self.MinFlightTakeoffVelocity.setText(old_val)
+            
+        old_val = self.getOldValue(self.config, "FLOGGER_V_LANDING_MIN")    
+        settings.FLOGGER_V_LANDING_MIN = old_val
+        self.MinFlightLandingVelocity.setText(old_val) 
+                   
+        old_val = self.getOldValue(self.config, "FLOGGER_DT_TUG_LAUNCH")    
+        settings.FLOGGER_DT_TUG_LAUNCH = old_val
+        self.MinTugLaunchTIme.setText(old_val)
 #
 # Note this could be done using LatLon
 #        
@@ -106,7 +129,7 @@ class MyApp(QtGui.QMainWindow, Ui_MainWindow):
         old_val_lon = self.getOldValue(self.config, "FLOGGER_LONGITUDE")    # This might get parsed as a real - need to watch it!
         print "Old_lon: " + old_val_lon
         settings.FLOGGER_LONGITUDE = old_val_lon
-        self.AirfieldLongitude.setText(old_val_lon)
+#        self.AirfieldLongitude.setText(old_val_lon)
         
         old_latlon = LatLon(Latitude( old_val_lat), Longitude(old_val_lon))
         old_latlonstr = old_latlon.to_string('D% %H')
@@ -135,6 +158,26 @@ class MyApp(QtGui.QMainWindow, Ui_MainWindow):
         settings.FLOGGER_DB_SCHEMA = old_val
         self.DBSchemaFile.setText(old_val)
         settings.FLOGGER_DB_SCHEMA = old_val
+        
+        
+        old_val = self.getOldValue(self.config, "FLOGGER_DB_NAME")    
+        settings.FLOGGER_DB_NAME = old_val
+        self.DBName.setText(old_val)
+        settings.FLOGGER_DB_NAME = old_val    
+        
+        old_val = self.getOldValue(self.config, "FLOGGER_FLARMNET_DB_URL")    
+        settings.FLOGGER_FLARMNET_DB_URL = old_val
+        self.FlarmnetURL.setText(old_val)
+#        settings.FLOGGER_FLARMNET_DB_URL = old_val
+       
+        old_val = self.getOldValue(self.config, "FLOGGER_OGN_DB_URL")    
+        settings.FLOGGER_OGN_DB_URL = old_val
+        self.OGNURL.setText(old_val)
+ #       settings.FLOGGER_OGN_DB_URL = old_val
+                
+        old_val = self.getOldValue(self.config, "FLOGGER_KEEPALIVE_TIME")    
+        settings.FLOGGER_KEEPALIVE_TIME = int(old_val)
+        self.APRSKeepAliveTIme.setText(old_val)
 
         old_val = self.getOldValue(self.config, "FLOGGER_SMTP_SERVER_URL")  
         print "Initialise FLOGGER_SMTP_SERVER_URL"  
@@ -166,7 +209,6 @@ class MyApp(QtGui.QMainWindow, Ui_MainWindow):
             print "APRS Base: " + item
             if i == 1:
                 self.APRSBase1Edit.setText(item)
-#                i = i + 1
                 i += 1
                 continue
             if i == 2:
@@ -181,10 +223,10 @@ class MyApp(QtGui.QMainWindow, Ui_MainWindow):
                 self.APRSBase4Edit.setText(item)
                 i += 1
                 continue 
-#            if i == 5:
-#                self.APRSBase5Edit.setText(item)
-#                i = i + 1  
-#                continue 
+            if i == 5:
+                self.APRSBase5Edit.setText(item)
+                i += 1
+                continue 
         settings.FLOGGER_APRS_BASES = old_val
         print "APRS_BASES: ", old_val
         print "APRS_BASES: ", settings.FLOGGER_APRS_BASES
@@ -217,9 +259,7 @@ class MyApp(QtGui.QMainWindow, Ui_MainWindow):
         self.RunningLabel.setStyleSheet("color: green")
         self.RunningLabel.setText("Running...")
 #        self.RunningProgressBar.maximum(0)
-        self.RunningProgressBar.setProperty("maximum", 0)
-        
-       
+        self.RunningProgressBar.setProperty("maximum", 0) 
         flogger.flogger_run(settings)
         
         
@@ -228,7 +268,6 @@ class MyApp(QtGui.QMainWindow, Ui_MainWindow):
         self.RunningLabel.setStyleSheet("color: red")
         self.RunningLabel.setText("Stopped")
         self.RunningProgressBar.setProperty("maximum", 1)
-#        print "Running max: ", self.RunningProgressBar.maximum
         print "flogger stop"
     
     def floggerQuit(self):
@@ -245,16 +284,27 @@ class MyApp(QtGui.QMainWindow, Ui_MainWindow):
         self.floggerAPRSPasscodeEdit2(True)
         self.floggerAPRSServerhostEdit2(True)
         self.floggerAPRSServerportEdit2(True)
+        self.floggerFlarmRadiusEdit2(True)
         self.floggerAirfieldDetailsEdit2(True)
         self.floggerAirfieldLatLonEdit2(True)
         self.floggerMinFlightTimeEdit2(True)
+        self.floggerMinTakeoffVelocityEdit2(True)
+        self.floggerMinLandingVelocityEdit2(True)
+        self.floggerMinFlightQFEEdit2(True)
+        self.floggerTugLaunchEdit2(True)
+        self.floggerKeepAliveTime2(True)
         self.floggerDBSchemaFileEdit2(True)
+        self.floggerDBNameEdit2(True)
+        self.floggerFlarmnetURL2(True)
+        self.floggerOGNURL2(True)
         self.floggerSMTPServerURLEdit2(True)
         self.floggerSMTPServerPortEdit2(True)
         self.floggerEmailSenderEdit2(True)
         self.floggerEmailReceiverEdit2(True)
-        self.floggerAPRSBaseEdit()
+        self.floggerAPRSBaseEdit2(True)
         return
+
+
     
     def floggerCancelConfigUpdate(self):
         print "floggerCancelConfigUpdate called"
@@ -263,25 +313,26 @@ class MyApp(QtGui.QMainWindow, Ui_MainWindow):
         self.floggerAPRSPasscodeEdit2(False)
         self.floggerAPRSServerhostEdit2(False)
         self.floggerAPRSServerportEdit2(False)
+        self.floggerFlarmRadiusEdit2(False)
         self.floggerAirfieldDetailsEdit2(False)
         self.floggerAirfieldLatLonEdit2(False)
         self.floggerMinFlightTimeEdit2(False)
+        self.floggerMinTakeoffVelocityEdit2(False)
+        self.floggerMinLandingVelocityEdit2(False)
+        self.floggerMinFlightQFEEdit2(False)
+        self.floggerTugLaunchEdit2(False)
+        self.floggerKeepAliveTime2(False)
         self.floggerDBSchemaFileEdit2(False)
+        self.floggerDBNameEdit2(False)
+        self.floggerFlarmnetURL2(False)
+        self.floggerOGNURL2(False)
         self.floggerSMTPServerURLEdit2(False)
         self.floggerSMTPServerPortEdit2(False)
         self.floggerEmailSenderEdit2(False)
         self.floggerEmailReceiverEdit2(False)
+        self.floggerAPRSBaseEdit2(False)
         return
                        
-#    def floggerAirfieldEdit(self):
-#        print "Base Airfield button clicked" 
-#        # Values have been put into gui field from setting.txt and may then have been changed interactively
-#        airfield_base = self.AirfieldBase.toPlainText()  
-#        print "Airfield Base: " + airfield_base
-#        # Put current value into settings.txt file for future use
-#        self.editConfigField("flogger_settings_file.txt", "FLOGGER_AIRFIELD_NAME", airfield_base)
-#        # Now update python variable to current value in gui and settings.txt
-#        self.FLOGGER_AIRFIELD_NAME = airfield_base
         
     def floggerAirfieldEdit2(self, mode):
         # Mode: True - update all fields, valraible to latest valuese
@@ -303,12 +354,6 @@ class MyApp(QtGui.QMainWindow, Ui_MainWindow):
         # Now update python variable to current value in gui and settings.txt
         self.FLOGGER_AIRFIELD_NAME = airfield_base
 
-#    def floggerAPRSUserEdit(self):
-#        print "APRS User button clicked" 
-#        APRSUser = self.APRSUser.toPlainText()  
-#       print "Airfield B: " + airfield_base
-#        self.editConfigField("settings.py", "APRS_USER", APRSUser)
-#        APRSUser = self.config["APRS_USER"]
         
     def floggerAPRSUserEdit2(self, mode):
         print "APRS User button clicked"
@@ -322,12 +367,7 @@ class MyApp(QtGui.QMainWindow, Ui_MainWindow):
         self.editConfigField("flogger_settings_file.txt", "APRS_USER", APRSUser)
         self.APRS_USER = APRSUser
         
-#    def floggerAirfieldDetailsEdit(self):
-#        print "Airfield Details button clicked"
-#        airfield_details = self.AirfieldDetails.toPlainText()
-#        self.editConfigField("flogger_settings_file.txt", "FLOGGER_AIRFIELD_DETAILS", airfield_details)
-#        airfield_details = self.config["FLOGGER_AIRFIELD_DETAILS"]
-#        self.FLOGGER_AIRFIELD_DETAILS = airfield_details
+
     def floggerAPRSPasscodeEdit2(self, mode):
             print "APRS Passcode button clicked"
             if mode: 
@@ -362,6 +402,18 @@ class MyApp(QtGui.QMainWindow, Ui_MainWindow):
                 APRSServerport = old_val
             self.editConfigField("flogger_settings_file.txt", "APRS_SERVER_PORT", APRSServerport)
             self.APRS_SERVER_PORT = int(APRSServerport)
+            
+    
+    def floggerFlarmRadiusEdit2(self, mode):
+            print "Flarm Radius button clicked"
+            if mode: 
+                FlarmRadius = self.AirfieldFlarmRadius.toPlainText()  
+            else:
+                old_val = self.getOldValue(self.config, "FLOGGER_RAD")
+                self.AirfieldFlarmRadius.setText(old_val)
+                FlarmRadius = old_val
+            self.editConfigField("flogger_settings_file.txt", "FLOGGER_RAD", FlarmRadius)
+            self.FLOGGER_RAD = int(FlarmRadius)
         
             
     def floggerAirfieldDetailsEdit2(self, mode):
@@ -373,8 +425,6 @@ class MyApp(QtGui.QMainWindow, Ui_MainWindow):
             self.AirfieldDetails.setText(old_val)
             airfield_details = old_val
         self.editConfigField("flogger_settings_file.txt", "FLOGGER_AIRFIELD_DETAILS", airfield_details)
-#        airfield_details = self.config["FLOGGER_AIRFIELD_DETAILS"]
-#        self.FLOGGER_AIRFIELD_DETAILS = airfield_details
 
     def floggerAirfieldLatLonEdit2(self, mode):
         print "Airfield latitude, longitude called"
@@ -412,6 +462,54 @@ class MyApp(QtGui.QMainWindow, Ui_MainWindow):
             self.MinFlightTime.setText(old_val)
             min_flight_time = old_val 
         self.editConfigField("flogger_settings_file.txt", "FLOGGER_MIN_FLIGHT_TIME", min_flight_time) 
+        
+                  
+    def floggerMinTakeoffVelocityEdit2(self, mode):
+        print "Min Takeoff Velocity button clicked"
+        # Note. Format is "HH:MM:SS" ie a string
+        if mode:
+            min_takeoff_velocity = self.MinFlightTakeoffVelocity.toPlainText() 
+        else:
+            old_val = self.getOldValue(self.config, "FLOGGER_V_TAKEOFF_MIN")
+            self.MinFlightTakeoffVelocity.setText(old_val)
+            min_takeoff_velocity = old_val 
+        self.editConfigField("flogger_settings_file.txt", "FLOGGER_V_TAKEOFF_MIN", min_takeoff_velocity) 
+        
+                  
+    def floggerMinLandingVelocityEdit2(self, mode):
+        print "Min Landing Velocity button clicked"
+        # Note. Format is "HH:MM:SS" ie a string
+        if mode:
+            min_landing_velocity = self.MinFlightLandingVelocity.toPlainText() 
+        else:
+            old_val = self.getOldValue(self.config, "FLOGGER_V_LANDING_MIN")
+            self.MinFlightLandingVelocity.setText(old_val)
+            min_landing_velocity = old_val 
+        self.editConfigField("flogger_settings_file.txt", "FLOGGER_V_LANDING_MIN", min_landing_velocity) 
+        
+                  
+    def floggerMinFlightQFEEdit2(self, mode):
+        print "Min QFE button clicked"
+        # Note. Format is "HH:MM:SS" ie a string
+        if mode:
+            min_QFE = self.MinFlightQFE.toPlainText() 
+        else:
+            old_val = self.getOldValue(self.config, "FLOGGER_QFE_MIN")
+            self.MinFlightQFE.setText(old_val)
+            min_QFE = old_val 
+        self.editConfigField("flogger_settings_file.txt", "FLOGGER_QFE_MIN", min_QFE) 
+                  
+    def floggerTugLaunchEdit2(self, mode):
+        print "Delta Tug Time button clicked"
+        # Note. Format is "HH:MM:SS" ie a string
+        if mode:
+            min_tug_time = self.MinTugLaunchTIme.toPlainText() 
+        else:
+            old_val = self.getOldValue(self.config, "FLOGGER_DT_TUG_LAUNCH")
+            self.MinTugLaunchTIme.setText(old_val)
+            min_tug_time = old_val 
+        self.editConfigField("flogger_settings_file.txt", "FLOGGER_DT_TUG_LAUNCH", min_tug_time) 
+        
     
     def floggerFleetCheckRadioButton(self):
         print "Fleet Check Radio Button clicked" 
@@ -433,17 +531,18 @@ class MyApp(QtGui.QMainWindow, Ui_MainWindow):
         else:
             print "Record Tracks unchecked"
             self.FLOGGER_TRACKS = "N"
-            self.editConfigField("flogger_settings_file.txt", "FLOGGER_TRACKS", "N")
-
+            self.editConfigField("flogger_settings_file.txt", "FLOGGER_TRACKS", "N")       
             
-    def floggerDBSchemaEdit(self):
-        print "DB Schema File button clicked" 
-        db_schema_file = self.DBSchemaFile.toPlainText()  
-        print "DB Schema File: " + db_schema_file
-        self.editConfigField("flogger_settings_file.txt", "FLOGGER_DB_SCHEMA", db_schema_file)
-        db_schema = self.config["FLOGGER_DB_SCHEMA"]
-#        self.AirfieldBase.setText(settings.FLOGGER_AIRFIELD_NAME)
-        self.FLOGGER_DB_SCHEMA = db_schema_file 
+    def floggerKeepAliveTime2(self, mode):
+        print "Keep Alive Time button clicked" 
+        if mode:
+            keep_alive_time = self.APRSKeepAliveTIme.toPlainText() 
+        else: 
+            old_val = self.getOldValue(self.config, "FLOGGER_KEEPALIVE_TIME") 
+            self.APRSKeepAliveTIme.setText(old_val)
+            keep_alive_time = old_val
+        self.editConfigField("flogger_settings_file.txt", "FLOGGER_KEEPALIVE_TIME", keep_alive_time)
+        self.FLOGGER_KEEPALIVE_TIME = keep_alive_time 
             
     def floggerDBSchemaFileEdit2(self, mode):
         print "DB Schema File button clicked"
@@ -454,7 +553,41 @@ class MyApp(QtGui.QMainWindow, Ui_MainWindow):
             self.DBSchemaFile.setText(old_val)
             db_schema_file = old_val 
         self.editConfigField("flogger_settings_file.txt", "FLOGGER_DB_SCHEMA", db_schema_file) 
-        self.FLOGGER_DB_SCHEMA = db_schema_file
+        self.FLOGGER_DB_SCHEMA = db_schema_file   
+                 
+    def floggerDBNameEdit2(self, mode):
+        print "DB Schema File button clicked"
+        if mode: 
+            db_name = self.DBName.toPlainText() 
+        else: 
+            old_val = self.getOldValue(self.config, "FLOGGER_DB_NAME")
+            self.DBName.setText(old_val)
+            db_name = old_val 
+        self.editConfigField("flogger_settings_file.txt", "FLOGGER_DB_NAME", db_name) 
+        self.FLOGGER_DB_NAME = db_name
+                       
+    def floggerFlarmnetURL2(self, mode):
+        print "Flarmnet URL button clicked"
+        if mode: 
+            Flarmnet_URL = self.FlarmnetURL.toPlainText() 
+        else: 
+            old_val = self.getOldValue(self.config, "FLOGGER_FLARMNET_DB_URL")
+            self.FlarmnetURL.setText(old_val)
+            Flarmnet_URL = old_val 
+        self.editConfigField("flogger_settings_file.txt", "FLOGGER_FLARMNET_DB_URL", Flarmnet_URL) 
+        self.FLOGGER_FLARMNET_DB_URL = Flarmnet_URL
+        
+                       
+    def floggerOGNURL2(self, mode):
+        print "OGN URL button clicked"
+        if mode: 
+            OGNURL = self.OGNURL.toPlainText() 
+        else: 
+            old_val = self.getOldValue(self.config, "FLOGGER_OGN_DB_URL")
+            self.OGNURL.setText(old_val)
+            OGNURL = old_val 
+        self.editConfigField("flogger_settings_file.txt", "FLOGGER_OGN_DB_URL", OGNURL) 
+        self.FLOGGER_OGN_DB_URL = OGNURL
                 
     def floggerSMTPServerURLEdit(self):
         print "SMTP Server URL button clicked" 
@@ -518,17 +651,31 @@ class MyApp(QtGui.QMainWindow, Ui_MainWindow):
             item.editItem()
 #            item.setText(item.text()+"More Text")
      
-    def floggerAPRSBaseEdit(self):  
+    def floggerAPRSBaseEdit2(self, mode):  
         print "APRS Base station list called" 
-        APRSBase1 = self.APRSBase1Edit.toPlainText()
-        APRSBase2 = self.APRSBase2Edit.toPlainText() 
-        APRSBase3 = self.APRSBase3Edit.toPlainText() 
-        APRSBase4 = self.APRSBase4Edit.toPlainText() 
-        APRSBaseList = [str(APRSBase1), str(APRSBase2), str(APRSBase3), str(APRSBase4)]
-        print "APRSBaseList: ", APRSBaseList
+        if mode:
+            APRSBaseList = []
+            APRSBaseList.append(self.APRSBase1Edit.toPlainText())
+            APRSBaseList.append(self.APRSBase2Edit.toPlainText())
+            APRSBaseList.append(self.APRSBase3Edit.toPlainText())
+            APRSBaseList.append(self.APRSBase4Edit.toPlainText())
+            APRSBaseList.append(self.APRSBase5Edit.toPlainText())
+            print "APRSBaseList: ", APRSBaseList
+#            APRSBaseList[1] = self.APRSBase2Edit.toPlainText() 
+#            APRSBaseList[2] = self.APRSBase3Edit.toPlainText() 
+#            APRSBaseList[3] = self.APRSBase4Edit.toPlainText()
+        else: 
+            old_val = self.getOldValue(self.config, "FLOGGER_APRS_BASES")
+            self.APRSBase1Edit.setText(old_val[0])
+            self.APRSBase2Edit.setText(old_val[1])
+            self.APRSBase3Edit.setText(old_val[2])
+            self.APRSBase4Edit.setText(old_val[3])
+            self.APRSBase5Edit.setText(old_val[4])
+            APRSBaseList = old_val
+        APRSBaseList = [str(APRSBaseList[0]), str(APRSBaseList[1]), str(APRSBaseList[2]), str(APRSBaseList[3]), str(APRSBaseList[4])]
         self.editConfigField("flogger_settings_file.txt", "FLOGGER_APRS_BASES", APRSBaseList)
-#        APRSBase = self.config["FLOGGER_APRS_BASES"]
         self.FLOGGER_APRS_BASES = APRSBaseList 
+        print "FLOGGER_APRS_BASES: ", self.FLOGGER_APRS_BASES
           
     def editConfigField (self, file_name, field_name, new_value):
         print "editConfig called"

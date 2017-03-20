@@ -37,9 +37,9 @@
    <widget class="QGroupBox" name="AirfieldGroupBox">
     <property name="geometry">
      <rect>
-      <x>430</x>
+      <x>460</x>
       <y>280</y>
-      <width>421</width>
+      <width>381</width>
       <height>61</height>
      </rect>
     </property>
@@ -80,9 +80,9 @@
    <widget class="QGroupBox" name="APRSUserNameBox">
     <property name="geometry">
      <rect>
-      <x>430</x>
+      <x>460</x>
       <y>10</y>
-      <width>421</width>
+      <width>381</width>
       <height>61</height>
      </rect>
     </property>
@@ -123,9 +123,9 @@
    <widget class="QGroupBox" name="APRSPasscodeBox">
     <property name="geometry">
      <rect>
-      <x>430</x>
+      <x>460</x>
       <y>80</y>
-      <width>421</width>
+      <width>381</width>
       <height>61</height>
      </rect>
     </property>
@@ -166,9 +166,9 @@
    <widget class="QGroupBox" name="APRSServerHostBox">
     <property name="geometry">
      <rect>
-      <x>430</x>
+      <x>460</x>
       <y>150</y>
-      <width>421</width>
+      <width>381</width>
       <height>61</height>
      </rect>
     </property>
@@ -209,9 +209,9 @@
    <widget class="QGroupBox" name="APRSServerPortBox">
     <property name="geometry">
      <rect>
-      <x>430</x>
+      <x>460</x>
       <y>210</y>
-      <width>421</width>
+      <width>381</width>
       <height>61</height>
      </rect>
     </property>
@@ -252,9 +252,9 @@
    <widget class="QGroupBox" name="AirfieldLatitudeBox">
     <property name="geometry">
      <rect>
-      <x>430</x>
+      <x>460</x>
       <y>410</y>
-      <width>421</width>
+      <width>381</width>
       <height>61</height>
      </rect>
     </property>
@@ -298,9 +298,9 @@
    <widget class="QGroupBox" name="AirfieldLongitudeBox">
     <property name="geometry">
      <rect>
-      <x>430</x>
+      <x>460</x>
       <y>480</y>
-      <width>421</width>
+      <width>381</width>
       <height>61</height>
      </rect>
     </property>
@@ -344,9 +344,9 @@
    <widget class="QGroupBox" name="AirfieldDetailsBox">
     <property name="geometry">
      <rect>
-      <x>430</x>
+      <x>460</x>
       <y>350</y>
-      <width>421</width>
+      <width>381</width>
       <height>61</height>
      </rect>
     </property>
@@ -387,9 +387,9 @@
    <widget class="QGroupBox" name="MinFlightTimeBox">
     <property name="geometry">
      <rect>
-      <x>430</x>
+      <x>460</x>
       <y>550</y>
-      <width>421</width>
+      <width>381</width>
       <height>61</height>
      </rect>
     </property>
@@ -497,9 +497,9 @@
    <widget class="QGroupBox" name="DBSchemaBox">
     <property name="geometry">
      <rect>
-      <x>430</x>
+      <x>460</x>
       <y>610</y>
-      <width>421</width>
+      <width>381</width>
       <height>61</height>
      </rect>
     </property>
@@ -546,9 +546,9 @@
    <widget class="QGroupBox" name="SMTPServerURLBox">
     <property name="geometry">
      <rect>
-      <x>430</x>
+      <x>460</x>
       <y>670</y>
-      <width>421</width>
+      <width>381</width>
       <height>61</height>
      </rect>
     </property>
@@ -595,9 +595,9 @@
    <widget class="QGroupBox" name="SMTPServerPortBox">
     <property name="geometry">
      <rect>
-      <x>430</x>
+      <x>460</x>
       <y>730</y>
-      <width>421</width>
+      <width>381</width>
       <height>61</height>
      </rect>
     </property>
@@ -645,7 +645,7 @@
     <property name="geometry">
      <rect>
       <x>30</x>
-      <y>220</y>
+      <y>180</y>
       <width>271</width>
       <height>211</height>
      </rect>
