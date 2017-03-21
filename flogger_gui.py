@@ -48,6 +48,12 @@ class MyApp(QtGui.QMainWindow, Ui_MainWindow):
 #        self.APRSBase1Button.clicked.connect(self.floggerAPRSBaseEdit)
         self.UpdateButton.clicked.connect(self.floggerUpdateConfig)
         self.CancelButton.clicked.connect(self.floggerCancelConfigUpdate)
+        
+        self.Add2FleetOkButton.clicked.connect(self.floggerAdd2FleetOkButton)
+        self.Add2FleetCancelButton.clicked.connect(self.floggerAdd2FleetCancelButton)
+        
+        self.DelFromFleetOkButton.clicked.connect(self.floggerDelFromFleetOkButton)
+     
 
         self.RunningLabel.setStyleSheet("color: red") 
         
@@ -94,6 +100,10 @@ class MyApp(QtGui.QMainWindow, Ui_MainWindow):
         old_val = self.getOldValue(self.config, "FLOGGER_RAD")    # This might get parsed as an int - need to watch it!
         settings.FLOGGER_RAD = int(old_val)
         self.AirfieldFlarmRadius.setText(old_val)
+         
+        old_val = self.getOldValue(self.config, "FLOGGER_AIRFIELD_LIMIT")    # This might get parsed as an int - need to watch it!
+        settings.FLOGGER_AIRFIELD_LIMIT = int(old_val)
+        self.LandOutRadius.setText(old_val)
         
         old_val = self.getOldValue(self.config, "FLOGGER_AIRFIELD_DETAILS")    
         settings.FLOGGER_AIRFIELD_DETAILS = old_val
@@ -206,7 +216,7 @@ class MyApp(QtGui.QMainWindow, Ui_MainWindow):
         old_val = self.getOldValue(self.config, "FLOGGER_APRS_BASES")
         i = 1
         for item in old_val:
-            print "APRS Base: " + item
+#            print "APRS Base: " + item
             if i == 1:
                 self.APRSBase1Edit.setText(item)
                 i += 1
@@ -228,18 +238,27 @@ class MyApp(QtGui.QMainWindow, Ui_MainWindow):
                 i += 1
                 continue 
         settings.FLOGGER_APRS_BASES = old_val
-        print "APRS_BASES: ", old_val
+#        print "APRS_BASES: ", old_val
         print "APRS_BASES: ", settings.FLOGGER_APRS_BASES
         
         old_val = self.getOldValue(self.config, "FLOGGER_FLEET_LIST") 
-#        print "FLOGGER_FLEET_LIST: ", old_val 
+ #       print "FLOGGER_FLEET_LIST: ", old_val 
         for key in old_val.keys():
+            # Convert string form of value to int
             old_val[key] = int(old_val[key])
 #            print "Key: ", key, " = ", int(old_val[key])
         settings.FLOGGER_FLEET_LIST = old_val
-#        for key in settings.FLOGGER_FLEET_LIST.keys():
-#            settings.FLOGGER_FLEET_LIST[key] = int(settings.FLOGGER_FLEET_LIST[key])
         print "FLOGGER_FLEET_LIST: ", settings.FLOGGER_FLEET_LIST
+        
+        rowPosition = self.FleetListTable.rowCount()
+        for registration in settings.FLOGGER_FLEET_LIST:
+            print "rowPosition: ", rowPosition, " Registration: ", registration, " Code: ", settings.FLOGGER_FLEET_LIST[registration]
+            self.FleetListTable.insertRow(rowPosition)
+            self.FleetListTable.setItem(rowPosition , 0, QtGui.QTableWidgetItem(registration))
+            self.FleetListTable.setItem(rowPosition , 1, QtGui.QTableWidgetItem(str(settings.FLOGGER_FLEET_LIST[registration])))
+            rowPosition = rowPosition + 1
+        
+
             
 #
 # GUI Initialisation end
@@ -285,6 +304,7 @@ class MyApp(QtGui.QMainWindow, Ui_MainWindow):
         self.floggerAPRSServerhostEdit2(True)
         self.floggerAPRSServerportEdit2(True)
         self.floggerFlarmRadiusEdit2(True)
+        self.floggerLandoutRadiusEdit2(True)
         self.floggerAirfieldDetailsEdit2(True)
         self.floggerAirfieldLatLonEdit2(True)
         self.floggerMinFlightTimeEdit2(True)
@@ -304,8 +324,6 @@ class MyApp(QtGui.QMainWindow, Ui_MainWindow):
         self.floggerAPRSBaseEdit2(True)
         return
 
-
-    
     def floggerCancelConfigUpdate(self):
         print "floggerCancelConfigUpdate called"
         self.floggerAirfieldEdit2(False)
@@ -314,6 +332,7 @@ class MyApp(QtGui.QMainWindow, Ui_MainWindow):
         self.floggerAPRSServerhostEdit2(False)
         self.floggerAPRSServerportEdit2(False)
         self.floggerFlarmRadiusEdit2(False)
+        self.floggerLandoutRadiusEdit2(False)
         self.floggerAirfieldDetailsEdit2(False)
         self.floggerAirfieldLatLonEdit2(False)
         self.floggerMinFlightTimeEdit2(False)
@@ -414,6 +433,17 @@ class MyApp(QtGui.QMainWindow, Ui_MainWindow):
                 FlarmRadius = old_val
             self.editConfigField("flogger_settings_file.txt", "FLOGGER_RAD", FlarmRadius)
             self.FLOGGER_RAD = int(FlarmRadius)
+   
+    def floggerLandoutRadiusEdit2(self, mode):
+            print "Flarm Radius button clicked"
+            if mode: 
+                LandOutRadius = self.LandOutRadius.toPlainText()  
+            else:
+                old_val = self.getOldValue(self.config, "FLOGGER_AIRFIELD_LIMIT")
+                self.LandOutRadius.setText(old_val)
+                LandOutRadius = old_val
+            self.editConfigField("flogger_settings_file.txt", "FLOGGER_AIRFIELD_LIMIT", LandOutRadius)
+            self.FLOGGER_AIRFIELD_LIMIT = int(LandOutRadius)
         
             
     def floggerAirfieldDetailsEdit2(self, mode):
@@ -676,7 +706,87 @@ class MyApp(QtGui.QMainWindow, Ui_MainWindow):
         self.editConfigField("flogger_settings_file.txt", "FLOGGER_APRS_BASES", APRSBaseList)
         self.FLOGGER_APRS_BASES = APRSBaseList 
         print "FLOGGER_APRS_BASES: ", self.FLOGGER_APRS_BASES
-          
+
+        
+#    def floggerFleetListEdit2(self, mode):
+        # Mode: True - update all fields, valraible to latest valuese
+        #       False - restore all fields and variables to values from config (settings.txt) file
+#        print "Fleet List button clicked ", "Mode: ", mode 
+#        if mode:
+            # Values have been put into gui field from setting.txt and may then have been changed interactively
+#            fleet_list = self.FleetListTable.toPlainText()  
+#        else:
+            # Restore old values from settings.txt
+#            old_val = self.getOldValue(self.config, "FLOGGER_FLEET_LIST")
+#            settings.FLOGGER_AIRFIELD_NAME = old_val
+#            print settings.FLOGGER_FLEET_LIST
+#            self.fleet_list.setText(old_val)
+#            print "Airfield Base: " + old_val
+#            fleet_list = old_val
+        # Put current value into settings.txt file for future use
+#        self.editConfigField("flogger_settings_file.txt", "FLOGGER_FLEET_LIST", fleet_list)
+        # Now update python variable to current value in gui and settings.txt
+#        self.FLOGGER_FLEET_LIST = fleet_list
+
+        
+    def floggerAdd2FleetOkButton(self):
+        print "floggerAdd2FleetOkButton called"
+        rowPosition = self.FleetListTable.rowCount()          
+#            print "rowPosition: ", rowPosition, " Registration: ", registration, " Code: ", settings.FLOGGER_FLEET_LIST[registration]
+        self.FleetListTable.insertRow(rowPosition)
+#        self.FleetListTable.setItem(rowPosition , 0, QtGui.QTableWidgetItem(self.Add2FleetRegEdit))
+        self.FleetListTable.setItem(rowPosition , 0, QtGui.QTableWidgetItem(self.Add2FleetRegEdit.toPlainText()))
+        self.FleetListTable.setItem(rowPosition , 1, QtGui.QTableWidgetItem(self.Add2FleetCodeEdit.toPlainText())) 
+        # Add in the new registration to the dictionary 
+        old_fleet_list = self.getOldValue(self.config, "FLOGGER_FLEET_LIST") 
+        old_fleet_list[str(self.Add2FleetRegEdit.toPlainText())] = str(self.Add2FleetCodeEdit.toPlainText())
+        # Output the updated FleetList to the config file
+        self.editConfigField("flogger_settings_file.txt", "FLOGGER_FLEET_LIST", old_fleet_list)
+        settings.FLOGGER_FLEET_LIST = old_fleet_list
+        print "FLOGGER_FLEET_LIST: ", settings.FLOGGER_FLEET_LIST
+        # Set fields on form to balnk
+        self.Add2FleetRegEdit.setText("")
+        self.Add2FleetCodeEdit.setText("")   
+        
+    def floggerAdd2FleetCancelButton(self): 
+        print "floggerAdd2FleetCancelButton called"
+        self.Add2FleetRegEdit.setText("")
+        self.Add2FleetCodeEdit.setText("")  
+        
+    def floggerDelFromFleetOkButton(self):
+        print "floggerDelFromFleetOkButton"
+        fleet_list = self.getOldValue(self.config, "FLOGGER_FLEET_LIST") 
+        reg = self.DelFromFleetEdit.toPlainText()
+        del fleet_list[str(reg)]
+#        print "fleet_list: ", fleet_list
+        self.editConfigField("flogger_settings_file.txt", "FLOGGER_FLEET_LIST", fleet_list)
+        settings.FLOGGER_FLEET_LIST = fleet_list
+        self.DelFromFleetEdit.setText("")
+        
+        old_val = self.getOldValue(self.config, "FLOGGER_FLEET_LIST")
+        print "FLOGGER_FLEET_LIST now: ", self.FLOGGER_FLEET_LIST 
+        for key in old_val.keys():
+            # Convert string form of value to int
+            old_val[key] = int(old_val[key])
+#            print "Key: ", key, " = ", int(old_val[key])
+        print "FLOGGER_FLEET_LIST: ", settings.FLOGGER_FLEET_LIST
+        
+        self.FleetListTable.clearContents()
+        self.FleetListTable.setRowCount(0)
+        rowPosition = self.FleetListTable.rowCount()
+#        rowPosition = 0
+        for registration in settings.FLOGGER_FLEET_LIST:
+            print "rowPosition: ", rowPosition, " Registration: ", registration, " Code: ", settings.FLOGGER_FLEET_LIST[registration]
+            self.FleetListTable.insertRow(rowPosition)          
+#            self.FleetListTable.setItem(rowPosition , 0, QtGui.QTableWidgetItem(str("")))
+#            self.FleetListTable.setItem(rowPosition , 1, QtGui.QTableWidgetItem(str("")))
+            self.FleetListTable.setItem(rowPosition , 0, QtGui.QTableWidgetItem(registration))
+            self.FleetListTable.setItem(rowPosition , 1, QtGui.QTableWidgetItem(str(settings.FLOGGER_FLEET_LIST[registration])))
+            rowPosition = rowPosition + 1
+    
+#
+# Utility functions
+#          
     def editConfigField (self, file_name, field_name, new_value):
         print "editConfig called"
         self.config[field_name] = new_value

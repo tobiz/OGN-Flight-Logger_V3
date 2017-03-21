@@ -1,9 +1,11 @@
 
 
 #-------------------------------------
-# OGN-Flight-Logger Settings
+# OGN-Flight-Logger Settings File
 #-------------------------------------
 # Python APRS/OGN program to log flight times, durations, maximum heights achieved and tracks
+#
+# The format of this file is defined in: http://www.voidspace.org.uk/python/configobj.html, see Section 6.
 #
 # This python program creates an SQlite db of flights from a given location and aircraft list 
 # (the later two parameters are to be be developed into a more generalised format).#

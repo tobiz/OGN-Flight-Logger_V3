@@ -157,7 +157,7 @@ class class_settings():
     ##        'Gliders/motoGliders',  # 1
     ##        'Planes',               # 2
     ##        'Ultralights',          # 3
-    ##        'Helicoters',           # 4
+    ##        'Helicopters',          # 4
     ##        'Drones/UAV',           # 5
     ##        'Others',               # 6
     ##        ]

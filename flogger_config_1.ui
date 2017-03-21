@@ -162,16 +162,16 @@ background-color: rgb(0, 255, 0);</string>
     <property name="geometry">
      <rect>
       <x>20</x>
-      <y>50</y>
+      <y>60</y>
       <width>641</width>
       <height>611</height>
      </rect>
     </property>
     <property name="toolTip">
-     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;These values should only be changed if you know what you are doing.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Coded: &lt;/p&gt;&lt;p&gt;001-099: Gliders, &lt;/p&gt;&lt;p&gt;101-199: Tugs, &lt;/p&gt;&lt;p&gt;201-299: Motor Gliders, &lt;/p&gt;&lt;p&gt;301-399: Other&lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
     </property>
     <property name="currentIndex">
-     <number>0</number>
+     <number>5</number>
     </property>
     <widget class="QWidget" name="APRSConfig">
      <attribute name="title">
@@ -770,8 +770,57 @@ background-color: rgb(0, 255, 0);</string>
        </property>
       </widget>
      </widget>
+     <widget class="QGroupBox" name="LandOutRadiusBox">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>330</y>
+        <width>381</width>
+        <height>61</height>
+       </rect>
+      </property>
+      <property name="toolTip">
+       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Distance from airfield centre considered a 'Land Out' in metres&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+      </property>
+      <property name="title">
+       <string/>
+      </property>
+      <widget class="QLabel" name="LandOutRadiusLabel">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>20</y>
+         <width>151</width>
+         <height>20</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>10</pointsize>
+         <weight>75</weight>
+         <bold>true</bold>
+        </font>
+       </property>
+       <property name="text">
+        <string>Land Out Radius</string>
+       </property>
+      </widget>
+      <widget class="QTextEdit" name="LandOutRadius">
+       <property name="geometry">
+        <rect>
+         <x>160</x>
+         <y>10</y>
+         <width>201</width>
+         <height>51</height>
+        </rect>
+       </property>
+       <property name="toolTip">
+        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Format is: d.dddd E|W&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+       </property>
+      </widget>
+     </widget>
     </widget>
-    <widget class="QWidget" name="tab">
+    <widget class="QWidget" name="EmailSetup">
      <attribute name="title">
       <string>Email Setup</string>
      </attribute>
@@ -968,7 +1017,7 @@ background-color: rgb(0, 255, 0);</string>
       </item>
      </layout>
     </widget>
-    <widget class="QWidget" name="tab_2">
+    <widget class="QWidget" name="FLight_Config">
      <attribute name="title">
       <string>Flight Config</string>
      </attribute>
@@ -1267,7 +1316,7 @@ background-color: rgb(0, 255, 0);</string>
       </widget>
      </widget>
     </widget>
-    <widget class="QWidget" name="tab_3">
+    <widget class="QWidget" name="Advanced">
      <attribute name="title">
       <string>Advanced</string>
      </attribute>
@@ -1276,7 +1325,7 @@ background-color: rgb(0, 255, 0);</string>
        <rect>
         <x>0</x>
         <y>20</y>
-        <width>381</width>
+        <width>491</width>
         <height>61</height>
        </rect>
       </property>
@@ -1314,7 +1363,7 @@ background-color: rgb(0, 255, 0);</string>
         <rect>
          <x>160</x>
          <y>10</y>
-         <width>201</width>
+         <width>311</width>
          <height>51</height>
         </rect>
        </property>
@@ -1374,7 +1423,7 @@ background-color: rgb(0, 255, 0);</string>
        <rect>
         <x>0</x>
         <y>90</y>
-        <width>381</width>
+        <width>491</width>
         <height>61</height>
        </rect>
       </property>
@@ -1412,7 +1461,7 @@ background-color: rgb(0, 255, 0);</string>
         <rect>
          <x>160</x>
          <y>10</y>
-         <width>201</width>
+         <width>311</width>
          <height>51</height>
         </rect>
        </property>
@@ -1423,7 +1472,7 @@ background-color: rgb(0, 255, 0);</string>
        <rect>
         <x>0</x>
         <y>160</y>
-        <width>381</width>
+        <width>491</width>
         <height>61</height>
        </rect>
       </property>
@@ -1461,7 +1510,7 @@ background-color: rgb(0, 255, 0);</string>
         <rect>
          <x>160</x>
          <y>10</y>
-         <width>201</width>
+         <width>311</width>
          <height>51</height>
         </rect>
        </property>
@@ -1472,12 +1521,12 @@ background-color: rgb(0, 255, 0);</string>
        <rect>
         <x>0</x>
         <y>230</y>
-        <width>381</width>
+        <width>491</width>
         <height>61</height>
        </rect>
       </property>
       <property name="toolTip">
-       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;URL of Flarmnet Database&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;URL of OGN Database&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
       </property>
       <property name="title">
        <string/>
@@ -1510,9 +1559,187 @@ background-color: rgb(0, 255, 0);</string>
         <rect>
          <x>160</x>
          <y>10</y>
-         <width>201</width>
+         <width>311</width>
          <height>51</height>
         </rect>
+       </property>
+      </widget>
+     </widget>
+    </widget>
+    <widget class="QWidget" name="FleetList">
+     <attribute name="title">
+      <string>Fleet List</string>
+     </attribute>
+     <widget class="QTableWidget" name="FleetListTable">
+      <property name="geometry">
+       <rect>
+        <x>30</x>
+        <y>20</y>
+        <width>251</width>
+        <height>531</height>
+       </rect>
+      </property>
+      <property name="toolTip">
+       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Coded: &lt;/p&gt;&lt;p&gt;001-099: Gliders, &lt;/p&gt;&lt;p&gt;101-199: Tugs, &lt;/p&gt;&lt;p&gt;201-299: Motor Gliders, &lt;/p&gt;&lt;p&gt;301-399: Other&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+      </property>
+      <property name="columnCount">
+       <number>2</number>
+      </property>
+      <column>
+       <property name="text">
+        <string>Registration</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>Code Value</string>
+       </property>
+      </column>
+     </widget>
+     <widget class="QGroupBox" name="Add2FleetBox">
+      <property name="geometry">
+       <rect>
+        <x>330</x>
+        <y>20</y>
+        <width>271</width>
+        <height>181</height>
+       </rect>
+      </property>
+      <property name="title">
+       <string>Add Aircraft to Fleet</string>
+      </property>
+      <widget class="QTextEdit" name="Add2FleetRegEdit">
+       <property name="geometry">
+        <rect>
+         <x>20</x>
+         <y>70</y>
+         <width>121</width>
+         <height>41</height>
+        </rect>
+       </property>
+      </widget>
+      <widget class="QLabel" name="Add2FleetRegLabel">
+       <property name="geometry">
+        <rect>
+         <x>30</x>
+         <y>40</y>
+         <width>101</width>
+         <height>17</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Registration</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="Add2FleetCodeLabel">
+       <property name="geometry">
+        <rect>
+         <x>150</x>
+         <y>40</y>
+         <width>71</width>
+         <height>17</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Code</string>
+       </property>
+      </widget>
+      <widget class="QTextEdit" name="Add2FleetCodeEdit">
+       <property name="geometry">
+        <rect>
+         <x>160</x>
+         <y>70</y>
+         <width>71</width>
+         <height>41</height>
+        </rect>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="Add2FleetCancelButton">
+       <property name="geometry">
+        <rect>
+         <x>20</x>
+         <y>130</y>
+         <width>109</width>
+         <height>26</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Cancel</string>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="Add2FleetOkButton">
+       <property name="geometry">
+        <rect>
+         <x>140</x>
+         <y>130</y>
+         <width>109</width>
+         <height>26</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>OK</string>
+       </property>
+      </widget>
+     </widget>
+     <widget class="QGroupBox" name="DelFromFleetBox">
+      <property name="geometry">
+       <rect>
+        <x>330</x>
+        <y>210</y>
+        <width>271</width>
+        <height>171</height>
+       </rect>
+      </property>
+      <property name="title">
+       <string>Remove Aircraft from Fleet</string>
+      </property>
+      <widget class="QLabel" name="DelFromFleetLabel">
+       <property name="geometry">
+        <rect>
+         <x>80</x>
+         <y>40</y>
+         <width>101</width>
+         <height>17</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Registration</string>
+       </property>
+      </widget>
+      <widget class="QTextEdit" name="DelFromFleetEdit">
+       <property name="geometry">
+        <rect>
+         <x>70</x>
+         <y>70</y>
+         <width>121</width>
+         <height>41</height>
+        </rect>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="DelFromFleetOkButton">
+       <property name="geometry">
+        <rect>
+         <x>160</x>
+         <y>130</y>
+         <width>109</width>
+         <height>26</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>OK</string>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="DelFromFleetCancelButton">
+       <property name="geometry">
+        <rect>
+         <x>20</x>
+         <y>130</y>
+         <width>109</width>
+         <height>26</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Cancel</string>
        </property>
       </widget>
      </widget>
