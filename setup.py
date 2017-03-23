@@ -1,0 +1,58 @@
+#from setuptools import setup, find_packages 
+from setuptools import setup
+
+# See https://medium.com/small-things-about-python/lets-talk-about-python-packaging-6d84b81f1bb5#.pjxrklmi6
+
+setup(name='OGN_Flogger',   
+      version='0.3.1.1',
+      description='Realtime logging of glider flights from Flarm data',
+      long_description='Realtime logging and tracking of gliders from Flarm signals using APRS.',
+      classifiers=[
+        'Development Status :: 3 - Alpha',
+        'License :: OSI Approved :: GNU General Public License (GPL)',
+        'Programming Language :: Python :: 2.7',
+        'Topic :: Scientific/Engineering :: Information Analysis',
+      ],
+      keywords='OGN Open Glider Flarm Logging Tracking',
+      url='http://github.com/tobiz/OGN-Flight-Logger_V3',
+      author='tobiz',
+      author_email='pjrobinson@metronet.co.uk',
+      license='GPL', 
+      py_modules=[
+                'flarm_db',
+                'flogger3',
+                'flogger_dump_flights',
+                'flogger_dump_IGC',
+                'flogger_dump_tracks',
+                'flogger_email_log',
+                'flogger_email_msg',
+                'flogger_find_tug',
+                'flogger_functions',
+                'flogger_get_coords',
+                'flogger_gui',
+                'flogger_landout',
+                'flogger_OGN_db',
+                'flogger_process_log',
+                'flogger_process_log_V1',
+                'flogger_progress_indicator',
+                'flogger',
+                'flogger_settings',
+                'flogger_signals',
+                'flogger_test_YorN',
+                'gpxTracks',
+                'libfap',
+                'open_db'],
+      install_requires=[
+                        'aerofiles==0.3',
+                        'geocoder==1.4.0',
+                        'geopy==1.11.0',
+                        'pytz==2012c',
+                        'pycrypto==2.6.1',
+                        'LatLon==1.0.2',
+                        'pyephem==3.7.6.0',
+                        'protobuf==3.1.0.post1',
+                        'adhocracy_pysqlite==2.6.3',
+                        'Requests==2.11.1'
+                        ],
+      include_package_data=True,
+      zip_safe=False)
