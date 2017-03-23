@@ -6,12 +6,12 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>926</width>
+    <width>700</width>
     <height>914</height>
    </rect>
   </property>
   <property name="windowTitle">
-   <string>MainWindow</string>
+   <string>OGN Flight Logging</string>
   </property>
   <widget class="QWidget" name="centralwidget">
    <widget class="QLabel" name="label">
@@ -37,10 +37,10 @@
    <widget class="QGroupBox" name="RunningBox">
     <property name="geometry">
      <rect>
-      <x>290</x>
-      <y>680</y>
-      <width>191</width>
-      <height>111</height>
+      <x>450</x>
+      <y>0</y>
+      <width>211</width>
+      <height>81</height>
      </rect>
     </property>
     <property name="font">
@@ -90,7 +90,7 @@
      <property name="geometry">
       <rect>
        <x>30</x>
-       <y>70</y>
+       <y>50</y>
        <width>118</width>
        <height>23</height>
       </rect>
@@ -106,8 +106,8 @@
    <widget class="QGroupBox" name="groupBox">
     <property name="geometry">
      <rect>
-      <x>0</x>
-      <y>690</y>
+      <x>390</x>
+      <y>750</y>
       <width>271</width>
       <height>80</height>
      </rect>
@@ -162,9 +162,9 @@ background-color: rgb(0, 255, 0);</string>
     <property name="geometry">
      <rect>
       <x>20</x>
-      <y>60</y>
+      <y>110</y>
       <width>641</width>
-      <height>611</height>
+      <height>631</height>
      </rect>
     </property>
     <property name="toolTip">
@@ -819,6 +819,150 @@ background-color: rgb(0, 255, 0);</string>
        </property>
       </widget>
      </widget>
+     <widget class="QGroupBox" name="DataRetentionBox">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>400</y>
+        <width>381</width>
+        <height>61</height>
+       </rect>
+      </property>
+      <property name="toolTip">
+       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Time in days to retain flogger data before deleting it&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+      </property>
+      <property name="title">
+       <string/>
+      </property>
+      <widget class="QLabel" name="DataRetentionLabel">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>20</y>
+         <width>151</width>
+         <height>20</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>10</pointsize>
+         <weight>75</weight>
+         <bold>true</bold>
+        </font>
+       </property>
+       <property name="text">
+        <string>Data Retention</string>
+       </property>
+      </widget>
+      <widget class="QTextEdit" name="DataRetentionTime">
+       <property name="geometry">
+        <rect>
+         <x>160</x>
+         <y>10</y>
+         <width>201</width>
+         <height>51</height>
+        </rect>
+       </property>
+       <property name="toolTip">
+        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Format is: d.dddd E|W&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+       </property>
+      </widget>
+     </widget>
+     <widget class="QGroupBox" name="HorizonAdjustmentBox">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>460</y>
+        <width>381</width>
+        <height>61</height>
+       </rect>
+      </property>
+      <property name="toolTip">
+       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Adjustment for the horizon in decimal:seconds degrees:seconds from field location for sunset. Negative values mean lower angle&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+      </property>
+      <property name="title">
+       <string/>
+      </property>
+      <widget class="QLabel" name="HorizonAdjustmentLabel">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>20</y>
+         <width>171</width>
+         <height>20</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>10</pointsize>
+         <weight>75</weight>
+         <bold>true</bold>
+        </font>
+       </property>
+       <property name="text">
+        <string>Horizon Adjustment</string>
+       </property>
+      </widget>
+      <widget class="QTextEdit" name="HorizonAdjustment">
+       <property name="geometry">
+        <rect>
+         <x>180</x>
+         <y>10</y>
+         <width>181</width>
+         <height>51</height>
+        </rect>
+       </property>
+       <property name="toolTip">
+        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Format is: d.dddd E|W&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+       </property>
+      </widget>
+     </widget>
+     <widget class="QGroupBox" name="AirfieldQNHBox">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>530</y>
+        <width>381</width>
+        <height>61</height>
+       </rect>
+      </property>
+      <property name="toolTip">
+       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;QNH ie ASL in metres for airfield at lat/logitude, if set to 0, elevation is automatically looked up from database&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+      </property>
+      <property name="title">
+       <string/>
+      </property>
+      <widget class="QLabel" name="AirfieldQNHLabel">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>20</y>
+         <width>181</width>
+         <height>20</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>9</pointsize>
+         <weight>75</weight>
+         <bold>true</bold>
+        </font>
+       </property>
+       <property name="text">
+        <string>Airfield QNH</string>
+       </property>
+      </widget>
+      <widget class="QTextEdit" name="AirfieldQNH">
+       <property name="geometry">
+        <rect>
+         <x>180</x>
+         <y>10</y>
+         <width>181</width>
+         <height>51</height>
+        </rect>
+       </property>
+      </widget>
+     </widget>
     </widget>
     <widget class="QWidget" name="EmailSetup">
      <attribute name="title">
@@ -1151,7 +1295,7 @@ background-color: rgb(0, 255, 0);</string>
         <rect>
          <x>10</x>
          <y>20</y>
-         <width>151</width>
+         <width>181</width>
          <height>20</height>
         </rect>
        </property>
@@ -1163,15 +1307,15 @@ background-color: rgb(0, 255, 0);</string>
         </font>
        </property>
        <property name="text">
-        <string>Minimum QFE</string>
+        <string>Minimum QFE For Flight</string>
        </property>
       </widget>
       <widget class="QTextEdit" name="MinFlightQFE">
        <property name="geometry">
         <rect>
-         <x>170</x>
+         <x>200</x>
          <y>10</y>
-         <width>201</width>
+         <width>171</width>
          <height>51</height>
         </rect>
        </property>
@@ -1315,6 +1459,497 @@ background-color: rgb(0, 255, 0);</string>
        </property>
       </widget>
      </widget>
+     <widget class="QGroupBox" name="MinFlightDeltaBox">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>340</y>
+        <width>381</width>
+        <height>61</height>
+       </rect>
+      </property>
+      <property name="toolTip">
+       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Time difference between flights to be considered as separate flights. In hh:mm:ss (only 00:mm:ss makes sense)&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+      </property>
+      <property name="title">
+       <string/>
+      </property>
+      <widget class="QLabel" name="MinFlightDeltaLabel">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>20</y>
+         <width>191</width>
+         <height>20</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>9</pointsize>
+         <weight>75</weight>
+         <bold>true</bold>
+        </font>
+       </property>
+       <property name="text">
+        <string>Min Time Between Flights</string>
+       </property>
+      </widget>
+      <widget class="QTextEdit" name="MinFlightDeltaTime">
+       <property name="geometry">
+        <rect>
+         <x>200</x>
+         <y>10</y>
+         <width>171</width>
+         <height>51</height>
+        </rect>
+       </property>
+      </widget>
+     </widget>
+     <widget class="QGroupBox" name="LandoutMsgBox">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>400</y>
+        <width>381</width>
+        <height>61</height>
+       </rect>
+      </property>
+      <property name="toolTip">
+       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Method used for sending Landout messages. Only 'email' is supported.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+      </property>
+      <property name="title">
+       <string/>
+      </property>
+      <widget class="QLabel" name="LandoutMsgLabel">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>20</y>
+         <width>191</width>
+         <height>20</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>9</pointsize>
+         <weight>75</weight>
+         <bold>true</bold>
+        </font>
+       </property>
+       <property name="text">
+        <string>Landout Message Mode</string>
+       </property>
+      </widget>
+      <widget class="QTextEdit" name="LandoutMsgMode">
+       <property name="geometry">
+        <rect>
+         <x>200</x>
+         <y>10</y>
+         <width>171</width>
+         <height>51</height>
+        </rect>
+       </property>
+      </widget>
+     </widget>
+     <widget class="QGroupBox" name="TakeoffEmailBox">
+      <property name="geometry">
+       <rect>
+        <x>400</x>
+        <y>150</y>
+        <width>151</width>
+        <height>61</height>
+       </rect>
+      </property>
+      <property name="toolTip">
+       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Whether to only record flights in a specified fleet&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+      </property>
+      <property name="title">
+       <string/>
+      </property>
+      <widget class="QRadioButton" name="TakeoffEmailButton">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>20</y>
+         <width>141</width>
+         <height>21</height>
+        </rect>
+       </property>
+       <property name="toolTip">
+        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Check for membership of fleet, Y|N&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+       </property>
+       <property name="text">
+        <string>Email Take offs</string>
+       </property>
+      </widget>
+     </widget>
+     <widget class="QGroupBox" name="LandingEmailBox">
+      <property name="geometry">
+       <rect>
+        <x>400</x>
+        <y>210</y>
+        <width>151</width>
+        <height>61</height>
+       </rect>
+      </property>
+      <property name="toolTip">
+       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Whether to only record flights in a specified fleet&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+      </property>
+      <property name="title">
+       <string/>
+      </property>
+      <widget class="QRadioButton" name="LandingEmailButton">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>20</y>
+         <width>141</width>
+         <height>21</height>
+        </rect>
+       </property>
+       <property name="toolTip">
+        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Check for membership of fleet, Y|N&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+       </property>
+       <property name="text">
+        <string>Email Landings</string>
+       </property>
+      </widget>
+     </widget>
+     <widget class="QGroupBox" name="LaunchFailuresBox">
+      <property name="geometry">
+       <rect>
+        <x>400</x>
+        <y>280</y>
+        <width>151</width>
+        <height>61</height>
+       </rect>
+      </property>
+      <property name="toolTip">
+       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Log Launch Failures&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+      </property>
+      <property name="title">
+       <string/>
+      </property>
+      <widget class="QRadioButton" name="LaunchFailuresButton">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>20</y>
+         <width>141</width>
+         <height>21</height>
+        </rect>
+       </property>
+       <property name="toolTip">
+        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Check for membership of fleet, Y|N&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+       </property>
+       <property name="text">
+        <string>Launch Failures</string>
+       </property>
+      </widget>
+     </widget>
+     <widget class="QGroupBox" name="LogTugsBox">
+      <property name="geometry">
+       <rect>
+        <x>400</x>
+        <y>340</y>
+        <width>151</width>
+        <height>61</height>
+       </rect>
+      </property>
+      <property name="toolTip">
+       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Log Tug FLights if checked&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+      </property>
+      <property name="title">
+       <string/>
+      </property>
+      <widget class="QRadioButton" name="LogTugsButton">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>20</y>
+         <width>141</width>
+         <height>21</height>
+        </rect>
+       </property>
+       <property name="toolTip">
+        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Check for membership of fleet, Y|N&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+       </property>
+       <property name="text">
+        <string>Log Tug Flights</string>
+       </property>
+      </widget>
+     </widget>
+     <widget class="QGroupBox" name="IGCFormatTracksBox">
+      <property name="geometry">
+       <rect>
+        <x>400</x>
+        <y>410</y>
+        <width>151</width>
+        <height>61</height>
+       </rect>
+      </property>
+      <property name="toolTip">
+       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Log Flights in IGC Format if checked&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+      </property>
+      <property name="title">
+       <string/>
+      </property>
+      <widget class="QRadioButton" name="IGCFormatButton">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>20</y>
+         <width>141</width>
+         <height>21</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>8</pointsize>
+        </font>
+       </property>
+       <property name="toolTip">
+        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Check for membership of fleet, Y|N&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+       </property>
+       <property name="text">
+        <string>IGC Format Tracks</string>
+       </property>
+      </widget>
+     </widget>
+    </widget>
+    <widget class="QWidget" name="FleetList">
+     <attribute name="title">
+      <string>Fleet List</string>
+     </attribute>
+     <widget class="QTableWidget" name="FleetListTable">
+      <property name="geometry">
+       <rect>
+        <x>30</x>
+        <y>20</y>
+        <width>251</width>
+        <height>531</height>
+       </rect>
+      </property>
+      <property name="toolTip">
+       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Coded: &lt;/p&gt;&lt;p&gt;001-099: Gliders, &lt;/p&gt;&lt;p&gt;101-199: Tugs, &lt;/p&gt;&lt;p&gt;201-299: Motor Gliders, &lt;/p&gt;&lt;p&gt;301-399: Other&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+      </property>
+      <property name="columnCount">
+       <number>2</number>
+      </property>
+      <column>
+       <property name="text">
+        <string>Registration</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>Code Value</string>
+       </property>
+      </column>
+     </widget>
+     <widget class="QTabWidget" name="tabWidget_2">
+      <property name="geometry">
+       <rect>
+        <x>300</x>
+        <y>20</y>
+        <width>311</width>
+        <height>251</height>
+       </rect>
+      </property>
+      <property name="toolTip">
+       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Add aircraft to Fleet List&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+      </property>
+      <property name="currentIndex">
+       <number>0</number>
+      </property>
+      <widget class="QWidget" name="tab">
+       <attribute name="title">
+        <string>Add Aircraft</string>
+       </attribute>
+       <widget class="QGroupBox" name="Add2FleetBox">
+        <property name="geometry">
+         <rect>
+          <x>20</x>
+          <y>20</y>
+          <width>271</width>
+          <height>181</height>
+         </rect>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">background-color: rgb(212, 255, 205);</string>
+        </property>
+        <property name="title">
+         <string>Add Aircraft to Fleet</string>
+        </property>
+        <widget class="QTextEdit" name="Add2FleetRegEdit">
+         <property name="geometry">
+          <rect>
+           <x>20</x>
+           <y>70</y>
+           <width>121</width>
+           <height>41</height>
+          </rect>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">background-color: rgb(255, 255, 255);</string>
+         </property>
+        </widget>
+        <widget class="QLabel" name="Add2FleetRegLabel">
+         <property name="geometry">
+          <rect>
+           <x>30</x>
+           <y>40</y>
+           <width>101</width>
+           <height>17</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>Registration</string>
+         </property>
+        </widget>
+        <widget class="QLabel" name="Add2FleetCodeLabel">
+         <property name="geometry">
+          <rect>
+           <x>150</x>
+           <y>40</y>
+           <width>71</width>
+           <height>17</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>Code</string>
+         </property>
+        </widget>
+        <widget class="QTextEdit" name="Add2FleetCodeEdit">
+         <property name="geometry">
+          <rect>
+           <x>160</x>
+           <y>70</y>
+           <width>71</width>
+           <height>41</height>
+          </rect>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">background-color: rgb(255, 255, 255);</string>
+         </property>
+        </widget>
+        <widget class="QPushButton" name="Add2FleetCancelButton">
+         <property name="geometry">
+          <rect>
+           <x>20</x>
+           <y>130</y>
+           <width>109</width>
+           <height>26</height>
+          </rect>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">background-color: rgb(255, 0, 0);</string>
+         </property>
+         <property name="text">
+          <string>Cancel</string>
+         </property>
+        </widget>
+        <widget class="QPushButton" name="Add2FleetOkButton">
+         <property name="geometry">
+          <rect>
+           <x>140</x>
+           <y>130</y>
+           <width>109</width>
+           <height>26</height>
+          </rect>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">background-color: rgb(0, 255, 0);</string>
+         </property>
+         <property name="text">
+          <string>OK</string>
+         </property>
+        </widget>
+       </widget>
+      </widget>
+      <widget class="QWidget" name="tab_2">
+       <attribute name="title">
+        <string>Remove Aircraft</string>
+       </attribute>
+       <widget class="QGroupBox" name="DelFromFleetBox">
+        <property name="geometry">
+         <rect>
+          <x>20</x>
+          <y>20</y>
+          <width>271</width>
+          <height>171</height>
+         </rect>
+        </property>
+        <property name="toolTip">
+         <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Remove aircraft from Fleet List&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">background-color: rgb(255, 226, 220);</string>
+        </property>
+        <property name="title">
+         <string>Remove Aircraft from Fleet</string>
+        </property>
+        <widget class="QLabel" name="DelFromFleetLabel">
+         <property name="geometry">
+          <rect>
+           <x>80</x>
+           <y>40</y>
+           <width>101</width>
+           <height>17</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>Registration</string>
+         </property>
+        </widget>
+        <widget class="QTextEdit" name="DelFromFleetEdit">
+         <property name="geometry">
+          <rect>
+           <x>70</x>
+           <y>70</y>
+           <width>121</width>
+           <height>41</height>
+          </rect>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">background-color: rgb(255, 255, 255);</string>
+         </property>
+        </widget>
+        <widget class="QPushButton" name="DelFromFleetOkButton">
+         <property name="geometry">
+          <rect>
+           <x>140</x>
+           <y>130</y>
+           <width>109</width>
+           <height>26</height>
+          </rect>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">background-color: rgb(0, 255, 0);</string>
+         </property>
+         <property name="text">
+          <string>OK</string>
+         </property>
+        </widget>
+        <widget class="QPushButton" name="DelFromFleetCancelButton">
+         <property name="geometry">
+          <rect>
+           <x>20</x>
+           <y>130</y>
+           <width>109</width>
+           <height>26</height>
+          </rect>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">background-color: rgb(255, 0, 0);</string>
+         </property>
+         <property name="text">
+          <string>Cancel</string>
+         </property>
+        </widget>
+       </widget>
+      </widget>
+     </widget>
     </widget>
     <widget class="QWidget" name="Advanced">
      <attribute name="title">
@@ -1373,7 +2008,7 @@ background-color: rgb(0, 255, 0);</string>
       <property name="geometry">
        <rect>
         <x>0</x>
-        <y>370</y>
+        <y>440</y>
         <width>381</width>
         <height>61</height>
        </rect>
@@ -1565,181 +2200,101 @@ background-color: rgb(0, 255, 0);</string>
        </property>
       </widget>
      </widget>
-    </widget>
-    <widget class="QWidget" name="FleetList">
-     <attribute name="title">
-      <string>Fleet List</string>
-     </attribute>
-     <widget class="QTableWidget" name="FleetListTable">
+     <widget class="QGroupBox" name="LogTimeDeltaBox">
       <property name="geometry">
        <rect>
-        <x>30</x>
-        <y>20</y>
-        <width>251</width>
-        <height>531</height>
+        <x>0</x>
+        <y>370</y>
+        <width>381</width>
+        <height>61</height>
        </rect>
       </property>
       <property name="toolTip">
-       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Coded: &lt;/p&gt;&lt;p&gt;001-099: Gliders, &lt;/p&gt;&lt;p&gt;101-199: Tugs, &lt;/p&gt;&lt;p&gt;201-299: Motor Gliders, &lt;/p&gt;&lt;p&gt;301-399: Other&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-      </property>
-      <property name="columnCount">
-       <number>2</number>
-      </property>
-      <column>
-       <property name="text">
-        <string>Registration</string>
-       </property>
-      </column>
-      <column>
-       <property name="text">
-        <string>Code Value</string>
-       </property>
-      </column>
-     </widget>
-     <widget class="QGroupBox" name="Add2FleetBox">
-      <property name="geometry">
-       <rect>
-        <x>330</x>
-        <y>20</y>
-        <width>271</width>
-        <height>181</height>
-       </rect>
+       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Time in hours before sunset to start processing flight data. Negative values mean before sunset.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
       </property>
       <property name="title">
-       <string>Add Aircraft to Fleet</string>
+       <string/>
       </property>
-      <widget class="QTextEdit" name="Add2FleetRegEdit">
+      <widget class="QLabel" name="LogTimeDeltaLabel">
        <property name="geometry">
         <rect>
-         <x>20</x>
-         <y>70</y>
-         <width>121</width>
-         <height>41</height>
+         <x>10</x>
+         <y>20</y>
+         <width>151</width>
+         <height>20</height>
         </rect>
        </property>
-      </widget>
-      <widget class="QLabel" name="Add2FleetRegLabel">
-       <property name="geometry">
-        <rect>
-         <x>30</x>
-         <y>40</y>
-         <width>101</width>
-         <height>17</height>
-        </rect>
+       <property name="font">
+        <font>
+         <pointsize>9</pointsize>
+         <weight>75</weight>
+         <bold>true</bold>
+        </font>
+       </property>
+       <property name="toolTip">
+        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
        </property>
        <property name="text">
-        <string>Registration</string>
+        <string>Log TIme Delta</string>
        </property>
       </widget>
-      <widget class="QLabel" name="Add2FleetCodeLabel">
+      <widget class="QTextEdit" name="LogTimeDelta">
        <property name="geometry">
         <rect>
-         <x>150</x>
-         <y>40</y>
-         <width>71</width>
-         <height>17</height>
+         <x>290</x>
+         <y>10</y>
+         <width>81</width>
+         <height>51</height>
         </rect>
-       </property>
-       <property name="text">
-        <string>Code</string>
-       </property>
-      </widget>
-      <widget class="QTextEdit" name="Add2FleetCodeEdit">
-       <property name="geometry">
-        <rect>
-         <x>160</x>
-         <y>70</y>
-         <width>71</width>
-         <height>41</height>
-        </rect>
-       </property>
-      </widget>
-      <widget class="QPushButton" name="Add2FleetCancelButton">
-       <property name="geometry">
-        <rect>
-         <x>20</x>
-         <y>130</y>
-         <width>109</width>
-         <height>26</height>
-        </rect>
-       </property>
-       <property name="text">
-        <string>Cancel</string>
-       </property>
-      </widget>
-      <widget class="QPushButton" name="Add2FleetOkButton">
-       <property name="geometry">
-        <rect>
-         <x>140</x>
-         <y>130</y>
-         <width>109</width>
-         <height>26</height>
-        </rect>
-       </property>
-       <property name="text">
-        <string>OK</string>
        </property>
       </widget>
      </widget>
-     <widget class="QGroupBox" name="DelFromFleetBox">
+     <widget class="QGroupBox" name="FlightLogBox">
       <property name="geometry">
        <rect>
-        <x>330</x>
-        <y>210</y>
-        <width>271</width>
-        <height>171</height>
+        <x>0</x>
+        <y>300</y>
+        <width>491</width>
+        <height>61</height>
        </rect>
       </property>
-      <property name="title">
-       <string>Remove Aircraft from Fleet</string>
+      <property name="toolTip">
+       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Name of folder for holding flight log files&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
       </property>
-      <widget class="QLabel" name="DelFromFleetLabel">
+      <property name="title">
+       <string/>
+      </property>
+      <widget class="QLabel" name="FlightLogFolderLabel">
        <property name="geometry">
         <rect>
-         <x>80</x>
-         <y>40</y>
-         <width>101</width>
-         <height>17</height>
+         <x>10</x>
+         <y>20</y>
+         <width>161</width>
+         <height>20</height>
         </rect>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>9</pointsize>
+         <weight>75</weight>
+         <bold>true</bold>
+        </font>
+       </property>
+       <property name="toolTip">
+        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
        </property>
        <property name="text">
-        <string>Registration</string>
+        <string>Folder for Flight Logs</string>
        </property>
       </widget>
-      <widget class="QTextEdit" name="DelFromFleetEdit">
+      <widget class="QTextEdit" name="FlightLogFolder">
        <property name="geometry">
         <rect>
-         <x>70</x>
-         <y>70</y>
-         <width>121</width>
-         <height>41</height>
+         <x>180</x>
+         <y>10</y>
+         <width>291</width>
+         <height>51</height>
         </rect>
-       </property>
-      </widget>
-      <widget class="QPushButton" name="DelFromFleetOkButton">
-       <property name="geometry">
-        <rect>
-         <x>160</x>
-         <y>130</y>
-         <width>109</width>
-         <height>26</height>
-        </rect>
-       </property>
-       <property name="text">
-        <string>OK</string>
-       </property>
-      </widget>
-      <widget class="QPushButton" name="DelFromFleetCancelButton">
-       <property name="geometry">
-        <rect>
-         <x>20</x>
-         <y>130</y>
-         <width>109</width>
-         <height>26</height>
-        </rect>
-       </property>
-       <property name="text">
-        <string>Cancel</string>
        </property>
       </widget>
      </widget>
@@ -1751,7 +2306,7 @@ background-color: rgb(0, 255, 0);</string>
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>926</width>
+     <width>700</width>
      <height>23</height>
     </rect>
    </property>

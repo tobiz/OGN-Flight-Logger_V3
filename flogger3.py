@@ -914,6 +914,7 @@ class flogger3(MyApp):
         # Then open new socket, set ephem date to new day
         #
                     print "Wait till after sunrise at: ", next_sunrise, " Elapsed time: ", wait_time, ". Wait seconds: ", wait_time_secs
+#                    self.RunningLabel.setText("Sleeping")
                     time.sleep(wait_time_secs)
                     # Sun has now risen so recommence logging flights
                     location.date = ephem.Date(datetime.datetime.now())

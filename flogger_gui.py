@@ -5,7 +5,7 @@ from PyQt4 import QtGui, QtCore, uic
 from PyQt4.Qt import SIGNAL
 import subprocess
 from parse import *
-from ConfigParser import *
+#from ConfigParser import *
 from configobj import ConfigObj
 from flogger3 import *
 from flogger_settings import * 
@@ -41,11 +41,14 @@ class MyApp(QtGui.QMainWindow, Ui_MainWindow):
 #        self.AirfieldDetailsButton.clicked.connect(self.floggerAirfieldDetailsEdit)   
 #        self.MinFlightTimeButton.clicked.connect(self.floggerMinFlightTimeEdit)  
         self.FleetCheckRadioButton.toggled.connect(self.floggerFleetCheckRadioButton) 
-        self.RecordTracksRadioButton.toggled.connect(self.floggerRecordTracksRadioButton)
-#        self.DBSchemaButton.clicked.connect(self.floggerDBSchemaEdit)  
-#        self.SMTPServerURLButton.clicked.connect(self.floggerSMTPServerURLEdit) 
-#        self.SMTPServerPortButton.clicked.connect(self.floggerSMTPServerPortEdit)
-#        self.APRSBase1Button.clicked.connect(self.floggerAPRSBaseEdit)
+        self.RecordTracksRadioButton.toggled.connect(self.floggerRecordTracksRadioButton)  
+        self.TakeoffEmailButton.toggled.connect(self.floggerTakeoffEmailButton)  
+        self.LandingEmailButton.toggled.connect(self.floggerLandingEmailButton)  
+        self.LaunchFailuresButton.toggled.connect(self.floggerLaunchFailuresButton)
+        self.LogTugsButton.toggled.connect(self.floggerLogTugsButton)
+        self.IGCFormatButton.toggled.connect(self.floggerIGCFormatButton)
+        
+        
         self.UpdateButton.clicked.connect(self.floggerUpdateConfig)
         self.CancelButton.clicked.connect(self.floggerCancelConfigUpdate)
         
@@ -163,6 +166,25 @@ class MyApp(QtGui.QMainWindow, Ui_MainWindow):
         else:
             print "N"   
         settings.FLOGGER_TRACKS = old_val 
+                     
+        old_val = self.getOldValue(self.config, "FLOGGER_TAKEOFF_EMAIL")
+        print "Email takeoffs is: " + old_val 
+        if old_val == "Y":
+            print "Y"
+            self.TakeoffEmailButton.setChecked(True)
+        else:
+            print "N"   
+        settings.FLOGGER_TAKEOFF_EMAIL = old_val 
+        
+                             
+        old_val = self.getOldValue(self.config, "FLOGGER_LANDING_EMAIL")
+        print "Email landings is: " + old_val 
+        if old_val == "Y":
+            print "Y"
+            self.LandingEmailButton.setChecked(True)
+        else:
+            print "N"   
+        settings.FLOGGER_LANDING_EMAIL = old_val 
         
         old_val = self.getOldValue(self.config, "FLOGGER_DB_SCHEMA")    
         settings.FLOGGER_DB_SCHEMA = old_val
@@ -258,8 +280,36 @@ class MyApp(QtGui.QMainWindow, Ui_MainWindow):
             self.FleetListTable.setItem(rowPosition , 1, QtGui.QTableWidgetItem(str(settings.FLOGGER_FLEET_LIST[registration])))
             rowPosition = rowPosition + 1
         
-
-            
+        
+        old_val = self.getOldValue(self.config, "FLOGGER_DATA_RETENTION")    # This might get parsed as an int - need to watch it!
+        settings.FLOGGER_DATA_RETENTION = int(old_val)
+        self.DataRetentionTime.setText(old_val)
+          
+        old_val = self.getOldValue(self.config, "FLOGGER_LOG_TIME_DELTA")    # This might get parsed as an int - need to watch it!
+        settings.FLOGGER_LOG_TIME_DELTA = int(old_val)
+        self.LogTimeDelta.setText(old_val) 
+                 
+        old_val = self.getOldValue(self.config, "FLOGGER_LOCATION_HORIZON")    # This might get parsed as an int - need to watch it!
+        settings.FLOGGER_LOCATION_HORIZON = old_val
+        self.HorizonAdjustment.setText(old_val)   
+                      
+        old_val = self.getOldValue(self.config, "FLOGGER_DUPLICATE_FLIGHT_DELTA_T")    
+        settings.FLOGGER_DUPLICATE_FLIGHT_DELTA_T = old_val
+        self.MinFlightDeltaTime.setText(old_val) 
+                             
+        old_val = self.getOldValue(self.config, "FLOGGER_QNH")    
+        settings.FLOGGER_QNH = old_val
+        self.AirfieldQNH.setText(old_val)     
+                                     
+        old_val = self.getOldValue(self.config, "FLOGGER_FLIGHTS_LOG")    
+        settings.FLOGGER_FLIGHTS_LOG = old_val
+        self.FlightLogFolder.setText(old_val)  
+                                           
+        old_val = self.getOldValue(self.config, "FLOGGER_LANDOUT_MODE")    
+        settings.FLOGGER_LANDOUT_MODE = old_val
+        self.LandoutMsgMode.setText(old_val)
+        
+#        self.floggerFleetCheckRadioButtonInit()
 #
 # GUI Initialisation end
 #  
@@ -305,6 +355,7 @@ class MyApp(QtGui.QMainWindow, Ui_MainWindow):
         self.floggerAPRSServerportEdit2(True)
         self.floggerFlarmRadiusEdit2(True)
         self.floggerLandoutRadiusEdit2(True)
+        self.floggerDataRetentionTimeEdit2(True)
         self.floggerAirfieldDetailsEdit2(True)
         self.floggerAirfieldLatLonEdit2(True)
         self.floggerMinFlightTimeEdit2(True)
@@ -322,7 +373,16 @@ class MyApp(QtGui.QMainWindow, Ui_MainWindow):
         self.floggerEmailSenderEdit2(True)
         self.floggerEmailReceiverEdit2(True)
         self.floggerAPRSBaseEdit2(True)
+        self.floggerLogTimeDeltaEdit2(True)
+        self.floggerHorizonAdjustmentEdit2(True)
+        self.floggerMinFlightDeltaTimeEdit2(True)
+        self.floggerMinFlightDeltaTimeEdit2(True)
+        self.floggerAirfieldQNHEdit2(True)
+        self.floggerFlightLogFolderEdit2(True)
+        self.floggerLandoutMsgModeEdit2(True)
         return
+
+
 
     def floggerCancelConfigUpdate(self):
         print "floggerCancelConfigUpdate called"
@@ -333,6 +393,7 @@ class MyApp(QtGui.QMainWindow, Ui_MainWindow):
         self.floggerAPRSServerportEdit2(False)
         self.floggerFlarmRadiusEdit2(False)
         self.floggerLandoutRadiusEdit2(False)
+        self.floggerDataRetentionTimeEdit2(False)
         self.floggerAirfieldDetailsEdit2(False)
         self.floggerAirfieldLatLonEdit2(False)
         self.floggerMinFlightTimeEdit2(False)
@@ -350,6 +411,12 @@ class MyApp(QtGui.QMainWindow, Ui_MainWindow):
         self.floggerEmailSenderEdit2(False)
         self.floggerEmailReceiverEdit2(False)
         self.floggerAPRSBaseEdit2(False)
+        self.floggerLogTimeDeltaEdit2(False)
+        self.floggerHorizonAdjustmentEdit2(False)
+        self.floggerMinFlightDeltaTimeEdit2(False)
+        self.floggerAirfieldQNHEdit2(False)
+        self.floggerFlightLogFolderEdit2(False)
+        self.floggerLandoutMsgModeEdit2(False)
         return
                        
         
@@ -422,7 +489,50 @@ class MyApp(QtGui.QMainWindow, Ui_MainWindow):
             self.editConfigField("flogger_settings_file.txt", "APRS_SERVER_PORT", APRSServerport)
             self.APRS_SERVER_PORT = int(APRSServerport)
             
-    
+    def floggerDataRetentionTimeEdit2(self, mode): 
+            print "Data Retention TIme button clicked"
+            if mode: 
+                DataRetentionTime = self.DataRetentionTime.toPlainText()  
+            else:
+                old_val = self.getOldValue(self.config, "FLOGGER_DATA_RETENTION")
+                self.DataRetentionTime.setText(old_val)
+                DataRetentionTime = old_val
+            self.editConfigField("flogger_settings_file.txt", "FLOGGER_DATA_RETENTION", DataRetentionTime)
+            self.FLOGGER_DATA_RETENTION = int(DataRetentionTime)
+            
+    def floggerLogTimeDeltaEdit2(self, mode):    
+            print "Log Time Delta button clicked"
+            if mode: 
+                LogTimeDelta = self.LogTimeDelta.toPlainText()  
+            else:
+                old_val = self.getOldValue(self.config, "FLOGGER_LOG_TIME_DELTA")
+                self.LogTimeDelta.setText(old_val)
+                LogTimeDelta = old_val
+            self.editConfigField("flogger_settings_file.txt", "FLOGGER_LOG_TIME_DELTA", LogTimeDelta)
+            self.FLOGGER_LOG_TIME_DELTA = int(LogTimeDelta)
+        
+    def floggerHorizonAdjustmentEdit2(self, mode):   
+            print "Horizon Adjustment button clicked"
+            if mode: 
+                HorizonAdjustment = self.HorizonAdjustment.toPlainText()  
+            else:
+                old_val = self.getOldValue(self.config, "FLOGGER_LOCATION_HORIZON")
+                self.HorizonAdjustment.setText(old_val)
+                HorizonAdjustment = old_val
+            self.editConfigField("flogger_settings_file.txt", "FLOGGER_LOCATION_HORIZON", HorizonAdjustment)
+            self.FLOGGER_LOCATION_HORIZON = HorizonAdjustment
+            
+    def floggerAirfieldQNHEdit2(self, mode):
+        print "QNH Setting button clicked"
+        if mode: 
+            AirfieldQNH = self.AirfieldQNH.toPlainText()  
+        else:
+            old_val = self.getOldValue(self.config, "FLOGGER_QNH")
+            self.AirfieldQNH.setText(old_val)
+            AirfieldQNH = old_val
+        self.editConfigField("flogger_settings_file.txt", "FLOGGER_QNH", AirfieldQNH)
+        self.FLOGGER_QNH = int(AirfieldQNH)
+        
     def floggerFlarmRadiusEdit2(self, mode):
             print "Flarm Radius button clicked"
             if mode: 
@@ -552,6 +662,39 @@ class MyApp(QtGui.QMainWindow, Ui_MainWindow):
             selfFLOGGER_FLEET_CHECK = "N"
             self.editConfigField("flogger_settings_file.txt", "FLOGGER_FLEET_CHECK", "N")
             
+        
+#    def floggerFleetCheckRadioButtonInit(self):
+#        print "Fleet Check Radio Button initialise"
+#        old_val = self.FLOGGER_FLEET_CHECK
+#        old_val = self.config["FLOGGER_FLEET_CHECK"]
+#        if old_val == "Y":
+#            if not self.FleetCheckRadioButton.isChecked():
+#                print "Settings say yes, button say no" 
+#                self.FleetCheckRadioButton.toggle()
+#            else:
+#                print "Settings say yes, button says yes, leave "
+#        else:
+#            if self.FleetCheckRadioButton.isChecked():
+#               print "Settings say no, button says yes"
+#               self.FleetCheckRadioButton.toggle()
+#            else:
+#                print "Settings say no, button says no, leave"
+            
+        
+        
+#        if old_val == "N" and self.FleetCheckRadioButton.isChecked():
+#            print "Settings say no, button say yes" 
+#            self.FleetCheckRadioButton.toggle()   
+#             
+#        if self.FleetCheckRadioButton.isChecked():
+#            print "Fleet check checked"
+#            self.FLOGGER_FLEET_CHECK = "Y"
+#            self.editConfigField("flogger_settings_file.txt", "FLOGGER_FLEET_CHECK", "Y")
+#        else:
+#            print "Fleet check unchecked"
+#            selfFLOGGER_FLEET_CHECK = "N"
+#            self.editConfigField("flogger_settings_file.txt", "FLOGGER_FLEET_CHECK", "N")
+            
     def floggerRecordTracksRadioButton(self):
         print "Record Tracks Radio Button clicked" 
         if self.RecordTracksRadioButton.isChecked():
@@ -561,7 +704,63 @@ class MyApp(QtGui.QMainWindow, Ui_MainWindow):
         else:
             print "Record Tracks unchecked"
             self.FLOGGER_TRACKS = "N"
-            self.editConfigField("flogger_settings_file.txt", "FLOGGER_TRACKS", "N")       
+            self.editConfigField("flogger_settings_file.txt", "FLOGGER_TRACKS", "N")    
+            
+    def floggerTakeoffEmailButton(self):   
+        print "Record Takeoff Radio Button clicked" 
+        if self.TakeoffEmailButton.isChecked():
+            print "Record Takeoff checked"
+            self.FLOGGER_TAKEOFF_EMAIL = "Y"
+            self.editConfigField("flogger_settings_file.txt", "FLOGGER_TAKEOFF_EMAIL", "Y")
+        else:
+            print "Takeoff Takeoff Button unchecked"
+            self.FLOGGER_TAKEOFF_EMAIL = "N"
+            self.editConfigField("flogger_settings_file.txt", "FLOGGER_TAKEOFF_EMAIL", "N")  
+            
+    def floggerLandingEmailButton(self): 
+        print "Landing Email button clicked" 
+        if self.LandingEmailButton.isChecked():
+            print "Landing Email button checked"
+            self.FLOGGER_TAKEOFF_EMAIL = "Y"
+            self.editConfigField("flogger_settings_file.txt", "FLOGGER_LANDING_EMAIL", "Y")
+        else:
+            print "Landing Email button unchecked"
+            self.FLOGGER_LANDING_EMAIL = "N"
+            self.editConfigField("flogger_settings_file.txt", "FLOGGER_LANDING_EMAIL", "N")
+            
+    def floggerLaunchFailuresButton(self):
+        print "Launch Failures button clicked" 
+        if self.LaunchFailuresButton.isChecked():
+            print "Launch Failures button checked"
+            self.FLOGGER_LOG_LAUNCH_FAILURES = "Y"
+            self.editConfigField("flogger_settings_file.txt", "FLOGGER_LOG_LAUNCH_FAILURES", "Y")
+        else:
+            print "Launch Failures button unchecked"
+            self.FLOGGER_LOG_LAUNCH_FAILURES = "N"
+            self.editConfigField("flogger_settings_file.txt", "FLOGGER_LOG_LAUNCH_FAILURES", "N")
+    
+    def floggerLogTugsButton(self):
+        print "Log Tugs button clicked" 
+        if self.LogTugsButton.isChecked():
+            print "Log Tugs button checked"
+            self.FLOGGER_LOG_TUGS = "Y"
+            self.editConfigField("flogger_settings_file.txt", "FLOGGER_LOG_TUGS", "Y")
+        else:
+            print "Log Tugs button unchecked"
+            self.FLOGGER_LOG_TUGS = "N"
+            self.editConfigField("flogger_settings_file.txt", "FLOGGER_LOG_TUGS", "N")
+            
+    def floggerIGCFormatButton(self):
+        print "IGC Format Button clicked" 
+        if self.IGCFormatButton.isChecked():
+            print "IGC Format button checked"
+            self.FLOGGER_TRACKS_IGC = "Y"
+            self.editConfigField("flogger_settings_file.txt", "FLOGGER_TRACKS_IGC", "Y")
+        else:
+            print "IGC Format button unchecked"
+            self.FLOGGER_TRACKS_IGC = "N"
+            self.editConfigField("flogger_settings_file.txt", "FLOGGER_TRACKS_IGC", "N")
+        
             
     def floggerKeepAliveTime2(self, mode):
         print "Keep Alive Time button clicked" 
@@ -669,8 +868,43 @@ class MyApp(QtGui.QMainWindow, Ui_MainWindow):
             self.SMTPServerPort.setText(old_val)
             smtp_server_port = old_val
         self.editConfigField("flogger_settings_file.txt", "FLOGGER_SMTP_SERVER_PORT", smtp_server_port)
-        self.FLOGGER_SMTP_SERVER_PORT = int(smtp_server_port)      
+        self.FLOGGER_SMTP_SERVER_PORT = int(smtp_server_port) 
+        
+    def floggerMinFlightDeltaTimeEdit2(self, mode):     
+        print "Minimum Flight Difference Time button clicked"
+        if mode :
+            MinFlightDeltaTime = self.MinFlightDeltaTime.toPlainText()  
+        else:
+            old_val = self.getOldValue(self.config, "FLOGGER_DUPLICATE_FLIGHT_DELTA_T")
+            self.MinFlightDeltaTime.setText(old_val)
+            MinFlightDeltaTime = old_val
+        self.editConfigField("flogger_settings_file.txt", "FLOGGER_DUPLICATE_FLIGHT_DELTA_T", MinFlightDeltaTime)
+        self.FLOGGER_DUPLICATE_FLIGHT_DELTA_T = MinFlightDeltaTime
+        
+    def floggerFlightLogFolderEdit2(self, mode):         
+        print "Flight Log Folder button clicked"
+        if mode :
+            FlightLogFolder = self.FlightLogFolder.toPlainText()  
+        else:
+            old_val = self.getOldValue(self.config, "FLOGGER_FLIGHTS_LOG")
+            self.FlightLogFolder.setText(old_val)
+            FlightLogFolder = old_val
+        self.editConfigField("flogger_settings_file.txt", "FLOGGER_FLIGHTS_LOG", FlightLogFolder)
+        self.FLOGGER_FLIGHTS_LOG = FlightLogFolder
+        
     
+                
+    def floggerLandoutMsgModeEdit2(self, mode):         
+        print "Landout Msg Mode button clicked"
+        if mode :
+            LandoutMsgMode = self.LandoutMsgMode.toPlainText()  
+        else:
+            old_val = self.getOldValue(self.config, "FLOGGER_LANDOUT_MODE")
+            self.LandoutMsgMode.setText(old_val)
+            LandoutMsgMode = old_val
+        self.editConfigField("flogger_settings_file.txt", "FLOGGER_LANDOUT_MODE", LandoutMsgMode)
+        self.FLOGGER_LANDOUT_MODE = LandoutMsgMode
+        
     def floggerAPRSBasesListEdit(self):
         print "APRS Bases list clicked"
 #        sel_items = listWidget.selectedItems()
@@ -731,6 +965,8 @@ class MyApp(QtGui.QMainWindow, Ui_MainWindow):
         
     def floggerAdd2FleetOkButton(self):
         print "floggerAdd2FleetOkButton called"
+        if self.Add2FleetRegEdit.toPlainText() == "":
+            return
         rowPosition = self.FleetListTable.rowCount()          
 #            print "rowPosition: ", rowPosition, " Registration: ", registration, " Code: ", settings.FLOGGER_FLEET_LIST[registration]
         self.FleetListTable.insertRow(rowPosition)
@@ -755,6 +991,8 @@ class MyApp(QtGui.QMainWindow, Ui_MainWindow):
         
     def floggerDelFromFleetOkButton(self):
         print "floggerDelFromFleetOkButton"
+        if self.DelFromFleetEdit.toPlainText() == "":
+            return
         fleet_list = self.getOldValue(self.config, "FLOGGER_FLEET_LIST") 
         reg = self.DelFromFleetEdit.toPlainText()
         del fleet_list[str(reg)]
@@ -782,7 +1020,7 @@ class MyApp(QtGui.QMainWindow, Ui_MainWindow):
 #            self.FleetListTable.setItem(rowPosition , 1, QtGui.QTableWidgetItem(str("")))
             self.FleetListTable.setItem(rowPosition , 0, QtGui.QTableWidgetItem(registration))
             self.FleetListTable.setItem(rowPosition , 1, QtGui.QTableWidgetItem(str(settings.FLOGGER_FLEET_LIST[registration])))
-            rowPosition = rowPosition + 1
+            rowPosition = rowPosition + 1 # interesting rowPosition =+ 1 gives wrong result!!
     
 #
 # Utility functions
