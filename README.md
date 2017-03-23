@@ -93,3 +93,5 @@ send an SMS msg but has not been tested.
 20170312 - First commit of V3
 
 20170313 - Add explanation of differences between V2 and V3.
+
+20170323 - First complete test version of gui controlled application
