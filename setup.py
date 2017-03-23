@@ -1,5 +1,5 @@
-#from setuptools import setup, find_packages 
-from setuptools import setup
+from setuptools import setup, find_packages 
+#from setuptools import setup
 
 # See https://medium.com/small-things-about-python/lets-talk-about-python-packaging-6d84b81f1bb5#.pjxrklmi6
 
@@ -35,24 +35,27 @@ setup(name='OGN_Flogger',
                 'flogger_process_log',
                 'flogger_process_log_V1',
                 'flogger_progress_indicator',
-                'flogger',
                 'flogger_settings',
                 'flogger_signals',
                 'flogger_test_YorN',
-                'gpxTracks',
+                'flogger_ui'                                                                                        ,
+                'gpxTracks'                                                                                         ,
                 'libfap',
                 'open_db'],
       install_requires=[
                         'aerofiles==0.3',
+                        'configobj==4.7.2',
                         'geocoder==1.4.0',
                         'geopy==1.11.0',
                         'pytz==2012c',
-                        'pycrypto==2.6.1',
+                        'requests==2.13.0',
+                        'setuptools==3.3',
                         'LatLon==1.0.2',
+                        'PyQt4==4.11.4',
                         'pyephem==3.7.6.0',
-                        'protobuf==3.1.0.post1',
-                        'adhocracy_pysqlite==2.6.3',
-                        'Requests==2.11.1'
+                        'protobuf==3.2.0',
+                        'parse==1.8.0',
+                        'adhocracy_pysqlite==2.6.3'
                         ],
       include_package_data=True,
       zip_safe=False)
