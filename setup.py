@@ -5,6 +5,7 @@ from setuptools import setup, find_packages
 
 setup(name='OGN_Flogger',   
       version='0.3.1.1',
+      scripts=['flogger_gui'],      # Command to run 
       description='Realtime logging of glider flights from Flarm data',
       long_description='Realtime logging and tracking of gliders from Flarm signals using APRS.',
       classifiers=[
@@ -51,7 +52,7 @@ setup(name='OGN_Flogger',
                         'requests==2.13.0',
                         'setuptools==3.3',
                         'LatLon==1.0.2',
-                        'PyQt4==4.11.4',
+                        'PyQt4>=4.11.4',
                         'pyephem==3.7.6.0',
                         'protobuf==3.2.0',
                         'parse==1.8.0',

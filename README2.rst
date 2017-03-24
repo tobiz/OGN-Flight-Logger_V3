@@ -97,3 +97,7 @@ send an SMS msg but has not been tested.
 20170323 - First complete test version of gui controlled application
 
 20170323 - Added files for PyPi packaging compatibility.
+
+20170324 - OGN-Flogger pypi package installed on PyPi will not install from there. The reason is not OGN-Flogger but PyQt4.  
+Despite PyQt4 being available from PyPi it cannot be installed using pip (and hence not as a dependency when installing OGN-Flogger).  
+To install PyQt4 (which together with QT4 Designer, are a great product), go to https://www.riverbankcomputing.com/software/pyqt/download and follow the instructions there.
