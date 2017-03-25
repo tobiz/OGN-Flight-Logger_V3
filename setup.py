@@ -4,7 +4,7 @@ from setuptools import setup, find_packages
 # See https://medium.com/small-things-about-python/lets-talk-about-python-packaging-6d84b81f1bb5#.pjxrklmi6
 
 setup(name='OGN_Flogger',   
-      version='0.3.1.1',
+      version='0.3.1.6',
       scripts=['flogger_gui'],      # Command to run 
       description='Realtime logging of glider flights from Flarm data',
       long_description='Realtime logging and tracking of gliders from Flarm signals using APRS.',
@@ -44,19 +44,19 @@ setup(name='OGN_Flogger',
                 'libfap',
                 'open_db'],
       install_requires=[
-                        'aerofiles==0.3',
-                        'configobj==4.7.2',
-                        'geocoder==1.4.0',
-                        'geopy==1.11.0',
-                        'pytz==2012c',
-                        'requests==2.13.0',
-                        'setuptools==3.3',
-                        'LatLon==1.0.2',
+                        'aerofiles>=0.3',
+                        'configobj>=4.7.2',
+                        'geocoder>=1.4.0',
+                        'geopy>=1.11.0',
+                        'pytz>=2012c',
+                        'requests>=2.13.0',
+                        'setuptools>=3.3',
+                        'LatLon>=1.0.2',
                         'PyQt4>=4.11.4',
-                        'pyephem==3.7.6.0',
-                        'protobuf==3.2.0',
-                        'parse==1.8.0',
-                        'adhocracy_pysqlite==2.6.3'
+                        'pyephem>=3.7.6.0',
+                        'protobuf>=3.2.0',
+                        'parse>=1.8.0',
+                        'adhocracy_pysqlite>=2.6.3'
                         ],
       include_package_data=True,
       zip_safe=False)
