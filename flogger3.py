@@ -40,7 +40,7 @@
 #                Now reads aircraft registration data from Flarmnet to build own internal table
 # 20150515        Third working version
 #                1) APRS user and APRS passcode have to be supplied on the command line and not in settings
-#                2) Changes to flogger_process_log to correct errors - still in testing
+#                2) Changes to flogger_process_log_old to correct errors - still in testing
 #
 # 20150520        Fourth working version (V0.1.0)
 #                1) On aircraft stop set altitude to initial value else highest value for any flight of the day
@@ -123,7 +123,7 @@ from flarm_db import flarmdb
 from pysqlite2 import dbapi2 as sqlite
 from open_db import opendb 
 import ephem
-from flogger_process_log import process_log
+from flogger_process_log_old import process_log
 import argparse
 from flogger_dump_flights import dump_flights
 from flogger_dump_tracks import dump_tracks2
@@ -143,6 +143,10 @@ from flogger_gui import *
 
 from flogger_settings import * 
 from threading import Thread
+#
+# This added to make it simpler after going to gui version
+#
+global settings
 
 class flogger3(MyApp):
     
@@ -153,7 +157,7 @@ class flogger3(MyApp):
     
     def flogger_run(self, settings):
         print "flogger_run called"
-#        print "settings.FLOGGER_SMTP_SERVER_URL: ", settings.FLOGGER_SMTP_SERVER_URL
+        print "settings.FLOGGER_SMTP_SERVER_URL: ", settings.FLOGGER_SMTP_SERVER_URL
 #        print "settings.FLOGGER_SMTP_SERVER_PORT: ", settings.FLOGGER_SMTP_SERVER_PORT
 #        print "settings.FLOGGER_DB_SCHEMA: ", settings.FLOGGER_DB_SCHEMA
         self.thread = Thread(target=self.flogger_start, name= "flogger", args=(settings,))
@@ -168,8 +172,10 @@ class flogger3(MyApp):
         libfap_cleanup()
         return
     #    def flogger_start(self, settings):
-    def flogger_start(self, settings):
+#    def flogger_start(self, settings):
+    def flogger_start(self, local_settings):
         print "flogger_start called"
+        settings = local_settings
 #        print "settings.FLOGGER_SMTP_SERVER_URL: ", settings.FLOGGER_SMTP_SERVER_URL
 #        print "settings.FLOGGER_SMTP_SERVER_PORT: ", settings.FLOGGER_SMTP_SERVER_PORT
 #        print "settings.FLOGGER_DB_SCHEMA: ", settings.FLOGGER_DB_SCHEMA
@@ -476,6 +482,7 @@ class flogger3(MyApp):
             # with the name supplied by "table".
             #-----------------------------------------------------------------
             #
+#            print "delete_table. settings.FLOGGER_MODE: ", settings.FLOGGER_MODE
             if settings.FLOGGER_MODE == "test":
                 print "Test only. Table %s not deleted" % (table)
                 return
@@ -586,7 +593,7 @@ class flogger3(MyApp):
         parser = argparse.ArgumentParser()
         parser.add_argument("--user", help="user and passcode must be supplied, see http://www.george-smart.co.uk/wiki/APRS_Callpass for how to obtain")
         parser.add_argument("--passcode", help="user and passcode must be supplied", type=int)
-        parser.add_argument("--mode", help="mode is test or live, test modifies behaviour to add output for testing", default="live")
+        parser.add_argument("--mode", help="mode is test or live, test modifies behaviour to add output for testing", default="test")
         parser.add_argument('-s', '--smtp', help="URL of smtp server")
         parser.add_argument('-t', '--tx', help="email address of sender")
         parser.add_argument('-r', '--rx', help="email address of receiver")
@@ -618,15 +625,16 @@ class flogger3(MyApp):
             if (args.user <> None):
                 settings.APRS_USER = args.user
             else:
-                print "Taken from form APRS_USER: ", settings.APRS_USER
+                print "Taken from APRS_USER: ", settings.APRS_USER
             if args.passcode <> None:
                 settings.APRS_PASSCODE = args.passcode
             else:
                 print "Taken from form APRS_PASSCODE: ", settings.APRS_PASSCODE
             if args.mode <> None:
+                print "Taken from args.mode: ", settings.FLOGGER_MODE 
                 settings.FLOGGER_MODE = args.mode
             else:
-                print "Taken from form FLOGGER_MODE: ", settings.FLOGGER_MODE               
+                print "Taken from FLOGGER_MODE: ", settings.FLOGGER_MODE               
         except :
             print "Failed in command line arg parser"
 #        print "user=", args.user, " passcode=", args.passcode, "mode=", args.mode, "smtp=", args.smtp, "tx=", args.tx, "rx=", args.rx
@@ -647,9 +655,12 @@ class flogger3(MyApp):
         #-----------------------------------------------------------------
         #
         
-        if os.path.isfile(settings.FLOGGER_DB_NAME):
+#        if os.path.isfile(settings.FLOGGER_DB_NAME):        
+        if os.path.isfile(settings.FLOGGER_DB_NAME) and settings.FLOGGER_MODE <> "test":
             print "SQLite3 db file exists so delete it"
             os.remove(settings.FLOGGER_DB_NAME)
+        else:
+            print "SQLite3 db file exists but in test mode so DON'T delete it!"
         
         db = sqlite3.connect(settings.FLOGGER_DB_NAME)
         cursor = db.cursor()                            # Get a cursor object

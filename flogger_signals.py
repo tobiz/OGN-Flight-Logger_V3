@@ -1,7 +1,7 @@
 import signal
 import time
 import sqlite3
-from flogger_process_log import process_log
+from flogger_process_log_old import process_log
 from flogger_dump_flights import dump_flights
 from flogger_dump_tracks import dump_tracks2
 from flogger_functions import delete_table

@@ -51,7 +51,7 @@ def txt2time(txt_time):
 # calling environment such that only the cursor to the database needs be passed
 #-----------------------------------------------------------------
 #
-def process_log (cursor, db):
+def process_log (cursor, db, settings):
     MINTIME = time.strptime(settings.FLOGGER_MIN_FLIGHT_TIME, "%H:%M:%S")  # 5 minutes minimum flight time
     print "MINTIME is: ", MINTIME
     cursor.execute('''SELECT max(sdate) FROM flight_log''')

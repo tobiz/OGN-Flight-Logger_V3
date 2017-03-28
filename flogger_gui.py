@@ -28,9 +28,31 @@ class MyApp(QtGui.QMainWindow, Ui_MainWindow):
     def __init__(self):
         QtGui.QMainWindow.__init__(self)
         Ui_MainWindow.__init__(self)
+        
+        
+#        self.Iconlabel.setPixmap(pixmap)
+#        self.iconlabel.show()
+        self.show()
+        
+        
         self.setupUi(self)
         global settings
         settings = class_settings()
+        
+        
+#        self.RunningLabel.setText("Stopped")
+        self.iconpath = os.path.join(path, "flogger_icon-08.png")
+        print "Icon path: ", self.iconpath
+        self.setWindowIcon(QtGui.QIcon(self.iconpath))
+        self.pixmap = QPixmap(self.iconpath)
+        self.Iconlabel.setPixmap(self.pixmap) 
+#        label = QLabel() 
+#        pixmap = QPixmap('path_to_your_image')
+        self.Iconlabel.setPixmap(self.pixmap)
+#        self.Iconlabel = QtGui.QPlainTextEdit(self)
+#        self.Iconlabel.setMinimumSize (480,150)
+#        self.Iconlabel.setStyleSheet("background-image: url(self.iconpath); background-attachment: fixed")
+#        self.Iconlabel.show()
         
         self.actionStart.triggered.connect(self.floggerStart)  
         self.actionStop.triggered.connect(self.floggerStop)  
@@ -113,7 +135,7 @@ class MyApp(QtGui.QMainWindow, Ui_MainWindow):
         self.AirfieldDetails.setText(old_val)
           
         old_val = self.getOldValue(self.config, "FLOGGER_QFE_MIN")    
-        settings.FLOGGER_QFE_MIN = old_val
+        settings.FLOGGER_QFE_MIN = int(old_val)
         self.MinFlightQFE.setText(old_val)
         
         old_val = self.getOldValue(self.config, "FLOGGER_MIN_FLIGHT_TIME")    
@@ -298,7 +320,7 @@ class MyApp(QtGui.QMainWindow, Ui_MainWindow):
         self.MinFlightDeltaTime.setText(old_val) 
                              
         old_val = self.getOldValue(self.config, "FLOGGER_QNH")    
-        settings.FLOGGER_QNH = old_val
+        settings.FLOGGER_QNH = int(old_val)
         self.AirfieldQNH.setText(old_val)     
                                      
         old_val = self.getOldValue(self.config, "FLOGGER_FLIGHTS_LOG")    
@@ -636,8 +658,9 @@ class MyApp(QtGui.QMainWindow, Ui_MainWindow):
         else:
             old_val = self.getOldValue(self.config, "FLOGGER_QFE_MIN")
             self.MinFlightQFE.setText(old_val)
-            min_QFE = old_val 
+            min_QFE = int(old_val) 
         self.editConfigField("flogger_settings_file.txt", "FLOGGER_QFE_MIN", min_QFE) 
+#        self.FLOGGER_QFE_MIN = min_QFE
                   
     def floggerTugLaunchEdit2(self, mode):
         print "Delta Tug Time button clicked"
@@ -1029,7 +1052,7 @@ class MyApp(QtGui.QMainWindow, Ui_MainWindow):
         print "editConfig called"
         self.config[field_name] = new_value
         self.config.write()
-
+        setattr(self, field_name, new_value) #equivalent to: self.'field_name' = new_value
             
     def setOldValue(self, config_field_name): 
 #        val = self.config[config_field_name]
@@ -1045,12 +1068,75 @@ class MyApp(QtGui.QMainWindow, Ui_MainWindow):
 #
 # Actions End
 #            
-               
+    
+#
+# Splash screen test start
+#
+from PyQt4.QtCore import *
+from PyQt4.QtGui import *
+
+
+class Form(QDialog):
+    """ Just a simple dialog with a couple of widgets
+    """
+    def __init__(self, parent=None):
+        super(Form, self).__init__(parent)
+        self.browser = QTextBrowser()
+        self.setWindowTitle('Just a dialog')
+        self.lineedit = QLineEdit("Write something and press Enter")
+        self.lineedit.selectAll()
+        layout = QVBoxLayout()
+        layout.addWidget(self.browser)
+        layout.addWidget(self.lineedit)
+        self.setLayout(layout)
+        self.lineedit.setFocus()
+        self.connect(self.lineedit, SIGNAL("returnPressed()"), self.update_ui)
+
+    def update_ui(self):
+        self.browser.append(self.lineedit.text())
+
+
+#
+# Splash screen test end
+#
+
+          
             
 if __name__ == "__main__":
     app = QtGui.QApplication(sys.argv)
+#
+# Splash screen start
+#
+    # Create and display the splash screen
+#    splash_pix = QPixmap('splash_loading.png')
+#    splash = QSplashScreen(splash_pix, Qt.WindowStaysOnTopHint)
+#    splash.setMask(splash_pix.mask())
+#    splash.show()
+#   app.processEvents()
+
+    # Simulate something that takes time
+    
     window = MyApp()
     window.show()
+#    time.sleep(5)
+
+#    form = Form()
+#    form.show()
+#
+# Splash screen end
+#
+
+#    window = MyApp()
+#    window.show()
+    
+#
+# Splash screen start
+#
+
+#    splash.finish(form)
+#
+# Splash screen end
+#
     sys.exit(app.exec_())
 
 
