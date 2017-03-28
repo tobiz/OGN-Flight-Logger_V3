@@ -69,6 +69,7 @@ class MyApp(QtGui.QMainWindow, Ui_MainWindow):
         self.LaunchFailuresButton.toggled.connect(self.floggerLaunchFailuresButton)
         self.LogTugsButton.toggled.connect(self.floggerLogTugsButton)
         self.IGCFormatButton.toggled.connect(self.floggerIGCFormatButton)
+        self.LiveTestButton.toggled.connect(self.floggerLiveTestButton)
         
         
         self.UpdateButton.clicked.connect(self.floggerUpdateConfig)
@@ -727,7 +728,19 @@ class MyApp(QtGui.QMainWindow, Ui_MainWindow):
         else:
             print "Record Tracks unchecked"
             self.FLOGGER_TRACKS = "N"
-            self.editConfigField("flogger_settings_file.txt", "FLOGGER_TRACKS", "N")    
+            self.editConfigField("flogger_settings_file.txt", "FLOGGER_TRACKS", "N")  
+            
+            
+    def floggerLiveTestButton(self):
+        print "Live | Test Radio Button clicked" 
+        if self.LiveTestButton.isChecked():
+            print "Live | Test mode checked"
+            self.FLOGGER_MODE = "Y"
+            self.editConfigField("flogger_settings_file.txt", "FLOGGER_MODE", "test")
+        else:
+            print "Live | Test mode unchecked"
+            self.FLOGGER_MODE = "live"
+            self.editConfigField("flogger_settings_file.txt", "FLOGGER_MODE", "live")  
             
     def floggerTakeoffEmailButton(self):   
         print "Record Takeoff Radio Button clicked" 
