@@ -19,8 +19,39 @@ path = os.path.dirname(os.path.abspath(__file__))
 print("Path: " + path) 
 #settings = class_settings()
 
-Ui_MainWindow, base_class = uic.loadUiType(os.path.join(path,"flogger_config_1.ui"))
-#Ui_MainWindow, base_class = uic.loadUiType(os.path.join(path,"flogger.ui"))
+#Ui_MainWindow, base_class = uic.loadUiType(os.path.join(path,"flogger_config_1.ui"))
+Ui_MainWindow, base_class = uic.loadUiType(os.path.join(path,"flogger.ui"))
+Ui_AboutWindow, base_class = uic.loadUiType(os.path.join(path,"flogger_about.ui"))
+Ui_HelpWindow, base_class = uic.loadUiType(os.path.join(path,"flogger_help.ui"))
+
+class AboutWindow(QtGui.QMainWindow, Ui_AboutWindow):
+    def __init__(self, parent=None):
+        super(QMainWindow, self).__init__(parent)
+        self.setAttribute(QtCore.Qt.WA_DeleteOnClose)
+        self.setupUi(self)
+        # Only one button - Ok
+        self.OkpushButton.clicked.connect(self.floggerOkpushButton)
+        return
+    
+    def floggerOkpushButton(self):
+        print "About Ok button clicked"
+        self.close()
+        return
+    
+class HelpWindow(QtGui.QMainWindow, Ui_HelpWindow):
+    def __init__(self, parent=None):
+        super(QMainWindow, self).__init__(parent)
+        self.setAttribute(QtCore.Qt.WA_DeleteOnClose)
+        self.setupUi(self)
+        # Only one button - Ok
+        self.HelppushButton.clicked.connect(self.floggerHelppushButton)
+        return
+    
+    def floggerHelppushButton(self):
+        print "Help Ok button clicked"
+        self.close()
+        return
+    
 
 
 #class Window (QtGui.QMainWindow, form_class):
@@ -28,6 +59,7 @@ class MyApp(QtGui.QMainWindow, Ui_MainWindow):
     def __init__(self):
         QtGui.QMainWindow.__init__(self)
         Ui_MainWindow.__init__(self)
+#        Ui_AboutWindow.__init__(self)
         
         
 #        self.Iconlabel.setPixmap(pixmap)
@@ -39,6 +71,9 @@ class MyApp(QtGui.QMainWindow, Ui_MainWindow):
         global settings
         settings = class_settings()
         
+        self.actionAbout.triggered.connect(self.AboutButton)
+        self.actionHelp_2.triggered.connect(self.HelpButton)
+
         
 #        self.RunningLabel.setText("Stopped")
         self.iconpath = os.path.join(path, "flogger_icon-08.png")
@@ -68,7 +103,7 @@ class MyApp(QtGui.QMainWindow, Ui_MainWindow):
         self.LandingEmailButton.toggled.connect(self.floggerLandingEmailButton)  
         self.LaunchFailuresButton.toggled.connect(self.floggerLaunchFailuresButton)
         self.LogTugsButton.toggled.connect(self.floggerLogTugsButton)
-        self.IGCFormatButton.toggled.connect(self.floggerIGCFormatButton)
+        self.IGCFormatButton.toggled.connect(self.floggerIGCFormatButton)  
         self.LiveTestButton.toggled.connect(self.floggerLiveTestButton)
         
         
@@ -79,6 +114,8 @@ class MyApp(QtGui.QMainWindow, Ui_MainWindow):
         self.Add2FleetCancelButton.clicked.connect(self.floggerAdd2FleetCancelButton)
         
         self.DelFromFleetOkButton.clicked.connect(self.floggerDelFromFleetOkButton)
+        
+#        self.OkpushButton.clicked.connect(self.floggerOkpushButton)
      
 
         self.RunningLabel.setStyleSheet("color: red") 
@@ -331,6 +368,11 @@ class MyApp(QtGui.QMainWindow, Ui_MainWindow):
         old_val = self.getOldValue(self.config, "FLOGGER_LANDOUT_MODE")    
         settings.FLOGGER_LANDOUT_MODE = old_val
         self.LandoutMsgMode.setText(old_val)
+        
+        old_val = self.getOldValue(self.config, "FLOGGER_MODE")
+        if old_val == "test":
+            print "Live/Test mode state is Test"
+            self.LiveTestButton.setChecked(True)
         
 #        self.floggerFleetCheckRadioButtonInit()
 #
@@ -734,11 +776,11 @@ class MyApp(QtGui.QMainWindow, Ui_MainWindow):
     def floggerLiveTestButton(self):
         print "Live | Test Radio Button clicked" 
         if self.LiveTestButton.isChecked():
-            print "Live | Test mode checked"
+            print "Live | Test mode checked: Test Mode"
             self.FLOGGER_MODE = "Y"
             self.editConfigField("flogger_settings_file.txt", "FLOGGER_MODE", "test")
         else:
-            print "Live | Test mode unchecked"
+            print "Live | Test mode unchecked: Live Mode"
             self.FLOGGER_MODE = "live"
             self.editConfigField("flogger_settings_file.txt", "FLOGGER_MODE", "live")  
             
@@ -1058,6 +1100,10 @@ class MyApp(QtGui.QMainWindow, Ui_MainWindow):
             self.FleetListTable.setItem(rowPosition , 1, QtGui.QTableWidgetItem(str(settings.FLOGGER_FLEET_LIST[registration])))
             rowPosition = rowPosition + 1 # interesting rowPosition =+ 1 gives wrong result!!
     
+    def floggerOkpushButton(self):
+        print "About Ok button clicked"
+        self.close()
+        
 #
 # Utility functions
 #          
@@ -1078,6 +1124,16 @@ class MyApp(QtGui.QMainWindow, Ui_MainWindow):
         val = config[config_field_name]
         setattr(self, config_field_name, val)
         return config[config_field_name]
+    
+    def AboutButton(self):
+        print "About menu clicked"
+        window = AboutWindow(self)
+        window.show()
+          
+    def HelpButton(self):
+        print "Help menu clicked"
+        window = HelpWindow(self)
+        window.show()
 #
 # Actions End
 #            
@@ -1117,38 +1173,11 @@ class Form(QDialog):
             
 if __name__ == "__main__":
     app = QtGui.QApplication(sys.argv)
-#
-# Splash screen start
-#
-    # Create and display the splash screen
-#    splash_pix = QPixmap('splash_loading.png')
-#    splash = QSplashScreen(splash_pix, Qt.WindowStaysOnTopHint)
-#    splash.setMask(splash_pix.mask())
-#    splash.show()
-#   app.processEvents()
 
-    # Simulate something that takes time
     
     window = MyApp()
+    about_window = AboutWindow()
     window.show()
-#    time.sleep(5)
-
-#    form = Form()
-#    form.show()
-#
-# Splash screen end
-#
-
-#    window = MyApp()
-#    window.show()
-    
-#
-# Splash screen start
-#
-
-#    splash.finish(form)
-#
-# Splash screen end
 #
     sys.exit(app.exec_())
 
