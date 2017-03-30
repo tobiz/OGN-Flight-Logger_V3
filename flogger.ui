@@ -2435,15 +2435,18 @@ background-color: rgb(0, 255, 0);</string>
    </property>
   </action>
   <action name="actionHelp_2">
+   <property name="icon">
+    <iconset resource="flogger_resources.qrc">
+     <normaloff>:/newPrefix/flogger_help_icon-1.png</normaloff>:/newPrefix/flogger_help_icon-1.png</iconset>
+   </property>
    <property name="text">
     <string>Help</string>
    </property>
   </action>
   <action name="actionAbout">
    <property name="icon">
-    <iconset>
-     <normalon>flogger_icon-08.png</normalon>
-    </iconset>
+    <iconset resource="flogger_resources.qrc">
+     <normaloff>:/newPrefix/flogger_icon-08.png</normaloff>:/newPrefix/flogger_icon-08.png</iconset>
    </property>
    <property name="text">
     <string>About OGN Flogger</string>
@@ -2465,11 +2468,19 @@ background-color: rgb(0, 255, 0);</string>
    </property>
   </action>
   <action name="actionStart">
+   <property name="icon">
+    <iconset resource="flogger_resources.qrc">
+     <normaloff>:/newPrefix/flogger_start.png</normaloff>:/newPrefix/flogger_start.png</iconset>
+   </property>
    <property name="text">
     <string>Start</string>
    </property>
   </action>
   <action name="actionStop">
+   <property name="icon">
+    <iconset resource="flogger_resources.qrc">
+     <normaloff>:/newPrefix/flogger_stop.png</normaloff>:/newPrefix/flogger_stop.png</iconset>
+   </property>
    <property name="text">
     <string>Stop</string>
    </property>
@@ -2492,7 +2503,7 @@ background-color: rgb(0, 255, 0);</string>
   </action>
  </widget>
  <resources>
-  <include location="flogger_icon-06.png"/>
+  <include location="flogger_resources.qrc"/>
  </resources>
  <connections>
   <connection>

@@ -10,19 +10,34 @@ from configobj import ConfigObj
 from flogger3 import *
 from flogger_settings import * 
 from LatLon import *
+#from uic import *
+#import resources
 
 
 # 20170311 
 
 # get the directory of this script
 path = os.path.dirname(os.path.abspath(__file__))
-print("Path: " + path) 
+#print("Path: " + path) 
 #settings = class_settings()
 
 #Ui_MainWindow, base_class = uic.loadUiType(os.path.join(path,"flogger_config_1.ui"))
+#Ui_MainWindow, base_class = uic.loadUiType(os.path.join(path,"flogger.ui"))
+try:
+    pyrcc4_cmd = "pyrcc4 -o "
+    pyrcc4_out = os.path.join(path,"flogger_resources_rc.py")
+    pyrcc4_in = os.path.join(path,"flogger_resources.qrc")
+    pyrcc4_cmd = "pyrcc4 -o %s %s" % (pyrcc4_out, pyrcc4_in)
+    os.system(pyrcc4_cmd)
+except:
+    print "failed to compile resources"
+    exit()
 Ui_MainWindow, base_class = uic.loadUiType(os.path.join(path,"flogger.ui"))
 Ui_AboutWindow, base_class = uic.loadUiType(os.path.join(path,"flogger_about.ui"))
 Ui_HelpWindow, base_class = uic.loadUiType(os.path.join(path,"flogger_help.ui"))
+
+#sys.path.append(os.path.dirname(__file__))
+#FORM_CLASS, _ = uic.loadUiType(os.path.join(os.path.dirname(__file__), 'flogger.ui'), resource_suffix='')
 
 class AboutWindow(QtGui.QMainWindow, Ui_AboutWindow):
     def __init__(self, parent=None):
