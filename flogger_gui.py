@@ -3,6 +3,8 @@ import os
 import string
 from PyQt4 import QtGui, QtCore, uic
 from PyQt4.Qt import SIGNAL
+from PyQt4.QtCore import *
+from PyQt4.QtGui import *
 import subprocess
 from parse import *
 #from ConfigParser import *
@@ -18,11 +20,6 @@ from LatLon import *
 
 # get the directory of this script
 path = os.path.dirname(os.path.abspath(__file__))
-#print("Path: " + path) 
-#settings = class_settings()
-
-#Ui_MainWindow, base_class = uic.loadUiType(os.path.join(path,"flogger_config_1.ui"))
-#Ui_MainWindow, base_class = uic.loadUiType(os.path.join(path,"flogger.ui"))
 try:
     pyrcc4_cmd = "pyrcc4 -o "
     pyrcc4_out = os.path.join(path,"flogger_resources_rc.py")
@@ -35,6 +32,11 @@ except:
 Ui_MainWindow, base_class = uic.loadUiType(os.path.join(path,"flogger.ui"))
 Ui_AboutWindow, base_class = uic.loadUiType(os.path.join(path,"flogger_about.ui"))
 Ui_HelpWindow, base_class = uic.loadUiType(os.path.join(path,"flogger_help.ui"))
+
+
+#form = Form()
+#form.show()
+#splash.finish(form)
 
 #sys.path.append(os.path.dirname(__file__))
 #FORM_CLASS, _ = uic.loadUiType(os.path.join(os.path.dirname(__file__), 'flogger.ui'), resource_suffix='')
@@ -106,7 +108,7 @@ class MyApp(QtGui.QMainWindow, Ui_MainWindow):
         
         self.actionStart.triggered.connect(self.floggerStart)  
         self.actionStop.triggered.connect(self.floggerStop)  
-        self.actionQuit.triggered.connect(self.floggerQuit)  
+        self.actionQuit.triggered.connect(self.floggerQuit) 
 #        self.AirfieldBaseButton.clicked.connect(self.floggerAirfieldEdit) 
 #        self.AirfieldBaseButton.clicked.connect(self.floggerAirfieldEdit)   
 #        self.APRSUserButton.clicked.connect(self.floggerAPRSUserEdit)   
@@ -129,11 +131,9 @@ class MyApp(QtGui.QMainWindow, Ui_MainWindow):
         self.Add2FleetCancelButton.clicked.connect(self.floggerAdd2FleetCancelButton)
         
         self.DelFromFleetOkButton.clicked.connect(self.floggerDelFromFleetOkButton)
-        
-#        self.OkpushButton.clicked.connect(self.floggerOkpushButton)
-     
-
         self.RunningLabel.setStyleSheet("color: red") 
+        
+        self.FlightLogcalendar.clicked.connect(self.floggerFlightLog)
         
         
         # Initialise values from config file
@@ -388,6 +388,17 @@ class MyApp(QtGui.QMainWindow, Ui_MainWindow):
         if old_val == "test":
             print "Live/Test mode state is Test"
             self.LiveTestButton.setChecked(True)
+            
+            
+#        rowPosition = self.FleetListTable.rowCount()
+#        rowPosition = 1
+#        for aflight in flight_count:
+#            print "rowPosition: ", rowPosition, " Registration: ", registration, " Code: ", settings.FLOGGER_FLEET_LIST[registration]
+#            self.FlightLogTable.insertRow(rowPosition)
+#            self.FleetListTable.setItem(rowPosition , 0, QtGui.QTableWidgetItem(registration))
+#            self.FleetListTable.setItem(rowPosition , 1, QtGui.QTableWidgetItem(str(settings.FLOGGER_FLEET_LIST[registration])))
+#            rowPosition = rowPosition + 1
+       
         
 #        self.floggerFleetCheckRadioButtonInit()
 #
@@ -1108,9 +1119,7 @@ class MyApp(QtGui.QMainWindow, Ui_MainWindow):
 #        rowPosition = 0
         for registration in settings.FLOGGER_FLEET_LIST:
             print "rowPosition: ", rowPosition, " Registration: ", registration, " Code: ", settings.FLOGGER_FLEET_LIST[registration]
-            self.FleetListTable.insertRow(rowPosition)          
-#            self.FleetListTable.setItem(rowPosition , 0, QtGui.QTableWidgetItem(str("")))
-#            self.FleetListTable.setItem(rowPosition , 1, QtGui.QTableWidgetItem(str("")))
+            self.FleetListTable.insertRow(rowPosition)   
             self.FleetListTable.setItem(rowPosition , 0, QtGui.QTableWidgetItem(registration))
             self.FleetListTable.setItem(rowPosition , 1, QtGui.QTableWidgetItem(str(settings.FLOGGER_FLEET_LIST[registration])))
             rowPosition = rowPosition + 1 # interesting rowPosition =+ 1 gives wrong result!!
@@ -1118,6 +1127,77 @@ class MyApp(QtGui.QMainWindow, Ui_MainWindow):
     def floggerOkpushButton(self):
         print "About Ok button clicked"
         self.close()
+        
+    def floggerFlightLog(self):
+        print "Flight Log calendar clicked"
+        date_conv = time.strptime(str(self.FlightLogcalendar.selectedDate().toString()),"%a %b %d %Y")
+#        print time.strftime("%d/%m/%Y",date_conv)
+        date = time.strftime("%y/%m/%d",date_conv)
+        print date
+        date = date_conv
+        # Get flights for date
+        try:
+            db = sqlite3.connect(os.path.join(path,settings.FLOGGER_DB_NAME)) 
+            print "DB name: ", os.path.join(path,settings.FLOGGER_DB_NAME)
+            cursor = db.cursor()
+        except:
+            print "Failed to connect to db"
+#        cursor.execute("SELECT flight_no, sdate, stime, etime, duration, src_callsign, max_altitude, registration, track_file_name, tug_registration, tug_altitude, tug_model  FROM flights WHERE sdate=? ORDER by sdate, stime", (str(date),))
+        try:
+            cursor.execute("SELECT flight_no, sdate, stime, etime, duration, src_callsign, max_altitude, registration, track_file_name, tug_registration, tug_altitude, tug_model  FROM flights ORDER by sdate, stime")
+        except:
+            print "Select failed"
+        rows = cursor.fetchall()
+        row_count = cursor.rowcount
+        print "row_count: ", row_count
+#        if row_count <= 0:
+#            print "No flights today"
+#        else:
+        header = self.FlightLogTable.horizontalHeader()
+        header.setResizeMode(0, QtGui.QHeaderView.Stretch)
+        col_nos = 0
+        while col_nos < 9:
+            header.setResizeMode(col_nos, QtGui.QHeaderView.ResizeToContents)
+            col_nos = col_nos + 1
+        self.FlightLogTable.clearContents()
+        self.FlightLogTable.setRowCount(0)
+        rowPosition = self.FlightLogTable.rowCount()
+#        row_count = 1
+        for row in rows:  
+#            print "Row: ", row_count
+            self.FlightLogTable.insertRow(rowPosition)   
+#            self.FlightLogTable.setItem(rowPosition , 0, QtGui.QTableWidgetItem(row[0])) # Row count
+            print "row[8]: ", row[8]
+            print "row[9]: ", row[9]
+            print "row[10]: ", row[10]
+            if row[9] is None:
+                val = "----"
+            else:
+                val = row[9]
+            self.FlightLogTable.setItem(rowPosition , 0, QtGui.QTableWidgetItem(val))           # Tug Reg
+            if row[11] is None:
+                val = "---"
+            else:
+                val = row[11]
+            self.FlightLogTable.setItem(rowPosition , 1, QtGui.QTableWidgetItem(val))           # Tug Type
+            self.FlightLogTable.setItem(rowPosition , 2, QtGui.QTableWidgetItem(row[7]))        # (Moto) Glider     
+            self.FlightLogTable.setItem(rowPosition , 3, QtGui.QTableWidgetItem(row[7][3:]))    # CN
+            cursor.execute("SELECT aircraft_model FROM flarm_db WHERE registration = ?", (row[7],))
+            plane_type = cursor.fetchone()
+            self.FlightLogTable.setItem(rowPosition , 4, QtGui.QTableWidgetItem(plane_type[0])) # Plane Tyep 
+            self.FlightLogTable.setItem(rowPosition , 5, QtGui.QTableWidgetItem(row[2]))        # Glider Takeoff TIme
+            self.FlightLogTable.setItem(rowPosition , 6, QtGui.QTableWidgetItem(row[3]))        # Glider Landing Time
+            self.FlightLogTable.setItem(rowPosition , 7, QtGui.QTableWidgetItem(row[4]))        # Glider Flight Time
+            if row[10] is None:
+                val = "---"
+            else:
+                val = row[10]
+            self.FlightLogTable.setItem(rowPosition , 8, QtGui.QTableWidgetItem(val))           # Tug Max ALt (QFE)
+            row_count = row_count + 1
+                       
+
+        
+        
         
 #
 # Utility functions
@@ -1187,14 +1267,60 @@ class Form(QDialog):
           
             
 if __name__ == "__main__":
-    app = QtGui.QApplication(sys.argv)
-
-    
+#
+# Old code start
+#    
+    app = QtGui.QApplication(sys.argv) 
     window = MyApp()
     about_window = AboutWindow()
     window.show()
-#
     sys.exit(app.exec_())
+#
+# Old code end
+#    
 
+
+#
+# Splash code start
+#    
+#    app = QApplication(sys.argv)
+    app = QtGui.QApplication(sys.argv)
+    path = os.path.dirname(os.path.abspath(__file__))
+    # Create and display the splash screen
+#    splash_pix = QPixmap('splash_loading.png')
+    splash_pix = QPixmap(os.path.join(path,"flogger_splash"))
+    splash = QSplashScreen(splash_pix, Qt.WindowStaysOnTopHint)
+    splash.setMask(splash_pix.mask())
+    splash.show()
+    app.processEvents()
+    # 
+    # This section takes time to run building the ui and resources files from flogger.ui 
+    #
+    try:
+        pyrcc4_cmd = "pyrcc4 -o "
+        pyrcc4_out = os.path.join(path,"flogger_resources_rc.py")
+        pyrcc4_in = os.path.join(path,"flogger_resources.qrc")
+        pyrcc4_cmd = "pyrcc4 -o %s %s" % (pyrcc4_out, pyrcc4_in)
+        os.system(pyrcc4_cmd)
+    except:
+        print "failed to compile resources"
+        exit()
+    Ui_MainWindow, base_class = uic.loadUiType(os.path.join(path,"flogger.ui"))
+    Ui_AboutWindow, base_class = uic.loadUiType(os.path.join(path,"flogger_about.ui"))
+    Ui_HelpWindow, base_class = uic.loadUiType(os.path.join(path,"flogger_help.ui"))
+    
+#    form = Form()
+#    form.show()
+#    splash.finish(form)
+#    app.exec_()
+    
+    window = MyApp()
+    window.show()
+    splash.finish(window)
+    sys.exit(app.exec_())
+    
+#
+# Splash code end
+#    
 
     

@@ -887,7 +887,7 @@ class flogger3(MyApp):
                     delete_table("flight_log2")
                     delete_table("flight_log_final")
                     delete_table("flight_group")
-                    delete_table("flights")
+##DEL                    delete_table("flights")
                     delete_table("track")
                     delete_table("trackFinal")
                     delete_table("flarm_db")        # flarm_db should be rebuilt at start of each day
