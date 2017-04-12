@@ -1166,17 +1166,13 @@ class MyApp(QtGui.QMainWindow, Ui_MainWindow):
         for row in rows:  
 #            print "Row: ", row_count
             self.FlightLogTable.insertRow(rowPosition)   
-#            self.FlightLogTable.setItem(rowPosition , 0, QtGui.QTableWidgetItem(row[0])) # Row count
-            print "row[8]: ", row[8]
-            print "row[9]: ", row[9]
-            print "row[10]: ", row[10]
             if row[9] is None:
                 val = "----"
             else:
                 val = row[9]
             self.FlightLogTable.setItem(rowPosition , 0, QtGui.QTableWidgetItem(val))           # Tug Reg
             if row[11] is None:
-                val = "---"
+                val = "----"
             else:
                 val = row[11]
             self.FlightLogTable.setItem(rowPosition , 1, QtGui.QTableWidgetItem(val))           # Tug Type
@@ -1184,12 +1180,12 @@ class MyApp(QtGui.QMainWindow, Ui_MainWindow):
             self.FlightLogTable.setItem(rowPosition , 3, QtGui.QTableWidgetItem(row[7][3:]))    # CN
             cursor.execute("SELECT aircraft_model FROM flarm_db WHERE registration = ?", (row[7],))
             plane_type = cursor.fetchone()
-            self.FlightLogTable.setItem(rowPosition , 4, QtGui.QTableWidgetItem(plane_type[0])) # Plane Tyep 
+            self.FlightLogTable.setItem(rowPosition , 4, QtGui.QTableWidgetItem(plane_type[0])) # Plane Type 
             self.FlightLogTable.setItem(rowPosition , 5, QtGui.QTableWidgetItem(row[2]))        # Glider Takeoff TIme
             self.FlightLogTable.setItem(rowPosition , 6, QtGui.QTableWidgetItem(row[3]))        # Glider Landing Time
             self.FlightLogTable.setItem(rowPosition , 7, QtGui.QTableWidgetItem(row[4]))        # Glider Flight Time
             if row[10] is None:
-                val = "---"
+                val = "----"
             else:
                 val = row[10]
             self.FlightLogTable.setItem(rowPosition , 8, QtGui.QTableWidgetItem(val))           # Tug Max ALt (QFE)
@@ -1270,11 +1266,13 @@ if __name__ == "__main__":
 #
 # Old code start
 #    
-    app = QtGui.QApplication(sys.argv) 
-    window = MyApp()
-    about_window = AboutWindow()
-    window.show()
-    sys.exit(app.exec_())
+
+#    app = QtGui.QApplication(sys.argv) 
+#    window = MyApp()
+#    about_window = AboutWindow()
+#    window.show()
+#    sys.exit(app.exec_())
+
 #
 # Old code end
 #    
@@ -1288,20 +1286,27 @@ if __name__ == "__main__":
     path = os.path.dirname(os.path.abspath(__file__))
     # Create and display the splash screen
 #    splash_pix = QPixmap('splash_loading.png')
-    splash_pix = QPixmap(os.path.join(path,"flogger_splash"))
-    splash = QSplashScreen(splash_pix, Qt.WindowStaysOnTopHint)
-    splash.setMask(splash_pix.mask())
-    splash.show()
+    try:
+#        splash_pix = QPixmap(os.path.join(path,"flogger_splash"))
+        splash_pix = QPixmap(os.path.join(path," flogger_icon-03.png"))
+        splash = QSplashScreen(splash_pix, Qt.WindowStaysOnTopHint)
+        splash.setMask(splash_pix.mask())
+        splash.show()
+    except:
+        print "Splash screen failed"
     app.processEvents()
     # 
     # This section takes time to run building the ui and resources files from flogger.ui 
     #
     try:
+        print "Build UI resource files start"
         pyrcc4_cmd = "pyrcc4 -o "
         pyrcc4_out = os.path.join(path,"flogger_resources_rc.py")
         pyrcc4_in = os.path.join(path,"flogger_resources.qrc")
         pyrcc4_cmd = "pyrcc4 -o %s %s" % (pyrcc4_out, pyrcc4_in)
         os.system(pyrcc4_cmd)
+        print "Build UI resource files end"
+        time.sleep(5)
     except:
         print "failed to compile resources"
         exit()
@@ -1317,6 +1322,7 @@ if __name__ == "__main__":
     window = MyApp()
     window.show()
     splash.finish(window)
+    print "Splash screen end"
     sys.exit(app.exec_())
     
 #

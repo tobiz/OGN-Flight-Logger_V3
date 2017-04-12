@@ -81,7 +81,8 @@ class class_settings():
     FLOGGER_DB_NAME = "flogger.sql3.2"# Name of file for flogger SQLite3 database
     FLOGGER_FLARMNET_DB_URL = "http://www.flarmnet.org/files/data.fln"# URL of Flarmnet database
     #FLOGGER_OGN_DB_URL = "http://ddb.glidernet.org/download"        # URL of OGN Flarm database  or blank for don't use   
-    FLOGGER_OGN_DB_URL = "http://ddb.glidernet.org/download/?t=1"# URL of OGN Flarm database  or blank for don't use                    
+    FLOGGER_OGN_DB_URL = "http://ddb.glidernet.org/download/?t=1"# URL of OGN Flarm database  or blank for don't use   
+#    FLOGGER_OGN_DB_URL = "http://ddb.glidernet.org/download/?t=1"# URL of OGN Flarm database  or blank for don't use                        
     #FLOGGER_OGN_DB_URL = ""                                        # URL of OGN Flarm to registration mapping database  
     #FLOGGER_AIRFIELD_NAME = "SuttonBnk"                            # Name of Flarm base station for airfield. NOTE MUST BE PROVIDED
     FLOGGER_AIRFIELD_NAME = "SUTTON BANK"# Name of Flarm base station for airfield. NOTE MUST BE PROVIDED AS in flarmdb record

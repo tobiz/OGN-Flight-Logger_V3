@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>720</width>
+    <width>711</width>
     <height>914</height>
    </rect>
   </property>
@@ -107,9 +107,9 @@
     <property name="geometry">
      <rect>
       <x>400</x>
-      <y>780</y>
+      <y>789</y>
       <width>271</width>
-      <height>80</height>
+      <height>71</height>
      </rect>
     </property>
     <property name="font">
@@ -161,17 +161,17 @@ background-color: rgb(0, 255, 0);</string>
    <widget class="QTabWidget" name="tabWidget">
     <property name="geometry">
      <rect>
-      <x>20</x>
-      <y>180</y>
+      <x>10</x>
+      <y>150</y>
       <width>691</width>
-      <height>591</height>
+      <height>631</height>
      </rect>
     </property>
     <property name="toolTip">
      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Options for controlling of flight logging&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
     </property>
     <property name="currentIndex">
-     <number>6</number>
+     <number>1</number>
     </property>
     <widget class="QWidget" name="APRSConfig">
      <attribute name="title">
@@ -2472,7 +2472,7 @@ Max Alt (QFE)</string>
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>720</width>
+     <width>711</width>
      <height>23</height>
     </rect>
    </property>
