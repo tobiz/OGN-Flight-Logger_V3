@@ -171,7 +171,7 @@ background-color: rgb(0, 255, 0);</string>
      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Options for controlling of flight logging&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
     </property>
     <property name="currentIndex">
-     <number>1</number>
+     <number>6</number>
     </property>
     <widget class="QWidget" name="APRSConfig">
      <attribute name="title">
@@ -1444,6 +1444,9 @@ background-color: rgb(0, 255, 0);</string>
          <bold>true</bold>
         </font>
        </property>
+       <property name="toolTip">
+        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Time in seconds between tug and glider takeoff time to be considered a tug launch&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+       </property>
        <property name="text">
         <string> Tug Launch TIme</string>
        </property>
@@ -1608,7 +1611,7 @@ background-color: rgb(0, 255, 0);</string>
         </rect>
        </property>
        <property name="toolTip">
-        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Check for membership of fleet, Y|N&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;If checked send an email for each landing&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
        </property>
        <property name="text">
         <string>Email Landings</string>
@@ -1640,7 +1643,7 @@ background-color: rgb(0, 255, 0);</string>
         </rect>
        </property>
        <property name="toolTip">
-        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Check for membership of fleet, Y|N&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Log Launch Failures&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
        </property>
        <property name="text">
         <string>Launch Failures</string>
@@ -1672,7 +1675,7 @@ background-color: rgb(0, 255, 0);</string>
         </rect>
        </property>
        <property name="toolTip">
-        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Check for membership of fleet, Y|N&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Log Tug FLights if checked&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
        </property>
        <property name="text">
         <string>Log Tug Flights</string>
@@ -1709,7 +1712,7 @@ background-color: rgb(0, 255, 0);</string>
         </font>
        </property>
        <property name="toolTip">
-        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Check for membership of fleet, Y|N&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Log Flights in IGC Format if checked&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
        </property>
        <property name="text">
         <string>IGC Format Tracks</string>
@@ -2422,12 +2425,44 @@ Max Alt (QFE)</string>
      <widget class="QCalendarWidget" name="FlightLogcalendar">
       <property name="geometry">
        <rect>
-        <x>110</x>
-        <y>10</y>
+        <x>20</x>
+        <y>20</y>
         <width>448</width>
         <height>165</height>
        </rect>
       </property>
+     </widget>
+     <widget class="QGroupBox" name="LogTugsBox_2">
+      <property name="geometry">
+       <rect>
+        <x>490</x>
+        <y>20</y>
+        <width>151</width>
+        <height>61</height>
+       </rect>
+      </property>
+      <property name="toolTip">
+       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Log Tug FLights if checked&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+      </property>
+      <property name="title">
+       <string/>
+      </property>
+      <widget class="QRadioButton" name="LogTugsButton_2">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>20</y>
+         <width>141</width>
+         <height>21</height>
+        </rect>
+       </property>
+       <property name="toolTip">
+        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Log Tug FLights if checked&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+       </property>
+       <property name="text">
+        <string>Log Tug Flights</string>
+       </property>
+      </widget>
      </widget>
     </widget>
    </widget>

@@ -95,7 +95,8 @@ def process_log (cursor, db, settings):
     #
     # Note this may need revision for the case that the system is started before sunrise. Not sure
     #
-    print "+++++++Phase 1 Start+++++++"
+    print "+++++++Phase 1 Start+++++++"  
+    print "settings.FLOGGER_QNH: ", settings.FLOGGER_QNH 
     if row <> (None,):
         max_date = datetime.datetime.strptime(row[0], "%y/%m/%d")
         print "Last record date in flight_log is: ", max_date

@@ -691,6 +691,10 @@ class flogger3(MyApp):
         
         if settings.FLOGGER_AIRFIELD_DETAILS <> "":
             loc = get_coords(settings.FLOGGER_AIRFIELD_DETAILS)
+            while loc[2] == None:
+                print "get_coords returned loc[2} as None, retry"
+                loc = get_coords(settings.FLOGGER_AIRFIELD_DETAILS)
+                
             if loc == False:
                 if settings.FLOGGER_LATITUDE <> "" and settings.FLOGGER_LONGITUDE <> "" and settings.FLOGGER_QNH >=0 :
                     print "Geolocator failed use values from settings"
@@ -701,9 +705,9 @@ class flogger3(MyApp):
                 settings.FLOGGER_LATITUDE       = str(loc[0])   # Held as string
                 settings.FLOGGER_LONGITUDE      = str(loc[1])   # Held as string
                 settings.FLOGGER_QNH            = loc[2]        # Held as number
-#                print "Location is: ", settings.FLOGGER_AIRFIELD_DETAILS, " latitude: ", loc[0], " longitude: ", loc[1], " elevation: ", loc[2] 
-                print "Location is: ", settings.FLOGGER_AIRFIELD_DETAILS, " latitude: ", settings.FLOGGER_LATITUDE , \
-                                    " longitude: ", settings.FLOGGER_LONGITUDE, " elevation: ", settings.FLOGGER_QNH       
+                print "Location is: ", settings.FLOGGER_AIRFIELD_DETAILS, " latitude: ", loc[0], " longitude: ", loc[1], " elevation: ", loc[2] 
+#                print "Location is: ", settings.FLOGGER_AIRFIELD_DETAILS, " latitude: ", settings.FLOGGER_LATITUDE , \
+#                                    " longitude: ", settings.FLOGGER_LONGITUDE, " elevation: ", settings.FLOGGER_QNH       
         else:
             print "Use location data from settings"   
             
@@ -859,7 +863,7 @@ class flogger3(MyApp):
         #
         # Experimental. Find tug used for each launch
         #
-                    find_tug(cursor, db)
+                    find_tug(cursor, db, settings)
                     print "Find tug phase end"
                         
                     
@@ -943,7 +947,7 @@ class flogger3(MyApp):
                     # Note source flarm_db may have changed during previous day 
                     #-----------------------------------------------------------------
                     #
-                    if flarmdb(settings.FLOGGER_FLARMNET_DB_URL, cursor, db, "flarm_data") == True:
+                    if flarmdb(settings.FLOGGER_FLARMNET_DB_URL, cursor, db, "flarm_data", settings) == True:
                         print "Flarmnet db built for today"   
                     else:
                         print "Flarmnet db re-build failed, exit" 

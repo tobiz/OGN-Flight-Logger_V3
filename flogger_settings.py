@@ -166,6 +166,8 @@ class class_settings():
     
 # Flogger process control. Continue process loop if True, else terminate thread
     FLOGGER_RUN = True
+    FLOGGER_INCLUDE_TUG_FLIGHTS = "N"    # If Yes display tug flights as separate lines in gui flight log
+
 
 
 

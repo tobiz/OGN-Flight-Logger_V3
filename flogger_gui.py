@@ -729,7 +729,7 @@ class MyApp(QtGui.QMainWindow, Ui_MainWindow):
             self.MinFlightQFE.setText(old_val)
             min_QFE = int(old_val) 
         self.editConfigField("flogger_settings_file.txt", "FLOGGER_QFE_MIN", min_QFE) 
-#        self.FLOGGER_QFE_MIN = min_QFE
+        self.FLOGGER_QFE_MIN = min_QFE
                   
     def floggerTugLaunchEdit2(self, mode):
         print "Delta Tug Time button clicked"
@@ -739,9 +739,9 @@ class MyApp(QtGui.QMainWindow, Ui_MainWindow):
         else:
             old_val = self.getOldValue(self.config, "FLOGGER_DT_TUG_LAUNCH")
             self.MinTugLaunchTIme.setText(old_val)
-            min_tug_time = old_val 
+            min_tug_time = int(old_val) 
         self.editConfigField("flogger_settings_file.txt", "FLOGGER_DT_TUG_LAUNCH", min_tug_time) 
-        
+        self.FLOGGER_DT_TUG_LAUNCH = min_tug_time
     
     def floggerFleetCheckRadioButton(self):
         print "Fleet Check Radio Button clicked" 
@@ -1168,7 +1168,13 @@ class MyApp(QtGui.QMainWindow, Ui_MainWindow):
             self.FlightLogTable.insertRow(rowPosition)   
             if row[9] is None:
                 val = "----"
-            else:
+            else: 
+#                if settings.FLOGGER_FLEET_LIST[row[9]] > 100 and \
+#                    settings.FLOGGER_FLEET_LIST[row[9]] < 200 and \
+#                    settings.FLOGGER_INCLUDE_TUG_FLIGHTS <> "Y"and \
+#                    row[7] == row[9]:
+#                       print "Tug flight so ignore tug: ", row[9]
+#                        continue
                 val = row[9]
             self.FlightLogTable.setItem(rowPosition , 0, QtGui.QTableWidgetItem(val))           # Tug Reg
             if row[11] is None:
@@ -1202,6 +1208,9 @@ class MyApp(QtGui.QMainWindow, Ui_MainWindow):
         print "editConfig called"
         self.config[field_name] = new_value
         self.config.write()
+#        setattr(self, field_name, new_value) #equivalent to: self.'field_name' = new_value
+        if type(new_value) is int: 
+            int(new_value)
         setattr(self, field_name, new_value) #equivalent to: self.'field_name' = new_value
             
     def setOldValue(self, config_field_name): 

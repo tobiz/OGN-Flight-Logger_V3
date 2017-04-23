@@ -21,12 +21,12 @@ from pysqlite2 import dbapi2 as sqlite
 from open_db import opendb 
 from flogger_test_YorN import test_YorN
 
-def find_tug(cursor, db):
+def find_tug(cursor, db, settings):
     #
     # Finds if a tug launched a glider and if yes puts tug registration in flights table for 
     # the glider flight
     #
-    def glider_fleet_check(registration):
+    def glider_fleet_check(registration, setttings):
         #
         # Checks if registration is in fleet list if fleet checking is being used or
         # checks that registration is a glider if fleet checking is not being used
@@ -50,7 +50,7 @@ def find_tug(cursor, db):
                             return True
         return False
     
-    def tug_fleet_check(registration):
+    def tug_fleet_check(registration, settings):
         #
         # Checks if registration is tug in fleet list if fleet checking is being used or
         # checks that registration is a tug ("plane" or "ultralight") if fleet checking is not being used
@@ -74,7 +74,7 @@ def find_tug(cursor, db):
 #        print "Next row candidate for a tug is: ", row, " Type code is: ", settings.FLOGGER_FLEET_LIST[row[3]]
         # row[3] is the aircraft registration. Check whether it's a tug or not
 #        if settings.FLOGGER_FLEET_LIST[row[3]] > 100 and settings.FLOGGER_FLEET_LIST[row[3]] < 200 :
-        if tug_fleet_check(row[3]):
+        if tug_fleet_check(row[3], settings):
             # This is a tug flight
             print "Tug flight found: ", row   
             tug_time = datetime.datetime.strptime("1900/01/01 " + row[1], '%Y/%m/%d %H:%M:%S')  # Tug takeoff time
@@ -83,14 +83,14 @@ def find_tug(cursor, db):
 #                print "Next row candidate for a glider is: ", flight
                 # Check  aircraft type in Flarm_db table is < 3 ie not powered aircraft if no fleet checking
                 # or check in fleet_list if fleet checking is being used
-                if glider_fleet_check(flight[3]):
+                if glider_fleet_check(flight[3], settings):
                     # This is a glider flight
 #                    print "Glider flight found: ", flight
                     glider_time = datetime.datetime.strptime("1900/01/01 " + flight[1], '%Y/%m/%d %H:%M:%S')    # Glider takeoff time
                     tdelta_sec = (tug_time - glider_time).total_seconds()      # Difference between 2 times in seconds, note artificially same years, same month, same day
 #                    print "Delta tug and glider take-off time is: ", tdelta_sec
-                    if abs(tdelta_sec) < settings.FLOGGER_DT_TUG_LAUNCH:                    
-                        print "Delta flight time is: ", abs(tdelta_sec), " Glider reg: ", flight[3]
+                    if int(abs(tdelta_sec)) <= int(settings.FLOGGER_DT_TUG_LAUNCH):                    
+                        print "Delta flight time is: ", abs(tdelta_sec), " Glider reg: ", flight[3], " FLOGGER_DT_TUG_LAUNCH is: ", settings.FLOGGER_DT_TUG_LAUNCH
                         # Time difference between takeoff times of glider and tug are less than this (secs), hence assume tug launched glider
                         flight_id = flight[0]
                         flight_details = flight
