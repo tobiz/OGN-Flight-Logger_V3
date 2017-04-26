@@ -117,7 +117,7 @@ FLOGGER_APRS_BASES = SuttonBnk, UKPOC, UKRUF, Linton, Riponhill
 # Flogger process control. Continue process loop if True, else terminate thread
 #
 FLOGGER_RUN = TRUE
-FLOGGER_INCLUDE_TUG_FLIGHTS = Y# If Yes display tug flights as separate lines in gui flight log
+FLOGGER_INCLUDE_TUG_FLIGHTS = N# If Yes display tug flights as separate lines in gui flight log
 
 
 

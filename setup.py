@@ -4,7 +4,7 @@ from setuptools import setup, find_packages
 # See https://medium.com/small-things-about-python/lets-talk-about-python-packaging-6d84b81f1bb5#.pjxrklmi6
 
 setup(name='OGN_Flogger',   
-      version='0.3.1.13',
+      version='0.3.1.14',
       scripts=['flogger_gui.py'],      # Command to run 
       description='Realtime logging of glider flights from Flarm data',
       long_description='Realtime logging and tracking of gliders from Flarm signals using APRS.',
@@ -33,9 +33,9 @@ setup(name='OGN_Flogger',
                 'flogger_gui',
                 'flogger_landout',
                 'flogger_OGN_db',
-                'flogger_process_log_old',
-                'flogger_process_log_V1',
+                'flogger_process_log',
                 'flogger_progress_indicator',
+                'flogger_resources_rc',
                 'flogger_settings',
                 'flogger_signals',
                 'flogger_test_YorN',
@@ -58,5 +58,7 @@ setup(name='OGN_Flogger',
                         'parse>=1.8.0',
                         'adhocracy_pysqlite>=2.6.3'
                         ],
+#      data_files=[('', ['*.png'])],  
+#      package_data={'': ['*.png']},
       include_package_data=True,
       zip_safe=False)

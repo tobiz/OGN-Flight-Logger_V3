@@ -10,7 +10,7 @@ This python program creates an SQlite db of flights from a given location and ai
 
 At the moment this is very much 'in development'
 (This is a development of V2 which got screwed up when I tried to to create a PyPi package)
-
+ 
 To install OGN Flight Logger the following prerequisites are required (see requirements.txt for specific details)
 - python-tz
 - sqlite3

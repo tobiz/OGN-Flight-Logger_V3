@@ -134,6 +134,7 @@ class MyApp(QtGui.QMainWindow, Ui_MainWindow):
         self.RunningLabel.setStyleSheet("color: red") 
         
         self.FlightLogcalendar.clicked.connect(self.floggerFlightLog)
+        self.IncludeTugsButton.toggled.connect(self.floggerIncludeTugsButton)
         
         
         # Initialise values from config file
@@ -388,6 +389,15 @@ class MyApp(QtGui.QMainWindow, Ui_MainWindow):
         if old_val == "test":
             print "Live/Test mode state is Test"
             self.LiveTestButton.setChecked(True)
+                                                       
+        old_val = self.getOldValue(self.config, "FLOGGER_INCLUDE_TUG_FLIGHTS")  
+        print "Include Tugs Button: " + old_val 
+        if old_val == "Y":
+            print "Y"
+            self.IncludeTugsButton.setChecked(True)
+        else:
+            print "N"  
+        settings.FLOGGER_FLEET_CHECK = old_val
             
             
 #        rowPosition = self.FleetListTable.rowCount()
@@ -471,6 +481,7 @@ class MyApp(QtGui.QMainWindow, Ui_MainWindow):
         self.floggerAirfieldQNHEdit2(True)
         self.floggerFlightLogFolderEdit2(True)
         self.floggerLandoutMsgModeEdit2(True)
+#        self.floggerIncludeTugFlightsEdit2(True)
         return
 
 
@@ -508,6 +519,7 @@ class MyApp(QtGui.QMainWindow, Ui_MainWindow):
         self.floggerAirfieldQNHEdit2(False)
         self.floggerFlightLogFolderEdit2(False)
         self.floggerLandoutMsgModeEdit2(False)
+#        self.floggerIncludeTugFlightsEdit2(False)
         return
                        
         
@@ -864,6 +876,16 @@ class MyApp(QtGui.QMainWindow, Ui_MainWindow):
             print "IGC Format button unchecked"
             self.FLOGGER_TRACKS_IGC = "N"
             self.editConfigField("flogger_settings_file.txt", "FLOGGER_TRACKS_IGC", "N")
+             
+    def floggerIncludeTugsButton(self):
+        print "Include Tugs Radio Button clicked" 
+        if self.IncludeTugsButton.isChecked():
+            print "Include Tugs Button checked"
+            self.FLOGGER_INCLUDE_TUG_FLIGHTS = "Y"
+        else:
+            print "Include Tugs Button unchecked"
+            self.FLOGGER_INCLUDE_TUG_FLIGHTS = "N"
+        self.editConfigField("flogger_settings_file.txt", "FLOGGER_INCLUDE_TUG_FLIGHTS", self.FLOGGER_INCLUDE_TUG_FLIGHTS)
         
             
     def floggerKeepAliveTime2(self, mode):
@@ -1164,17 +1186,16 @@ class MyApp(QtGui.QMainWindow, Ui_MainWindow):
         rowPosition = self.FlightLogTable.rowCount()
 #        row_count = 1
         for row in rows:  
-#            print "Row: ", row_count
+#            print "Row: ", row_count 
+            if settings.FLOGGER_FLEET_LIST[row[7]] > 100 and \
+                settings.FLOGGER_FLEET_LIST[row[7]] <= 200 and \
+                settings.FLOGGER_INCLUDE_TUG_FLIGHTS <> "Y":
+                print "Tug only flight so ignore tug: ", row[7]
+                continue
             self.FlightLogTable.insertRow(rowPosition)   
             if row[9] is None:
                 val = "----"
-            else: 
-#                if settings.FLOGGER_FLEET_LIST[row[9]] > 100 and \
-#                    settings.FLOGGER_FLEET_LIST[row[9]] < 200 and \
-#                    settings.FLOGGER_INCLUDE_TUG_FLIGHTS <> "Y"and \
-#                    row[7] == row[9]:
-#                       print "Tug flight so ignore tug: ", row[9]
-#                        continue
+            else:
                 val = row[9]
             self.FlightLogTable.setItem(rowPosition , 0, QtGui.QTableWidgetItem(val))           # Tug Reg
             if row[11] is None:
@@ -1196,7 +1217,6 @@ class MyApp(QtGui.QMainWindow, Ui_MainWindow):
                 val = row[10]
             self.FlightLogTable.setItem(rowPosition , 8, QtGui.QTableWidgetItem(val))           # Tug Max ALt (QFE)
             row_count = row_count + 1
-                       
 
         
         

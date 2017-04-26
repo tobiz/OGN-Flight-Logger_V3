@@ -171,7 +171,7 @@ background-color: rgb(0, 255, 0);</string>
      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Options for controlling of flight logging&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
     </property>
     <property name="currentIndex">
-     <number>6</number>
+     <number>5</number>
     </property>
     <widget class="QWidget" name="APRSConfig">
      <attribute name="title">
@@ -2432,35 +2432,35 @@ Max Alt (QFE)</string>
        </rect>
       </property>
      </widget>
-     <widget class="QGroupBox" name="LogTugsBox_2">
+     <widget class="QGroupBox" name="IncludeTugsBox">
       <property name="geometry">
        <rect>
         <x>490</x>
         <y>20</y>
-        <width>151</width>
+        <width>181</width>
         <height>61</height>
        </rect>
       </property>
       <property name="toolTip">
-       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Log Tug FLights if checked&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Include Tug FLights if checked&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
       </property>
       <property name="title">
        <string/>
       </property>
-      <widget class="QRadioButton" name="LogTugsButton_2">
+      <widget class="QRadioButton" name="IncludeTugsButton">
        <property name="geometry">
         <rect>
          <x>10</x>
          <y>20</y>
-         <width>141</width>
+         <width>161</width>
          <height>21</height>
         </rect>
        </property>
        <property name="toolTip">
-        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Log Tug FLights if checked&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Include Tug FLights if checked&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
        </property>
        <property name="text">
-        <string>Log Tug Flights</string>
+        <string>Include Tug Flights</string>
        </property>
       </widget>
      </widget>
