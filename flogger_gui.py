@@ -1187,11 +1187,14 @@ class MyApp(QtGui.QMainWindow, Ui_MainWindow):
 #        row_count = 1
         for row in rows:  
 #            print "Row: ", row_count 
-            if settings.FLOGGER_FLEET_LIST[row[7]] > 100 and \
-                settings.FLOGGER_FLEET_LIST[row[7]] <= 200 and \
-                settings.FLOGGER_INCLUDE_TUG_FLIGHTS <> "Y":
-                print "Tug only flight so ignore tug: ", row[7]
-                continue
+            try:
+                if settings.FLOGGER_FLEET_LIST[row[7]] > 100 and \
+                    settings.FLOGGER_FLEET_LIST[row[7]] <= 200 and \
+                    settings.FLOGGER_INCLUDE_TUG_FLIGHTS <> "Y":
+                    print "Tug only flight so ignore tug: ", row[7]
+                    continue
+            except KeyError:
+                print "Glider not in Fleet hence not a tug: ", row[7]                        
             self.FlightLogTable.insertRow(rowPosition)   
             if row[9] is None:
                 val = "----"
