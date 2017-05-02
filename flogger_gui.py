@@ -1151,12 +1151,17 @@ class MyApp(QtGui.QMainWindow, Ui_MainWindow):
         self.close()
         
     def floggerFlightLog(self):
+        
+        def setColourtoRow(table, rowIndex, colour):
+            for j in range(table.columnCount()):
+                table.item(rowIndex, j).setBackground(colour)
+                
         print "Flight Log calendar clicked"
         date_conv = time.strptime(str(self.FlightLogcalendar.selectedDate().toString()),"%a %b %d %Y")
 #        print time.strftime("%d/%m/%Y",date_conv)
         date = time.strftime("%y/%m/%d",date_conv)
         print date
-        date = date_conv
+#        date = date_conv
         # Get flights for date
         try:
             db = sqlite3.connect(os.path.join(path,settings.FLOGGER_DB_NAME)) 
@@ -1166,7 +1171,9 @@ class MyApp(QtGui.QMainWindow, Ui_MainWindow):
             print "Failed to connect to db"
 #        cursor.execute("SELECT flight_no, sdate, stime, etime, duration, src_callsign, max_altitude, registration, track_file_name, tug_registration, tug_altitude, tug_model  FROM flights WHERE sdate=? ORDER by sdate, stime", (str(date),))
         try:
-            cursor.execute("SELECT flight_no, sdate, stime, etime, duration, src_callsign, max_altitude, registration, track_file_name, tug_registration, tug_altitude, tug_model  FROM flights ORDER by sdate, stime")
+#            cursor.execute("SELECT flight_no, sdate, stime, etime, duration, src_callsign, max_altitude, registration, track_file_name, tug_registration, tug_altitude, tug_model  FROM flights ORDER by sdate, stime")
+            cursor.execute("SELECT flight_no, sdate, stime, etime, duration, src_callsign, max_altitude, registration, track_file_name, tug_registration, tug_altitude, tug_model  FROM flights WHERE sdate=? ORDER by sdate, stime", (date,))
+
         except:
             print "Select failed"
         rows = cursor.fetchall()
@@ -1218,7 +1225,12 @@ class MyApp(QtGui.QMainWindow, Ui_MainWindow):
                 val = "----"
             else:
                 val = row[10]
-            self.FlightLogTable.setItem(rowPosition , 8, QtGui.QTableWidgetItem(val))           # Tug Max ALt (QFE)
+            self.FlightLogTable.setItem(rowPosition , 8, QtGui.QTableWidgetItem(val))            # Tug Max ALt (QFE)
+            if row_count % 2 == 0:
+                colour = QtGui.QColor(204,255,204)      # Light green 
+            else:
+                colour = QtGui.QColor(128,255,128)      # Darker green
+            setColourtoRow(self.FlightLogTable, rowPosition, colour)     
             row_count = row_count + 1
 
         
