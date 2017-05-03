@@ -171,7 +171,7 @@ background-color: rgb(0, 255, 0);</string>
      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Options for controlling of flight logging&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
     </property>
     <property name="currentIndex">
-     <number>5</number>
+     <number>6</number>
     </property>
     <widget class="QWidget" name="APRSConfig">
      <attribute name="title">
@@ -2362,7 +2362,7 @@ background-color: rgb(0, 255, 0);</string>
        <set>QAbstractItemView::NoEditTriggers</set>
       </property>
       <property name="columnCount">
-       <number>9</number>
+       <number>10</number>
       </property>
       <column>
        <property name="text">
@@ -2419,6 +2419,12 @@ Time</string>
        <property name="text">
         <string>Tow Plane 
 Max Alt (QFE)</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>Glider 
+Max Alt</string>
        </property>
       </column>
      </widget>
