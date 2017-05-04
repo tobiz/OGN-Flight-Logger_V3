@@ -1172,7 +1172,9 @@ class MyApp(QtGui.QMainWindow, Ui_MainWindow):
 #        cursor.execute("SELECT flight_no, sdate, stime, etime, duration, src_callsign, max_altitude, registration, track_file_name, tug_registration, tug_altitude, tug_model  FROM flights WHERE sdate=? ORDER by sdate, stime", (str(date),))
         try:
 #            cursor.execute("SELECT flight_no, sdate, stime, etime, duration, src_callsign, max_altitude, registration, track_file_name, tug_registration, tug_altitude, tug_model  FROM flights ORDER by sdate, stime")
-            cursor.execute("SELECT flight_no, sdate, stime, etime, duration, src_callsign, max_altitude, registration, track_file_name, tug_registration, tug_altitude, tug_model  FROM flights WHERE sdate=? ORDER by sdate, stime", (date,))
+#            cursor.execute("SELECT flight_no, sdate, stime, etime, duration, src_callsign, max_altitude, registration, track_file_name, tug_registration, tug_altitude, tug_model  FROM flights WHERE sdate=? ORDER by sdate, stime", (date,))
+            cursor.execute("SELECT flight_no, sdate, stime, etime, duration, src_callsign, max_altitude, registration, track_file_name, tug_registration, tug_altitude, tug_model  FROM flights WHERE sdate=? ORDER BY stime DESC", (date,))
+
 
         except:
             print "Select failed"
@@ -1226,6 +1228,7 @@ class MyApp(QtGui.QMainWindow, Ui_MainWindow):
             else:
                 val = row[10]
             self.FlightLogTable.setItem(rowPosition , 8, QtGui.QTableWidgetItem(val))            # Tug Max ALt (QFE)
+            self.FlightLogTable.setItem(rowPosition , 9, QtGui.QTableWidgetItem(row[6]))
             if row_count % 2 == 0:
                 colour = QtGui.QColor(204,255,204)      # Light green 
             else:
