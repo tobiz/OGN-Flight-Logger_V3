@@ -134,7 +134,7 @@ class MyApp(QtGui.QMainWindow, Ui_MainWindow):
         self.Add2FleetCancelButton.clicked.connect(self.floggerAdd2FleetCancelButton)
         
         self.DelFromFleetOkButton.clicked.connect(self.floggerDelFromFleetOkButton)
-        self.RunningLabel.setStyleSheet("color: red") 
+        self.RunningLabel.setStyleSheet("color: red")  
         
         self.FlightLogcalendar.clicked.connect(self.floggerFlightLog)
         self.IncludeTugsButton.toggled.connect(self.floggerIncludeTugsButton)

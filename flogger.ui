@@ -2452,9 +2452,9 @@ Max Alt</string>
      <widget class="QGroupBox" name="IncludeTugsBox">
       <property name="geometry">
        <rect>
-        <x>490</x>
+        <x>480</x>
         <y>20</y>
-        <width>181</width>
+        <width>191</width>
         <height>61</height>
        </rect>
       </property>
