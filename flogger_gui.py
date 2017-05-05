@@ -12,6 +12,9 @@ from configobj import ConfigObj
 from flogger3 import *
 from flogger_settings import * 
 from LatLon import *
+import gpxpy
+import matplotlib.pyplot as plt
+import mplleaflet
 #from uic import *
 #import resources
 
@@ -135,6 +138,11 @@ class MyApp(QtGui.QMainWindow, Ui_MainWindow):
         
         self.FlightLogcalendar.clicked.connect(self.floggerFlightLog)
         self.IncludeTugsButton.toggled.connect(self.floggerIncludeTugsButton)
+        self.FlightLogTable.doubleClicked.connect(self.floggerFlightLogDoubleClicked)
+        self.FlightLogTable.verticalHeader().sectionClicked.connect(self.floggerFlightLogDoubleClicked)  
+        self.FlightLogTable.setColumnHidden(10, True)
+
+
         
         
         # Initialise values from config file
@@ -1169,13 +1177,8 @@ class MyApp(QtGui.QMainWindow, Ui_MainWindow):
             cursor = db.cursor()
         except:
             print "Failed to connect to db"
-#        cursor.execute("SELECT flight_no, sdate, stime, etime, duration, src_callsign, max_altitude, registration, track_file_name, tug_registration, tug_altitude, tug_model  FROM flights WHERE sdate=? ORDER by sdate, stime", (str(date),))
         try:
-#            cursor.execute("SELECT flight_no, sdate, stime, etime, duration, src_callsign, max_altitude, registration, track_file_name, tug_registration, tug_altitude, tug_model  FROM flights ORDER by sdate, stime")
-#            cursor.execute("SELECT flight_no, sdate, stime, etime, duration, src_callsign, max_altitude, registration, track_file_name, tug_registration, tug_altitude, tug_model  FROM flights WHERE sdate=? ORDER by sdate, stime", (date,))
             cursor.execute("SELECT flight_no, sdate, stime, etime, duration, src_callsign, max_altitude, registration, track_file_name, tug_registration, tug_altitude, tug_model  FROM flights WHERE sdate=? ORDER BY stime DESC", (date,))
-
-
         except:
             print "Select failed"
         rows = cursor.fetchall()
@@ -1193,6 +1196,7 @@ class MyApp(QtGui.QMainWindow, Ui_MainWindow):
         self.FlightLogTable.clearContents()
         self.FlightLogTable.setRowCount(0)
         rowPosition = self.FlightLogTable.rowCount()
+        self.FlightLogTable.setColumnHidden(10, True)
 #        row_count = 1
         for row in rows:  
 #            print "Row: ", row_count 
@@ -1229,6 +1233,8 @@ class MyApp(QtGui.QMainWindow, Ui_MainWindow):
                 val = row[10]
             self.FlightLogTable.setItem(rowPosition , 8, QtGui.QTableWidgetItem(val))            # Tug Max ALt (QFE)
             self.FlightLogTable.setItem(rowPosition , 9, QtGui.QTableWidgetItem(row[6]))
+            self.FlightLogTable.setItem(rowPosition , 10, QtGui.QTableWidgetItem(row[8]))
+
             if row_count % 2 == 0:
                 colour = QtGui.QColor(204,255,204)      # Light green 
             else:
@@ -1236,6 +1242,31 @@ class MyApp(QtGui.QMainWindow, Ui_MainWindow):
             setColourtoRow(self.FlightLogTable, rowPosition, colour)     
             row_count = row_count + 1
 
+    def floggerFlightLogDoubleClicked(self):
+        print "Double Clicked called"
+        self.FlightLogTable.setColumnHidden(10, False)
+        index = self.FlightLogTable.selectedIndexes()
+        
+        print 'selected item index found at %s with data: %s' % (index[10].row(), index[10].data().toString())
+        track_file = index[10].data().toString()
+        self.FlightLogTable.setColumnHidden(10, True)    
+        gpx_file = open(track_file, 'r')
+        gpx = gpxpy.parse(gpx_file)       
+        lat = []
+        lon = []   
+        for track in gpx.tracks:
+            for segment in track.segments:
+                for point in segment.points:
+                    lat.append(point.latitude)
+                    lon.append(point.longitude)
+        #fig = plt.figure(facecolor = '0.05')
+        fig = plt.figure(facecolor = 'w')
+        ax = plt.Axes(fig, [0., 0., 1., 1.], )
+        ax.set_aspect('equal')
+        ax.set_axis_off()
+        fig.add_axes(ax)
+        plt.plot(lon, lat, color = 'black', lw = 1.0, alpha = 0.8)
+        mplleaflet.show()
         
         
         
