@@ -240,7 +240,21 @@ class MyApp(QtGui.QMainWindow, Ui_MainWindow):
             self.FleetCheckRadioButton.setChecked(True)
         else:
             print "N"   
+            self.FleetCheckRadioButton.setChecked(False)
         settings.FLOGGER_FLEET_CHECK = old_val
+                          
+        old_val = self.getOldValue(self.config, "FLOGGER_LOG_TUGS")
+        print "Log Tugs Button: ", old_val 
+        if old_val == "Y":
+            print "Y"
+            self.LogTugsButton.setChecked(True)
+        else:
+            print "N"   
+            self.LogTugsButton.setChecked(False)
+        settings.FLOGGER_FLEET_CHECK = old_val
+#            self.LogTugsButton.setChecked(True)
+#            settings.FLOGGER_LOG_TUGS = "Y" 
+#        settings.FLOGGER_LOG_TUGS = old_val
         
         old_val = self.getOldValue(self.config, "FLOGGER_TRACKS")
         print "Record Tracks: " + old_val 
