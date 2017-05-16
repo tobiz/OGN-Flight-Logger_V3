@@ -5,6 +5,8 @@
 # it won't be included.  
 #
 # Run at start of each day? 
+#
+# Access to OGN Flarm db: http://ddb.glidernet.org/download/?t=1
 #-----------------------------------------------------------------
 #
 import string
@@ -96,20 +98,45 @@ def ogndb (ognurl, cursor, flarmdb, flarm_data, settings):
         else:
             airport = "OTHER" 
 #        if int(nf7) > 2:
-        if int(nf7) > 3:
+#        if int(nf7) > 3:
             # Type 2 is 'Plane', Type 3 is 'Ultralight'
 #            print "Ignore Aircraft type is: ", nf7
-            continue
-        elif "n" in settings.FLOGGER_LOG_TUGS or "N" in settings.FLOGGER_LOG_TUGS and int(nf7) == 2: 
+#            continue
+#        elif "n" in settings.FLOGGER_LOG_TUGS or "N" in settings.FLOGGER_LOG_TUGS and int(nf7) == 2: 
 #                print "Ignore tugs: ", nf7
-                continue
+#                continue
+            
+        Registration = nf3
+        aircraft_type = 0
+        try:
+            aircraft_type_val = settings.FLOGGER_FLEET_LIST[Registration]
+            if aircraft_type_val >= 1 and aircraft_type_val < 100:
+                aircraft_type = 1
+            if aircraft_type_val >= 100 and aircraft_type_val < 200:
+                aircraft_type = 2
+            if aircraft_type_val >= 200 and aircraft_type_val < 300:
+                aircraft_type = 1  
+#            print "Fleet list aircraft: ", Registration, " Type: ", str(aircraft_type)             
+        except:
+#            pass
+            aircraft_type = nf7
+#            print "Aircraft not in fleet list: ", Registration, " Type: ", str(aircraft_type)
+#            if type(Registration) == 'ascii':
+#                pass  
+#            else:
+#                print "Non ascii in: ", Registration
+#                Registration = Registration.encode('ascii','ignore')
+#                print "After encode: ", Registration
+        aircraft_type = str(aircraft_type) 
+         
         try:
             cursor.execute('''INSERT INTO flarm_db(type, flarm_id, airport, aircraft_model, registration, aircraft_type)
                                VALUES(:type, :flarm_id, :airport, :aircraft_model, :registration, :aircraft_type)''',
 #                                {'type': nf0, 'flarm_id': nf1, 'airport': settings.FLOGGER_AIRFIELD_NAME, 'type': nf0, 'registration': nf3})
-                                {'type': nf0, 'flarm_id': nf1, 'airport': airport, 'aircraft_model':  nf2, 'registration': nf3, 'aircraft_type': nf7})
+#                                {'type': nf0, 'flarm_id': nf1, 'airport': airport, 'aircraft_model':  nf2, 'registration': nf3, 'aircraft_type': nf7})
+                                {'type': nf0, 'flarm_id': nf1, 'airport': airport, 'aircraft_model':  nf2, 'registration': nf3, 'aircraft_type': aircraft_type})
         except Exception as e:
-           print "Flarm_db insert failed. Reason: %s " % (e)
+           print "Flarm_db insert failed. Reason: %s Aircraft: %s Flarm_ID: %s" % (e, Registration, nf1)
         i += 1
     flarmdb.commit()
     return True
