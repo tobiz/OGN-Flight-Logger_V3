@@ -39,7 +39,7 @@ def find_tug(cursor, db, settings):
                 if settings.FLOGGER_FLEET_LIST[registration] <= 100:    # Gliders are 0-99
                     return True
         except KeyError: 
-            print "Not in local fleet: ", registration
+#            print "Not in local fleet: ", registration
             # It's not a Motor Glider in specified fleet   
 #            if settings.FLOGGER_FLEET_CHECK == "N" or settings.FLOGGER_FLEET_CHECK == "n":  
             if not test_YorN(settings.FLOGGER_FLEET_CHECK):
@@ -59,7 +59,7 @@ def find_tug(cursor, db, settings):
         if not test_YorN(settings.FLOGGER_FLEET_CHECK):
                     cursor.execute('''SELECT aircraft_type FROM flarm_db WHERE registration=?''', (registration,))
                     aircraft_type = cursor.fetchone()
-                    print "Tug Fleet check. Registration: ", registration, " Type: ",  aircraft_type[0]
+#                    print "Tug Fleet check. Registration: ", registration, " Type: ",  aircraft_type[0]
                     if int(aircraft_type[0]) == 2 or int(aircraft_type[0]) == 3 :
                         return True
         else:

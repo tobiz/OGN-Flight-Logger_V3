@@ -15,6 +15,7 @@ from LatLon import *
 import gpxpy
 import matplotlib.pyplot as plt
 import mplleaflet
+from flogger_splash import *
 #from uic import *
 #import resources
 
@@ -1369,6 +1370,24 @@ if __name__ == "__main__":
 # Old code end
 #    
 
+#
+# Movie splash start
+#
+#    gif = "/path/to/image.gif"
+#    app = QApplication(sys.argv)
+#    import requests
+#    app = QApplication(sys.argv)
+#    r = requests.get("http://flightlog.glidernet.org/pict/ogn-logo-ani.gif")
+#    gif  = r.content
+#    print gif
+#    print "Splash"
+#    player = ImagePlayer(gif, "was")
+#    player.show()
+
+#
+# Movie splash end
+#
+
 
 #
 # Splash code start
@@ -1378,15 +1397,25 @@ if __name__ == "__main__":
     path = os.path.dirname(os.path.abspath(__file__))
     # Create and display the splash screen
 #    splash_pix = QPixmap('splash_loading.png')
-    try:
+##    try:
 #        splash_pix = QPixmap(os.path.join(path,"flogger_splash"))
-        splash_pix = QPixmap(os.path.join(path," flogger_icon-03.png"))
-        splash = QSplashScreen(splash_pix, Qt.WindowStaysOnTopHint)
-        splash.setMask(splash_pix.mask())
-        splash.show()
-    except:
-        print "Splash screen failed"
-    app.processEvents()
+    splash_pix = QPixmap(os.path.join(path," flogger_icon-03.png"))
+    splash = QSplashScreen(splash_pix, Qt.WindowStaysOnTopHint)
+#        splash.setMask(splash_pix.mask())
+#    from time import time, sleep
+#    from gui import MainWindow
+#    splash.show()
+#    start = time() 
+#    while time() - start < 1:
+#        sleep(0.001)
+#        app.processEvents()
+#        splash.show()
+#    splash_win = MainWindow()
+#        splash.finish(win)
+#    splash_win.show()
+##    except:
+##        print "Splash screen failed"
+#    app.processEvents()
     # 
     # This section takes time to run building the ui and resources files from flogger.ui 
     #
@@ -1402,6 +1431,8 @@ if __name__ == "__main__":
     except:
         print "failed to compile resources"
         exit()
+    
+#    splash.finish(splash_win)
     Ui_MainWindow, base_class = uic.loadUiType(os.path.join(path,"flogger.ui"))
     Ui_AboutWindow, base_class = uic.loadUiType(os.path.join(path,"flogger_about.ui"))
     Ui_HelpWindow, base_class = uic.loadUiType(os.path.join(path,"flogger_help.ui"))
@@ -1413,7 +1444,6 @@ if __name__ == "__main__":
     
     window = MyApp()
     window.show()
-    splash.finish(window)
     print "Splash screen end"
     sys.exit(app.exec_())
     

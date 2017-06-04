@@ -37,12 +37,12 @@
 # APRS_SERVER_PORT = 14580
 APRS_SERVER_HOST = aprs.glidernet.org
 APRS_SERVER_PORT = 14580
-#
+# 
 # Please get your own Username and Passcode from http://www.george-smart.co.uk/wiki/APRS_Callpass
 # DO NOT USE THE VALUES IN THIS FILE AS IT WILL STOP A PREVIOUS INVOCATION WORKING CORRECTLY
 #
-APRS_USER = OGNFLOG2# Username
-APRS_PASSCODE = 1234# Passcode. See http://www.george-smart.co.uk/wiki/APRS_Callpass 
+APRS_USER = OGNFLOG3# Username
+APRS_PASSCODE = 31135# Passcode. See http://www.george-smart.co.uk/wiki/APRS_Callpass 
 #
 # Check that APRS_USER and APRS_PASSCODE are set
 #
@@ -83,7 +83,7 @@ FLOGGER_VER = 0.3.1# Flogger version number
 FLOGGER_RAD = 50# APRS radius in km from base station in AIRFIELD_DETAILS
 FLOGGER_FLIGHTS_LOG = flight_logs# Folder for csv file of daily flights record  
 FLOGGER_DATA_RETENTION = 3# Number of days to keep .csv files, ie delete, if "0" keep all files
-FLOGGER_LOG_TUGS = N# Don't log tug flights if "N"
+FLOGGER_LOG_TUGS = Y# Don't log tug flights if "N"
 FLOGGER_TRACKS_IGC = N# Dump flight tracks in IGC format if "Y" else no
 FLOGGER_LOG_TIME_DELTA = -1# Number of hours before sunset to start processing flight log
 FLOGGER_SMTP_SERVER_URL = smtp.metronet.co.uk# URL of smtp server for sending email
@@ -92,8 +92,8 @@ FLOGGER_SMTP_TX = pjrobinson@metronet.co.uk# Flight log sender email addrs
 FLOGGER_SMTP_RX = pjrobinson@metronet.co.uk# Flight log receiver email addrs 
 FLOGGER_AIRFIELD_LIMIT = 2000# Distance from airfield centre considered a 'Land Out' in metres
 FLOGGER_LANDOUT_MODE = email# Send land out msg by "email', SMS, or "" don't send
-FLOGGER_TAKEOFF_EMAIL = Y# Send email for each take off if Yes else no
-FLOGGER_LANDING_EMAIL = Y# Send email for each landing if Yes else no
+FLOGGER_TAKEOFF_EMAIL = N# Send email for each take off if Yes else no
+FLOGGER_LANDING_EMAIL = N# Send email for each landing if Yes else no
 FLOGGER_LOG_LAUNCH_FAILURES = N# Log launch failures, ie below min time & min height
 FLOGGER_LOCATION_HORIZON = -0:34# Adjustments for angle to horizon for sunset
 FLOGGER_V_TAKEOFF_MIN = 10# Min ground speed considered as takenoff. ogn-live is (55Km/h)

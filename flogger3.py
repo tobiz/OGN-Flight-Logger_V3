@@ -518,7 +518,7 @@ class flogger3(MyApp):
             else:
                 print "Not found: ", folder
                 return
-            print "delete flist: ", flist
+##            print "delete flist: ", flist
             for f in flist:
         #        print "Pathname is: ", os.path.join(folder, f), " st_mtime is: ", os.stat(os.path.join(folder, f)).st_mtime
                 full_file = os.path.join(folder, f)
@@ -667,8 +667,8 @@ class flogger3(MyApp):
         cursor = db.cursor()                            # Get a cursor object
 #        f = open(settings.FLOGGER_DB_SCHEMA, 'rt')      # Open the db schema file for reading
         f = open(settings.FLOGGER_DB_SCHEMA, 'rt')      # Open the db schema file for reading
-        schema = f.read()
-##        cursor.executescript(schema)                    # Build flogger db from schema
+        schema = f.read()                               
+        cursor.executescript(schema)                 ###   # Build flogger db from schema
         print "End of building db: ", settings.FLOGGER_DB_NAME, " using schema: ", settings.FLOGGER_DB_SCHEMA
         
         #    
