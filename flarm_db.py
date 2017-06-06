@@ -7,6 +7,10 @@
 # The function reads this format into its own local file converting it to
 # character form (ie 2 pairs of hex digits become 1 character) 
 # before creating the database of records.
+#
+# Note:
+# Flarmnet database URL is:    http://www.flarmnet.org/files/data.fln
+# OGN database URL is:         http://ddb.glidernet.org/download/?t=1
 #-----------------------------------------------------------------
 #
 import string
@@ -96,17 +100,40 @@ def flarmdb (flarmnet, cursor, database, flarm_data, settings):
 #                Airport = str(string[27:47]).decode("iso-8858-15").encode("iso-8859-15")
                 Airport = Airport.rstrip()
             except:
-                print "Code error ", str(string[27:47])
+                print "Code error ", str(string[27:47]), " Row: ", i
             Type = str(string[48:69]).decode("iso-8859-15").encode("utf-8")
             Registration = str(string[69:75]).decode("iso-8859-15").encode("utf-8")
             Radio = str(string[79:86]).decode("iso-8859-15").encode("utf-8")
     #        print "Line: ", i-1, " ID: ", ID,  " Airport: ", Airport, " Type: ", Type, " Registration: ", Registration,  " Radio: ", Radio
     #        row = "%s__%s__%s__%s__%s\n" % (ID, Airport, Type, Registration, Radio)
     #        flm_txt.write(row)
+
+    #
+    #        Start Add aircraft type for tug logging
+    #
+            aircraft_type = 0
             try:
-                cursor.execute('''INSERT INTO flarm_db(flarm_id, airport, type, registration, radio)
-                               VALUES(:flarm_id, :airport, :type, :registration, :radio)''',
-                                {'flarm_id': ID, 'airport': Airport, 'type': Type, 'registration': Registration, 'radio': Radio})
+                aircraft_type_val = settings.FLOGGER_FLEET_LIST[Registration]
+                if aircraft_type_val >= 1 and aircraft_type_val < 100:
+                    aircraft_type = 1
+                if aircraft_type_val >= 100 and aircraft_type_val < 200:
+                    aircraft_type = 2
+                if aircraft_type_val >= 200 and aircraft_type_val < 300:
+                    aircraft_type = 1  
+    #            print "Fleet list aircraft: ", Registration, " Type: ", str(aircraft_type)             
+            except:
+                aircraft_type = 1    # Since it's not in the fleet list can't be a tug hence assume it's a glider
+    #            print "Aircraft not in fleet list: ", Registration, " Type: ", str(aircraft_type)
+            aircraft_type = str(aircraft_type)         
+            
+    #
+    #        End Add aircraft type for tug logging
+    #
+    
+            try:
+                cursor.execute('''INSERT INTO flarm_db(flarm_id, airport, type, registration, radio, aircraft_type)
+                               VALUES(:flarm_id, :airport, :type, :registration, :radio, :aircraft_type)''',
+                                {'flarm_id': ID, 'airport': Airport, 'type': Type, 'registration': Registration, 'radio': Radio, 'aircraft_type': aircraft_type})
     #            dbflarm.commit()
             except :
                print "Flarm_db insert failed ", Airport
