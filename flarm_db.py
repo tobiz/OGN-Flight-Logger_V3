@@ -124,12 +124,10 @@ def flarmdb (flarmnet, cursor, database, flarm_data, settings):
             except:
                 aircraft_type = 1    # Since it's not in the fleet list can't be a tug hence assume it's a glider
     #            print "Aircraft not in fleet list: ", Registration, " Type: ", str(aircraft_type)
-            aircraft_type = str(aircraft_type)         
-            
+            aircraft_type = str(aircraft_type)              
     #
     #        End Add aircraft type for tug logging
     #
-    
             try:
                 cursor.execute('''INSERT INTO flarm_db(flarm_id, airport, type, registration, radio, aircraft_type)
                                VALUES(:flarm_id, :airport, :type, :registration, :radio, :aircraft_type)''',
