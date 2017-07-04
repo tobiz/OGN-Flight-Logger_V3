@@ -92,6 +92,7 @@ def flarmdb (flarmnet, cursor, database, flarm_data, settings):
                 c = chr(int(line[j:j + 2], 16))
                 string = string + c
             i = i + 1
+#            print "FlarmBD line: ", string
     #        v.decode("iso-8859-15").encode("utf-8")
             ID = str(string[0:6]).decode("iso-8859-15").encode("utf-8")
     #        Airport = str(string[27:47]).decode("iso-8859-15").encode("utf-8", errors="replace")
@@ -128,10 +129,17 @@ def flarmdb (flarmnet, cursor, database, flarm_data, settings):
     #
     #        End Add aircraft type for tug logging
     #
+
+            # Note 'type': "F" is used as it means: Flarm device. Since this is taken from the Flarmnet db seems reasonable default
+            # since no value is supplied, to be compatible with OGN db
             try:
-                cursor.execute('''INSERT INTO flarm_db(flarm_id, airport, type, registration, radio, aircraft_type)
-                               VALUES(:flarm_id, :airport, :type, :registration, :radio, :aircraft_type)''',
-                                {'flarm_id': ID, 'airport': Airport, 'type': Type, 'registration': Registration, 'radio': Radio, 'aircraft_type': aircraft_type})
+                    cursor.execute('''INSERT INTO flarm_db(type, flarm_id, airport, aircraft_model, registration, aircraft_type)
+                                       VALUES(:type, :flarm_id, :airport, :aircraft_model, :registration, :aircraft_type)''',
+                                        {'type': "F", 'flarm_id': ID, 'airport': Airport, 'aircraft_model':  Type, 'registration': Registration, 'aircraft_type': aircraft_type})
+#            try:
+#                cursor.execute('''INSERT INTO flarm_db(flarm_id, airport, type, registration, radio, aircraft_type)
+#                               VALUES(:flarm_id, :airport, :type, :registration, :radio, :aircraft_type)''',
+#                                {'flarm_id': ID, 'airport': Airport, 'type': Type, 'registration': Registration, 'radio': Radio, 'aircraft_type': aircraft_type})
     #            dbflarm.commit()
             except :
                print "Flarm_db insert failed ", Airport

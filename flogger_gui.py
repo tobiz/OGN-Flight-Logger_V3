@@ -1239,7 +1239,12 @@ class MyApp(QtGui.QMainWindow, Ui_MainWindow):
             self.FlightLogTable.setItem(rowPosition , 3, QtGui.QTableWidgetItem(row[7][3:]))    # CN
             cursor.execute("SELECT aircraft_model FROM flarm_db WHERE registration = ?", (row[7],))
             plane_type = cursor.fetchone()
-            self.FlightLogTable.setItem(rowPosition , 4, QtGui.QTableWidgetItem(plane_type[0])) # Plane Type 
+            if plane_type[0] == None:
+                print "Aircraft_model not found, try Type for Registration : ", row[7]
+                cursor.execute("SELECT type FROM flarm_db WHERE registration = ?", (row[7],))   
+                plane_type = cursor.fetchone()
+            print "Plane Type/model is: ", plane_type[0]
+            self.FlightLogTable.setItem(rowPosition , 4, QtGui.QTableWidgetItem(plane_type[0])) # Plane Type/Model 
             self.FlightLogTable.setItem(rowPosition , 5, QtGui.QTableWidgetItem(row[2]))        # Glider Takeoff TIme
             self.FlightLogTable.setItem(rowPosition , 6, QtGui.QTableWidgetItem(row[3]))        # Glider Landing Time
             self.FlightLogTable.setItem(rowPosition , 7, QtGui.QTableWidgetItem(row[4]))        # Glider Flight Time

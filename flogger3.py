@@ -668,7 +668,7 @@ class flogger3(MyApp):
 #        f = open(settings.FLOGGER_DB_SCHEMA, 'rt')      # Open the db schema file for reading
         f = open(settings.FLOGGER_DB_SCHEMA, 'rt')      # Open the db schema file for reading
         schema = f.read()                               
-##        cursor.executescript(schema)                                
+        cursor.executescript(schema)                                
 ##      cursor.executescript(schema)                ###   # Build flogger db from schema
         print "End of building db: ", settings.FLOGGER_DB_NAME, " using schema: ", settings.FLOGGER_DB_SCHEMA
         

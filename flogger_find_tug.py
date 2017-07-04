@@ -105,7 +105,12 @@ def find_tug(cursor, db, settings):
             print "Single glider flight found. Glider details: ", flight_details, " Tug details: ", row, " Registration: ", row[3]
             tug_reg = row[3]
             cursor.execute('''SELECT aircraft_model FROM flarm_db WHERE registration=? ''', (tug_reg,))
-            tug_model = cursor.fetchone()
+            tug_model = cursor.fetchone()            
+            if tug_model[0] == None:
+                print "Aircraft_model not found, try Type for Registration : ", tug_reg
+                cursor.execute("SELECT type FROM flarm_db WHERE registration = ?", (tug_reg,))   
+                tug_model = cursor.fetchone()
+            print "Plane Type/model is: ", tug_model[0]
             try:
                 cursor.execute('''UPDATE flights SET tug_registration=?, tug_altitude=?, tug_model=? WHERE id=?''', (row[3], row[4], tug_model[0], flight_id))
                 print "Tug model added to flight_id: ", flight_id, " Model: ", tug_model 
