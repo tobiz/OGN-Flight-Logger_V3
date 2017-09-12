@@ -337,6 +337,8 @@ class flogger3(MyApp):
                     if settings.FLOGGER_FLEET_LIST[reg] > 100 and settings.FLOGGER_FLEET_LIST[reg] < 200 and (not test_YorN(settings.FLOGGER_LOG_TUGS)):
                         print "Don't log tug: %s" % reg
                         return False
+                    else:
+                        print "Tug flight: ", reg
             # At least 1 match for the callsign has been found
             return True
         
