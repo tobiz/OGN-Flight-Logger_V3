@@ -39,10 +39,12 @@ setup(name='OGN_Flogger',
                 'flogger_settings',
                 'flogger_signals',
                 'flogger_test_YorN',
-                'flogger_ui'                                                                                        ,
-                'gpxTracks'                                                                                         ,
+                'flogger_ui',
+                'gpxTracks',
                 'libfap',
-                'open_db'],
+                'open_db'
+                ],
+                
       install_requires=[
                         'aerofiles>=0.3',
                         'configobj>=4.7.2',
