@@ -107,3 +107,5 @@ send an SMS msg but has not been tested.
 20170426 - OGN-Flogger is now available on PyPi. Please note the sip/pyqt4 issue above when trying to install.
 
 20170505 - Added facility to display flight tracks on OpenStreetMap map by double clicking on selected flight in flight log table.
+
+20180114 - To run the gui version call "flogger_gui.py".
