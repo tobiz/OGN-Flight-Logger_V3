@@ -45,6 +45,7 @@ def flarmdb (flarmnet, cursor, database, flarm_data, settings):
         print "Failed to connect to flarmnet db, exit"
         exit()
         
+    print "flarm_data is: ", flarm_data    
     data = r.content    
 #    flm = open("flarm_data", "w")
 #    flm_txt = open("flarm_data_txt", "w")  
@@ -68,7 +69,7 @@ def flarmdb (flarmnet, cursor, database, flarm_data, settings):
     print "First line from FlarmNet data is : ", val
     
     try:
-        print "Create flarm_db table"
+        print "flarm_db.py: Create flarm_db table"
         cursor.execute('''CREATE TABLE IF NOT EXISTS
                             flarm_db(id INTEGER PRIMARY KEY, flarm_id TEXT, airport STRING, type TEXT, registration TEXT, radio TEXT)''')
         print "flarm_db table created"

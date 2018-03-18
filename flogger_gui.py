@@ -17,6 +17,7 @@ import matplotlib.pyplot as plt
 import mplleaflet
 from flogger_splash import *
 from flogger_moviesplash import *
+#import flogger_resources_rc
 #from uic import *
 #import resources
 
@@ -26,11 +27,15 @@ from flogger_moviesplash import *
 # get the directory of this script
 path = os.path.dirname(os.path.abspath(__file__))
 try:
+    print "Directory name: ", path
     pyrcc4_cmd = "pyrcc4 -o "
     pyrcc4_out = os.path.join(path,"flogger_resources_rc.py")
+#    pyrcc4_out = os.path.join(path,flogger_resources)
     pyrcc4_in = os.path.join(path,"flogger_resources.qrc")
     pyrcc4_cmd = "pyrcc4 -o %s %s" % (pyrcc4_out, pyrcc4_in)
     os.system(pyrcc4_cmd)
+#    import flogger_resources_rc                                 # pyrcc4 makes the file, then it can be imported
+    print "PyQt4 flogger_resources_rc.py built and imported"
 except:
     print "failed to compile resources"
     exit()

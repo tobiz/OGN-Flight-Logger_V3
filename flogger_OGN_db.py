@@ -13,9 +13,10 @@ import string
 import requests
 import sqlite3
 import time
-#import flogger_settings
-import flogger_OGN_db 
+import flogger_settings
+#import flogger_OGN_db 
 # import unicodedata
+
 
 
 def ogndb (ognurl, cursor, flarmdb, flarm_data, settings):
@@ -46,7 +47,7 @@ def ogndb (ognurl, cursor, flarmdb, flarm_data, settings):
     #-----------------------------------------------------------------
     #  
     try:
-        print "Create flarm_db table"
+        print "flogger_OGN_db.py: Create flarm_db table"
         cursor.execute('''CREATE TABLE IF NOT EXISTS
                             flarm_db(id INTEGER PRIMARY KEY, type TEXT, flarm_id TEXT, airport STRING, aircraft_model TEXT, registration TEXT, radio TEXT, aircraft_type TEXT)''')
         print "flarm_db table created"
@@ -56,16 +57,18 @@ def ogndb (ognurl, cursor, flarmdb, flarm_data, settings):
 #        dbflarm.rollback()
 #        raise e 
     try:
-        # OGN flarm db is at "http://ddb.glidernet.org/download"
+        print "OGN flarm db is at http://ddb.glidernet.org/download"
         ogn_db = settings.FLOGGER_OGN_DB_URL
+        print "settings.FLOGGER_OGN_DB_URL is: ", settings.FLOGGER_OGN_DB_URL
         r = requests.get(ogn_db)
+        print "requests.get(ogn_db) with: ", settings.FLOGGER_OGN_DB_URL
     except Exception as e:
         print "Failed to connect to OGN db, reason: %s. Exit" % (e)
-        exit()
+#        exit()
     print "OGN db accessed"   
     
     data = r.content  
-#    print "OGN content is: ", data[0], data[1], data[2]
+    print "OGN content is: ", data[0], data[1], data[2]
     lines = data.split("\n")
 #    print "OGN split is: ", lines
     i = 1

@@ -14,4 +14,11 @@
 	<natures>
 		<nature>org.python.pydev.pythonNature</nature>
 	</natures>
+	<linkedResources>
+		<link>
+			<name>flogger_gui_01.spec</name>
+			<type>1</type>
+			<location>/home/pjr/git_neon.2/OGN-Flight-Logger_V3.2/flogger_gui_01.spec</location>
+		</link>
+	</linkedResources>
 </projectDescription>

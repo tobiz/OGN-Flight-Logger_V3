@@ -175,7 +175,7 @@ class flogger3(MyApp):
     #    def flogger_start(self, settings):
 #    def flogger_start(self, settings):
     def flogger_start(self, local_settings):
-        print "flogger_start called"
+        print "flogger_start called\n"
         settings = local_settings
 #        print "settings.FLOGGER_SMTP_SERVER_URL: ", settings.FLOGGER_SMTP_SERVER_URL
 #        print "settings.FLOGGER_SMTP_SERVER_PORT: ", settings.FLOGGER_SMTP_SERVER_PORT
@@ -592,14 +592,18 @@ class flogger3(MyApp):
         # User and passcode now mandatory positional parameters
         # Mode is an optional positional parameter, default is "live"
         #
-        
-        parser = argparse.ArgumentParser()
-        parser.add_argument("--user", help="user and passcode must be supplied, see http://www.george-smart.co.uk/wiki/APRS_Callpass for how to obtain")
-        parser.add_argument("--passcode", help="user and passcode must be supplied", type=int)
-        parser.add_argument("--mode", help="mode is test or live, test modifies behaviour to add output for testing", default="test")
-        parser.add_argument('-s', '--smtp', help="URL of smtp server")
-        parser.add_argument('-t', '--tx', help="email address of sender")
-        parser.add_argument('-r', '--rx', help="email address of receiver")
+#        try:
+#            parser = argparse.ArgumentParser()
+#            parser.add_argument("--user", help="user and passcode must be supplied, see http://www.george-smart.co.uk/wiki/APRS_Callpass for how to obtain")
+#            parser.add_argument("--passcode", help="user and passcode must be supplied", type=int)
+#            parser.add_argument("--mode", help="mode is test or live, test modifies behaviour to add output for testing", default="test")
+#            parser.add_argument('-s', '--smtp', help="URL of smtp server")
+#            parser.add_argument('-t', '--tx', help="email address of sender")
+#            parser.add_argument('-r', '--rx', help="email address of receiver")
+#        except:
+#            print "Parsing cmd line args failed"
+            
+        print "Cmd line args parsed"
         
         try:
             args = parser.parse_args()
@@ -694,9 +698,13 @@ class flogger3(MyApp):
         
         if settings.FLOGGER_AIRFIELD_DETAILS <> "":
             loc = get_coords(settings.FLOGGER_AIRFIELD_DETAILS)
-            while loc[2] == None:
-                print "get_coords returned loc[2} as None, retry"
+            i = 1
+            while loc == False and i<=10:
+#            while loc[2] == None:
+#                print "get_coords returned loc[2] as None, retry", " Retry count get_coords: ", i
+                print "get_coords returned False, retry", " Retry count get_coords: ", i
                 loc = get_coords(settings.FLOGGER_AIRFIELD_DETAILS)
+                i = i + 1
                 
             if loc == False:
                 if settings.FLOGGER_LATITUDE <> "" and settings.FLOGGER_LONGITUDE <> "" and settings.FLOGGER_QNH >=0 :
