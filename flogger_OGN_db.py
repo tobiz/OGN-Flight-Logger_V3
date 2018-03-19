@@ -68,7 +68,7 @@ def ogndb (ognurl, cursor, flarmdb, flarm_data, settings):
     print "OGN db accessed"   
     
     data = r.content  
-    print "OGN content is: ", data[0], data[1], data[2]
+#    print "OGN content is: ", data[0], data[1], data[2]
     lines = data.split("\n")
 #    print "OGN split is: ", lines
     i = 1

@@ -1,5 +1,5 @@
-import sys, time
-from PyQt4.QtCore import Qt, QTimer
+#import sys, time
+#from PyQt4.QtCore import Qt, QTimer
 from PyQt4.QtGui import *
     
 class MovieSplashScreen(QSplashScreen):

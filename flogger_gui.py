@@ -17,15 +17,15 @@ import matplotlib.pyplot as plt
 import mplleaflet
 from flogger_splash import *
 from flogger_moviesplash import *
-#import flogger_resources_rc
-#from uic import *
-#import resources
+from importlib import import_module
 
 
 # 20170311 
 
 # get the directory of this script
 path = os.path.dirname(os.path.abspath(__file__))
+#path = "/home/pjr/git_neon.2/OGN-Flight-Logger_V3.2"
+print "Current path is: ", path
 try:
     print "Directory name: ", path
     pyrcc4_cmd = "pyrcc4 -o "
@@ -34,8 +34,16 @@ try:
     pyrcc4_in = os.path.join(path,"flogger_resources.qrc")
     pyrcc4_cmd = "pyrcc4 -o %s %s" % (pyrcc4_out, pyrcc4_in)
     os.system(pyrcc4_cmd)
+    try:
+        resources_rc_path = os.path.join(path, "flogger_resources_rc")
+#        resources_rc = __import__(resources_rc_path)
+#        resources_rc = import_module(resources_rc_path)
+#        resources_rc
+#        print "Dynamic import success"
+    except:
+        print "Dynamic import failed"
 #    import flogger_resources_rc                                 # pyrcc4 makes the file, then it can be imported
-    print "PyQt4 flogger_resources_rc.py built and imported"
+    print "PyQt4 flogger_resources_rc.py built and imported-1"
 except:
     print "failed to compile resources"
     exit()
