@@ -699,23 +699,28 @@ class flogger3(MyApp):
         if settings.FLOGGER_AIRFIELD_DETAILS <> "":
             loc = get_coords(settings.FLOGGER_AIRFIELD_DETAILS)
             i = 1
-            while loc == False and i<=10:
+            while loc == False and i<=100:
 #            while loc[2] == None:
 #                print "get_coords returned loc[2] as None, retry", " Retry count get_coords: ", i
                 print "get_coords returned False, retry", " Retry count get_coords: ", i
                 loc = get_coords(settings.FLOGGER_AIRFIELD_DETAILS)
                 i = i + 1
+#                time.sleep (1)
                 
             if loc == False:
                 if settings.FLOGGER_LATITUDE <> "" and settings.FLOGGER_LONGITUDE <> "" and settings.FLOGGER_QNH >=0 :
                     print "Geolocator failed use values from settings"
                 else:
-                    print "Geoloactor failed and no values in setting for lat, long, QNH"
+                    print "Geoloactor failed and no value for lat, long, QNH. Run again, might work"
                     exit(2)
             else:
                 settings.FLOGGER_LATITUDE       = str(loc[0])   # Held as string
                 settings.FLOGGER_LONGITUDE      = str(loc[1])   # Held as string
                 settings.FLOGGER_QNH            = loc[2]        # Held as number
+                if settings.FLOGGER_QNH == None:
+                    print "Probable Geolocator error, set FLOGGER_QNH default 0, loc[2]: ", loc[2]
+                    settings.FLOGGER_QNH = 0
+                    exit(3)
                 print "Location is: ", settings.FLOGGER_AIRFIELD_DETAILS, " latitude: ", loc[0], " longitude: ", loc[1], " elevation: ", loc[2] 
 #                print "Location is: ", settings.FLOGGER_AIRFIELD_DETAILS, " latitude: ", settings.FLOGGER_LATITUDE , \
 #                                    " longitude: ", settings.FLOGGER_LONGITUDE, " elevation: ", settings.FLOGGER_QNH       

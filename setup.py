@@ -3,9 +3,9 @@ from setuptools import setup, find_packages
 
 # See https://medium.com/small-things-about-python/lets-talk-about-python-packaging-6d84b81f1bb5#.pjxrklmi6
 
-setup(name='OGN_Flogger',   
-#      version='0.3.1.14', 
-      version='0.3.1.20',
+setup(name='OGN_Flogger', 
+      version='0.3.1.21',
+      packages=['OGN-Flight-Logger_V3\\.2'],
       scripts=['flogger_gui.py'],      # Command to run 
       description='Realtime logging of glider flights from Flarm data',
       long_description='Realtime logging and tracking of gliders from Flarm signals using APRS.',
@@ -64,14 +64,15 @@ setup(name='OGN_Flogger',
                         'adhocracy_pysqlite>=2.6.3'
                         ],
 #      data_files=[('', ['*.png'])],
-      packages=find_packages(),  
+#      packages=find_packages(),  
       package_data={'': ['*.png'], 
                     '': ['*.txt'], 
                     '': ['flogger.ui'], 
                     '': ['*.sql'], 
                     '': ['*.qrc'], 
                     '': ['*.sql3.2'], 
-                    '': ['flarmdata']},
+                    '': ['flarmdata'],
+                    },
       
 #       packages=find_packages(),
       include_package_data=True,

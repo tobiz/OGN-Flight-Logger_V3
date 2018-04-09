@@ -42,7 +42,13 @@
      <string notr="true">background-color: rgb(255, 255, 255);</string>
     </property>
     <property name="text">
-     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;OGN Flogger, realtime logging of Flarm signals.&lt;/p&gt;&lt;p&gt;Designer: Peter J Robinson&lt;/p&gt;&lt;p&gt;Graphics: Adrian Melia&lt;/p&gt;&lt;p&gt;Data Source: Open Glider Network (OGN)&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;
+     	OGN Flogger, realtime logging of Flarm signals.&lt;/p&gt;&lt;p&gt;
+     	Designer: Peter J Robinson&lt;/p&gt;&lt;p&gt;
+     	Graphics: Adrian Melia&lt;/p&gt;&lt;p&gt;
+     	Data Source: Open Glider Network (OGN)&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;
+     	Coordinates by: OGN Nominatim Service &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;
+     </string>
     </property>
     <property name="alignment">
      <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
