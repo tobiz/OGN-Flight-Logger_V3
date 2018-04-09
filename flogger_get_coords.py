@@ -16,17 +16,26 @@ import geopy
 
 def get_coords(address):
     try:
-#        geolocator = Nominatim(timeout=3, scheme='http')  # Nominatim seems to have stopped working, see github geopy
-        geolocator = geopy.geocoders.GoogleV3(timeout=3)
-#        geolocator = geopy.geocoders.GeocodeFarm(timeout=20)
+        geolocator = Nominatim(user_agent="OGN_Flogger")
         try:   
-            location = geolocator.geocode(address, timeout=3, exactly_one=True)  # Only 1 location for this address
+            location = geolocator.geocode(address, timeout=5, exactly_one=True)  # Only 1 location for this address
             if location == None:
                 print "Geocoder Service timed out or Airfield: ", address, " not known by geocode locator service. Check settings"
                 return False
-            ele = geocoder.elevation(address)
-            print "Geolocator worked"
-            return location.latitude, location.longitude, ele.meters
+            i = 1
+            while i <= 10:
+                ele = geocoder.google([location.latitude, location.longitude], method='elevation')
+                if ele.meters == None:
+                    print "geocoder.google try: ", i
+                    i = i + 1
+                    time.sleep(1)
+                    continue
+                else:
+                    print "Geolocator worked for: ", address, " Lat: ", location.latitude, " Long: ", location.longitude, " Ele: ",ele.meters
+                    return location.latitude, location.longitude, ele.meters
+                print "Geolocator failed for: ", address, " Lat: ", location.latitude, " Long: ", location.longitude, " Ele: ", ele.meters, "Try a Restart" 
+                exit(2)
+            
         except ERROR_CODE_MAP[400]:
             print " ERROR_CODE_MAP is: ",  ERROR_CODE_MAP[400]
         except ERROR_CODE_MAP[401]:
