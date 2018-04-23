@@ -144,6 +144,7 @@ from flogger_gui import *
 
 from flogger_settings import * 
 from threading import Thread
+from flogger_aprs_parser import  *
 #
 # This added to make it simpler after going to gui version
 #
@@ -859,10 +860,11 @@ class flogger3(MyApp):
                 s = ephem.Sun()
                 s.compute(location)
                 twilight = -6 * ephem.degree    # Defn of Twilight is: Centre of Sun is 6, 12, 18 degrees below horizon (civil, nautical, astronomical)  
+#               daylight = s.alt > twilight
+#                print "Just for testing aprs_parse"
+#                daylight = True
+#                if daylight:
                 if s.alt > twilight:
-        #        t = False
-        #        if t:
-        
                     print "Is it light at Location? Yes", location, " Ephem date is: ", ephem.Date(location.date), " Next sunset at: ", location.next_setting(ephem.Sun())
                 else:
                     print "Is it light at Location? No", location, " Ephem date is: ", ephem.Date(location.date), " Next sunrise at: ", location.next_rising(ephem.Sun())
@@ -1055,6 +1057,11 @@ class flogger3(MyApp):
                 # Note this uses a modified version of libfap as the master on
                 # github contains an error
                 #
+                packet = aprs_parse(packet_str, settings)
+                if packet:
+                    print "aprs_parse rtnd: ", packet
+                else:
+                    print "aprs_parse Failed"
                 packet = libfap.fap_parseaprs(packet_str, len(packet_str), 0)
                 print 'Parse packet. Callsign: %s. Packet body: %s' % (packet[0].src_callsign, packet[0].body)
                 try:
