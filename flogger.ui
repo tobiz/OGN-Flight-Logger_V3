@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>711</width>
+    <width>786</width>
     <height>914</height>
    </rect>
   </property>
@@ -163,7 +163,7 @@ background-color: rgb(0, 255, 0);</string>
      <rect>
       <x>10</x>
       <y>150</y>
-      <width>691</width>
+      <width>761</width>
       <height>631</height>
      </rect>
     </property>
@@ -2536,7 +2536,7 @@ Max Alt</string>
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>711</width>
+     <width>786</width>
      <height>23</height>
     </rect>
    </property>
