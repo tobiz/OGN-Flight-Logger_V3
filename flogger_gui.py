@@ -15,7 +15,7 @@ from LatLon import *
 import gpxpy
 import matplotlib.pyplot as plt
 import mplleaflet
-from flogger_splash import *
+#from flogger_splash import *
 from flogger_moviesplash import *
 from importlib import import_module
 

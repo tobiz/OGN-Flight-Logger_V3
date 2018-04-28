@@ -1,11 +1,30 @@
-from setuptools import setup, find_packages 
+"""A setuptools based setup module.
+See:
+https://packaging.python.org/en/latest/distributing.html
+https://github.com/pypa/sampleproject
+"""
+
+# Always prefer setuptools over distutils
+from setuptools import setup, find_packages
+# To use a consistent encoding
+from codecs import open
+from os import path
+
+here = path.abspath(path.dirname(__file__))
+
+# Get the long description from the README file
+with open(path.join(here, 'README.md'), encoding='utf-8') as f:
+    long_description = f.read()
+
+
+
+#from setuptools import setup, find_packages 
 #from setuptools import setup
 
 # See https://medium.com/small-things-about-python/lets-talk-about-python-packaging-6d84b81f1bb5#.pjxrklmi6
 
 setup(name='OGN_Flogger', 
-      version='0.3.1.21',
-      packages=['OGN-Flight-Logger_V3\\.2'],
+      version='0.3.2a5',
       scripts=['flogger_gui.py'],      # Command to run 
       description='Realtime logging of glider flights from Flarm data',
       long_description='Realtime logging and tracking of gliders from Flarm signals using APRS.',
@@ -15,11 +34,16 @@ setup(name='OGN_Flogger',
         'Programming Language :: Python :: 2.7',
         'Topic :: Scientific/Engineering :: Information Analysis',
       ],
+      project_urls = {
+          'tracker': 'http://github.com/tobiz/OGN-Flight-Logger_V3/issues',
+          },
       keywords='OGN Open Glider Flarm Logging Tracking',
       url='http://github.com/tobiz/OGN-Flight-Logger_V3',
       author='tobiz',
       author_email='pjrobinson@metronet.co.uk',
       license='GPL', 
+      python_requires = '>=2.7, <3',
+      packages = find_packages(),
       py_modules=[
                 'flarm_db',
                 'flogger3',
@@ -35,44 +59,54 @@ setup(name='OGN_Flogger',
                 'flogger_landout',
                 'flogger_moviesplash',
                 'flogger_OGN_db',
-                'flogger_process_log',
+#                'flogger_process_log',
 #                'flogger_progress_indicator',
 #                'flogger_resources_rc',
                 'flogger_settings',
                 'flogger_signals',
 #                'flogger_splash',
                 'flogger_test_YorN',
-#                'flogger_ui',
+                'flogger_ui',
+                'flogger_aprs_parser',
                 'gpxTracks',
-                'libfap',
                 'open_db'
                 ],
                 
       install_requires=[
-                        'aerofiles>=0.3',
-                        'configobj>=4.7.2',
                         'geocoder>=1.4.0',
+                        'parse>=1.8.0',
+                        'configobj>=4.7.2',
                         'geopy>=1.11.0',
+                        'aerofiles>=0.3',
+                        'aprslib>=0.6.46',
+                        'gpxpy>=1.1.2',
+                        'setuptools>=3.3',
                         'pytz>=2012c',
                         'requests>=2.13.0',
-                        'setuptools>=3.3',
+                        'mplleaflet>=0.0.5',
                         'LatLon>=1.0.2',
-                        'PyQt4>=4.11.4',
+#                        'PyQt4>=4.11.4',
                         'pyephem>=3.7.6.0',
-                        'protobuf>=3.2.0',
-                        'parse>=1.8.0',
-                        'adhocracy_pysqlite>=2.6.3'
+                        'protobuf>=3.5.2.post1',
+                        'adhocracy_pysqlite>=2.6.3',
+                        'pysqlite3>=0.1.0',
+                        'matplotlib',
                         ],
-#      data_files=[('', ['*.png'])],
-#      packages=find_packages(),  
-      package_data={'': ['*.png'], 
-                    '': ['*.txt'], 
-                    '': ['flogger.ui'], 
-                    '': ['*.sql'], 
-                    '': ['*.qrc'], 
-                    '': ['*.sql3.2'], 
-                    '': ['flarmdata'],
-                    },
+      data_files=[('', ['flogger_help_icon-1.png']),
+                  ('', ['flogger_icon-08.png']),
+                  ('', ['flogger_start.png']),
+                  ('', ['flogger_stop.png']),
+                  ('', ['flogger_settings_file.txt']),
+                  ('', ['requirements.txt']),
+                  ('', ['flogger_about.ui']),  
+                  ('', ['flogger_config_1.ui']),  
+                  ('', ['flogger_help.ui']),  
+                  ('', ['flogger.ui']),
+                  ('', ['flogger_resources.qrc']), 
+                  ('', ['flogger_schema-1.0.4.sql']),
+                  ('', ['ogn-logo-ani.gif']), 
+                  ('', ['flarm_data']),
+                  ],
       
 #       packages=find_packages(),
       include_package_data=True,

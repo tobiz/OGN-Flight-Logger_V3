@@ -18,7 +18,7 @@ import os
 import datetime
 from geopy.distance import vincenty
 from flogger_get_coords import get_coords
-from google.directions import GoogleDirections
+#from google.directions import GoogleDirections
 from LatLon import  * 
 
 def landout_check(flight_reg, flight_no, af_centre, radius, landing_coords, mode, settings):

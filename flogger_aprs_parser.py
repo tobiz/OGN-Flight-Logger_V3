@@ -48,6 +48,7 @@ def check_parse(parse_dict, settings):
                         "latitude": parse_dict["latitude"], 
                         "altitude": parse_dict["altitude"],
                         "speed": parse_dict["speed"], 
+                        "course": parse_dict["course"],
                         "timestamp": parse_dict["timestamp"],
                         }
 #            print "via key not present in parse dictionary"

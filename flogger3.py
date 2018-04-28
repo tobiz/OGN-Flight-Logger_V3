@@ -110,7 +110,7 @@
 
 import socket
 
-from libfap import *
+#from libfap import *
 #import flogger_settings
 import string
 import datetime
@@ -124,7 +124,7 @@ from pysqlite2 import dbapi2 as sqlite
 from open_db import opendb 
 import ephem
 #from flogger_process_log_old import process_log
-from flogger_process_log import process_log
+#from flogger_process_log import process_log
 import argparse
 from flogger_dump_flights import dump_flights
 from flogger_dump_tracks import dump_tracks2
@@ -171,7 +171,7 @@ class flogger3(MyApp):
     
     def floggerStop(self):
         print "floggerStop called"
-        libfap_cleanup()
+#        libfap_cleanup()
         return
     #    def flogger_start(self, settings):
 #    def flogger_start(self, settings):
@@ -776,12 +776,12 @@ class flogger3(MyApp):
         print "Start time!" 
         sock = APRS_connect(settings)
         sock_file = sock.makefile()
-        print "libfap_init"
-        rtn = libfap.fap_init()
-        if rtn <> 0:
-            print "Failed to connect to APRS, check parameters"
-            exit()
-        print "Libfap return: ", rtn
+#        print "libfap_init"
+#        rtn = libfap.fap_init()
+#        if rtn <> 0:
+#            print "Failed to connect to APRS, check parameters"
+#            exit()
+#        print "Libfap return: ", rtn
         
         #    
         #-----------------------------------------------------------------
@@ -1061,126 +1061,22 @@ class flogger3(MyApp):
                 if packet:
                     print "aprs_parse rtnd: ", packet
                 else:
-                    print "aprs_parse Failed"
-                packet = libfap.fap_parseaprs(packet_str, len(packet_str), 0)
-                print 'Parse packet. Callsign: %s. Packet body: %s' % (packet[0].src_callsign, packet[0].body)
-                try:
-                    error_code = packet[0].error_code[0]
-                except ValueError:
-                    x = 0
-        #             print "Error_code is NULL pointer ignore"
-                else:
-                    x = 0
-        #             print "Error_code is: ", packet[0].error_code[0]
-                    
-        #         print "error_message is(type=c_char_p): ", packet[0].error_message
-                try:
-                    type = packet[0].type[0]
-                except ValueError:
-                    print "Type is NULL pointer ignore"
-                else:
-                    x = 0 
-                src_callsign = packet[0].src_callsign
-                dest_callsign = packet[0].dst_callsign
-                try:
-                    path = packet[0].path[0]
-                except ValueError:
-                    x = 0
-        #             print "Path is NULL pointer ignore"
-                else:
-                    x = 0 
-        #             print "Path is: ", packet[0].path[0]        
-                try:
-                    latitude = packet[0].latitude[0]
-                except ValueError:
-                    x = 0
-        #             print "Latitude is NULL pointer"
-                else:
-        #             print "Latitude is: ", packet[0].latitude[0]
-        #             nvalues[src_callsign]["latitude"] = latitude
-                    CheckVals(src_callsign, "latitude", latitude)
-                        
-                try:
-                    longitude = packet[0].longitude[0]
-                except ValueError:
-                    x = 0
-        #             print "Longitude is NULL pointer"
-                else:
-        #             print "Longitude is: ", packet[0].longitude[0]
-                    nvalues[src_callsign]["longitude"] = longitude
-                        
-                try:
-                    altitude = packet[0].altitude[0]
-                except ValueError:
-                    x = 0
-        #             print "Altitude is NULL pointer"
-                else:
-        #             print "Altitude is: ", packet[0].altitude[0]
-                    nvalues[src_callsign]["altitude"] = altitude    
-                        
-                try:
-                    course = packet[0].course[0]
-                except ValueError:
-                    course = 0
-        #             print "Course is NULL pointer, set to 0"
-                else:
-                    x = 0
-        #             print "Course is: ", packet[0].course[0]
-                                    
-                try:
-                    speed = packet[0].speed[0]
-                except ValueError:
-                    speed = 0
-        #             print "Speed is NULL pointer, set to 0"
-                else:
-        #             print "Speed is: ", packet[0].speed[0]
-                    nvalues[src_callsign]["speed"] = speed 
-        #
-        # Timestamps need to be record when multi-base monitoring is used
-        #            
-                try:
-                    timestamp = packet[0].timestamp[0]       
-                except ValueError:
-                    timestamp = 0
-                    print "Timestamp is NULL pointer, set to 0"
-#                else:
-#                    print "Timestamp from libfap is: ", timestamp
-                          
-                # Test the packet to be one for the required field
-                res1 = string.find(str(packet_str), "# aprsc")
-                res2 = string.find(str(packet_str), "# logresp")
-        #        res3 = string.find(str(packet_str), settings.FLOGGER_AIRFIELD_NAME)
-        #        if check_position_packet(str(packet_str)) <> -1:
-        #            print "res3 would be set <> -1"
-                res3 = check_position_packet(str(packet_str))
-                if res1 <> -1 :
-                    print "Comment aprs packet returned: ", packet_str
-                    print "-----------------End of Packet: ", i, " ------------------------------"    
+                    print "aprs_parse Failed. Not glider position packet"
                     continue
-                if res2 <> -1 :
-                    print "Comment logresp packet returned: ", packet_str
-                    print "-----------------End of Packet: ", i, " ------------------------------"    
-                    continue
-                if res3 <> -1 :
-        #            print "---------!!!!!! Comment",  settings.FLOGGER_AIRFIELD_NAME, " packet returned: ", packet_str 
-                    print "---------!!!!!! Comment",  res3, " packet returned: ", packet_str       
-                    src_callsign = packet[0].src_callsign
-                    res = string.find(str(packet[0].src_callsign), "None")
-               #     if string.find(str(packet_str), "GLIDERN1") <> -1 or string.find(str(packet_str), "GLIDERN2") <> -1 or string.find(str(packet_str), "GLIDERN3"):
-                    if string.find(str(packet_str), "GLIDERN") <> -1 :
-                        # Should match: GLIDERN1, GLIDERN2 or GLIDERN3
-        #                print settings.FLOGGER_AIRFIELD_NAME, " beacon packet, ignore: ", str(packet_str)
-                        print res3, " beacon packet, ignore: ", str(packet_str)
-                        print "-----------------End of Packet: ", i, " ------------------------------"    
-                        continue
-                    else:
-        #                print settings.FLOGGER_AIRFIELD_NAME, " aircraft position packet: ", src_callsign
-                        print res3, " aircraft position packet: ", src_callsign
-                        
-                else:
-                    print "No match ", packet_str
-                    print "-----------------End of Packet: ", i, " ------------------------------"    
-                    continue
+                src_callsign = packet["from"]
+                latitude = packet["latitude"]
+                longitude = packet["longitude"]
+                altitude = packet["altitude"]
+                speed = packet["speed"]
+                course = packet["course"]
+                timestamp = packet["timestamp"]
+                CheckVals(src_callsign, "latitude", latitude)
+                nvalues[src_callsign]["longitude"] = longitude
+                nvalues[src_callsign]["altitude"] = altitude 
+                nvalues[src_callsign]["speed"] = speed   
+                #
+                # Removed libfap parsing 20180424
+                # 
                 
                 # Check if callsign is in the fleet 
                 if fleet_check_new(str(src_callsign)) == False:
@@ -1400,15 +1296,15 @@ class flogger3(MyApp):
                     print "Values for callsign Commit: ", src_callsign, " Values are: ", nvalues[src_callsign], " Prev_vals are: ", nprev_vals[src_callsign]
                     db.commit()        
                 print "-----------------End of Packet: ", i, " ------------------------------"
-            libfap.fap_free(packet)
+#            libfap.fap_free(packet)
                     
         except KeyboardInterrupt:
             print "Keyboard input received, ignore"
         #    db.commit()
             pass
         
-        print "libfap_cleanup. If not called results in memory leak"
-        libfap.fap_cleanup()
+#        print "libfap_cleanup. If not called results in memory leak"
+#        libfap.fap_cleanup()
         # close socket -- must be closed to avoid buffer overflow
         sock.shutdown(0)
         sock.close()
