@@ -1,5 +1,5 @@
 # OGN-Flight-Logger_V3
-DEVELOPMENT OF OGN-Flight-Logger IS NOW CONTINUING AS: OGN-Flight-Logger_V3
+DEVELOPMENT OF OGN-Flight-Logger IS NOW CONTINUING AS: OGN-Flight-Logger_V2.2 (V3 was not continued)
 
 Python APRS/OGN program to log flight times, durations and maximum heights achieved
 
